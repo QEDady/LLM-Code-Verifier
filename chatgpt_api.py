@@ -7,7 +7,7 @@ Original file is located at
     https://colab.research.google.com/drive/1iqdPX2wnsbAfBCHeoS-_5SuFMUQV9cjv
 """
 
-!pip install --upgrade openai
+#!pip install --upgrade openai
 
 import requests
 import json
