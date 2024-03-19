@@ -54,25 +54,18 @@ def generate_codes(model="gpt-4-turbo-preview", n=5, t_refrence = 0, t_samples =
   for choice in response_dict['choices']:
     generated_codes.append(parse_response(choice))
 
-  print(response_dict)
-  print("---------------------------------------------------")
-  print(generated_codes)
-
 
   # sampled responses
   payload["temperature"] = t_samples
   payload["n"] = n
-  refrence_response = requests.post(URL, headers=headers, json=payload, stream=False).content.strip().decode("utf-8")
-  response_dict = json.loads(refrence_response)
+  samples_response = requests.post(URL, headers=headers, json=payload, stream=False).content.strip().decode("utf-8")
+  response_dict = json.loads(samples_response)
   for choice in response_dict['choices']:
     generated_codes.append(parse_response(choice))
 
-  print(response_dict)
-  print("---------------------------------------------------")
-  print(generated_codes)
-  return generate_codes
+  return generated_codes
 
 
 # if __name__=="__main__": 
 #   prompt = " Write a Python function in markdown that takes a sequence of numbers and determines whether all the numbers are different from each other. Return the code of the function only without any other text."
-#   generate_codes(prompt=prompt)
+#   print(generate_codes(prompt=prompt))
