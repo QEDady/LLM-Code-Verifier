@@ -22,7 +22,7 @@ def parse_response(choice):
 
 # n: number of samples to generate other than the refrence response
 # The function returns an array of n+1 codes where the first the refrence code and the others are the candidates.
-def generate_codes(model="gpt-3.5-turbo", n=5, t_refrence=0, t_samples=1, prompt=None):
+def generate_codes(model="gpt-4-turbo-preview", n=5, t_refrence=0, t_samples=1, prompt=None):
     URL = "https://api.openai.com/v1/chat/completions"
     api_key = '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'
     if prompt is None:
@@ -63,6 +63,7 @@ def generate_codes(model="gpt-3.5-turbo", n=5, t_refrence=0, t_samples=1, prompt
     samples_response = requests.post(
         URL, headers=headers, json=payload, stream=False).content.strip().decode("utf-8")
     response_dict = json.loads(samples_response)
+    # print(response_dict)
     for choice in response_dict['choices']:
         generated_codes.append(parse_response(choice))
 
