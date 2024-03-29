@@ -10,9 +10,7 @@ from sklearn.metrics import f1_score
 
 from scipy.spatial.distance import hamming
 
-import matplotlib.pyplot as plt
-
-def compute_syntactic_score(func1: str, func2: str, n_grams=2) -> float:
+def compute_syntactic_score(func1: str, func2: str, n_grams=2, hamming_mode='regular') -> float:
     # Calculate sequence similarity
     seq_matcher = SequenceMatcher(None, func1, func2, autojunk=False)
     sequence_similarity = seq_matcher.ratio()
@@ -56,13 +54,14 @@ def compute_syntactic_score(func1: str, func2: str, n_grams=2) -> float:
     padded_func1 = func1.ljust(max_len)
     padded_func2 = func2.ljust(max_len)
 
-    # Calculate Hamming distance - Regular
-    hamming_distance = hamming(list(padded_func1), list(padded_func2))
-    hamming_distance_score = 1 - hamming_distance
-
-    # Calculate Hamming distance - Sorted
-    hamming_distance_sorted = hamming(sorted(padded_func1), sorted(padded_func2))
-    hamming_distance_score_sorted = 1 - hamming_distance_sorted
+    if hamming_mode == 'regular':
+        # Calculate Hamming distance - Regular
+        hamming_distance = hamming(list(padded_func1), list(padded_func2))
+        hamming_distance_score = 1 - hamming_distance
+    elif hamming_mode == 'sorted':
+        # Calculate Hamming distance - Sorted
+        hamming_distance = hamming(sorted(padded_func1), sorted(padded_func2))
+        hamming_distance_score = 1 - hamming_distance
 
     # Calculate Sørensen–Dice coefficient (F1 score) - Need to binarize the padded strings
     binarized_func1 = [1 if char in padded_func2 else 0 for char in padded_func1]
@@ -77,73 +76,32 @@ def compute_syntactic_score(func1: str, func2: str, n_grams=2) -> float:
         "cosine_similarity_score": cosine_similarity_score,
         "sorensen_dice_coefficient": sorensen_dice_coefficient,
         "hamming_distance_score": hamming_distance_score,
-        "hamming_distance_score_sorted": hamming_distance_score_sorted,
     }
 
     return sum(scores.values()) / len(scores), scores
 
-def syntactic_similarity(func1: str, funcList: list, n_grams=2) -> dict:
+
+def syntactic_similarity(func1: str, funcList: list, n_grams=2, hamming_mode='regular') -> dict:
     scores = {}
     for i, func2 in enumerate(funcList):
-        score, score_details = compute_syntactic_score(func1, func2, n_grams)
+        score, metrics = compute_syntactic_score(func1, func2, n_grams, hamming_mode)
         scores[f"res_code_{i + 1}"] = {
-            "score": score,
-            "score_details": score_details
+            "aggregate_score": score,
+            "metrics": metrics
         }
     return scores
 
-test_cases = {
-    "code_1": '''
-        def find_divisors(n):
-            divisors = []
-            for i in range(1, n + 1):
-                if n % i == 0:
-                    divisors.append(i)
-            return divisors    
-    ''',
-    "code_2": '''
-        def find_divisors(num):
-            divisors = []
-            for j in range(1, num + 1, 1):
-                if num % j == 0:
-                    divisors.append(j)
-            return divisors
-    ''',
-    "code_3": '''
-       def get_something(weird):
-            something = set()
-            for index in range(1, int(weird**0.5) + 1):
-                if not (weird % index != 0):
-                    something.add(index)
-                    something.add(weird // index)
-            return sorted(something)
-    '''
-}
-
+generated_codes = [
+    '\ndef find_divisors(num):\n    divisors = []\n    for i in range(1, n + 1):\n        if n % i == 0:\n            divisors.append(i)\n    return divisors\n',
+    '\ndef find_divisors(num):\n    divisors = []\n    for j in range(1, num + 1, 1):\n        if num % j == 0:\n            divisors.append(j)\n    return divisors\n',
+    '\ndef find_divisors(num):\n    something = set()\n    for index in range(1, int(weird**0.5) + 1):\n        if not (weird % index != 0):\n            something.add(index)\n            something.add(weird // index)\n    return sorted(something)\n'
+]
 
 if __name__ == "__main__":
-    ref_code = test_cases["code_1"]
-    candidate_codes = [test_cases["code_2"], test_cases["code_3"]]
+    ref_code = generated_codes[0]
+    candidate_codes = generated_codes[1:]
 
     similarity_scores = syntactic_similarity(ref_code, candidate_codes)
 
-# Prepare data for visualization
-    labels = list(similarity_scores.keys())
-    scores = [similarity_scores[label]['score'] for label in labels]
-    score_details = [similarity_scores[label]['score_details'] for label in labels]
-
-    # Create a bar chart
-    plt.bar(labels, scores)
-    plt.xlabel('Code')
-    plt.ylabel('Similarity Score')
-    plt.title('Syntactic Similarity Scores')
-    plt.show()
-
-    # For each metric, create a separate bar chart
-    for metric in score_details[0].keys():
-        metric_scores = [details[metric] for details in score_details]
-        plt.bar(labels, metric_scores)
-        plt.xlabel('Code')
-        plt.ylabel('Score')
-        plt.title(f'{metric} Scores')
-        plt.show()
+    print(similarity_scores)
+    
