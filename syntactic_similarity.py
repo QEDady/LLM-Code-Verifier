@@ -66,11 +66,6 @@ def syntactic_similarity(func1: str, func2: str, n_grams=2) -> float:
     binarized_func1 = [1 if char in padded_func2 else 0 for char in padded_func1]
     binarized_func2 = [1 if char in padded_func1 else 0 for char in padded_func2]
     sorensen_dice_coefficient = f1_score(binarized_func1, binarized_func2)
-    
-    # Calculate n-gram similarity
-    ngrams1 = set(ngrams(tokens1, n_grams))
-    ngrams2 = set(ngrams(tokens2, n_grams))
-    ngram_similarity = 1 - jaccard_distance(ngrams1, ngrams2)
 
     # Return an aggregate similarity score and the scores for each metric
     scores = {
@@ -81,7 +76,6 @@ def syntactic_similarity(func1: str, func2: str, n_grams=2) -> float:
         "sorensen_dice_coefficient": sorensen_dice_coefficient,
         "hamming_distance_score": hamming_distance_score,
         "hamming_distance_score_sorted": hamming_distance_score_sorted,
-        "ngram_similarity": ngram_similarity,
     }
 
     return sum(scores.values()) / len(scores), scores
@@ -121,10 +115,20 @@ if __name__ == "__main__":
     code2 = test_cases["code_2"]
     code3 = test_cases["code_3"]
 
-    print(syntactic_similarity(code1, code2))
-    print(syntactic_similarity(code1, code3))
-    print(syntactic_similarity(code2, code3))
+    # Calculate similarity between all codes - N-grams = 2
+    similarity_score, scores = syntactic_similarity(code1, code2, n_grams=2)
+    print(f"Similarity between code1 and code2: {similarity_score}")
+    print(scores)
 
-    print(syntactic_similarity(code1, code2, n_grams=3))
-    print(syntactic_similarity(code1, code3, n_grams=3))
-    print(syntactic_similarity(code2, code3, n_grams=3))
+    similarity_score, scores = syntactic_similarity(code1, code3, n_grams=2)
+    print(f"Similarity between code1 and code3: {similarity_score}")
+    print(scores)
+
+    # Calculate similarity between all codes - N-grams = 3
+    similarity_score, scores = syntactic_similarity(code1, code2, n_grams=3)
+    print(f"Similarity between code1 and code2: {similarity_score}")
+    print(scores)
+
+    similarity_score, scores = syntactic_similarity(code1, code3, n_grams=3)
+    print(f"Similarity between code1 and code3: {similarity_score}")
+    print(scores)
