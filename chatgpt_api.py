@@ -16,10 +16,10 @@ import json
 def parse_response(choice):
     sentence = choice['message']['content'].split()
     code = choice['message']['content'].replace('`', "")
-    code = code.replace("python", "")
-    code = code.replace("Python", "")
-    code = code.replace("python\n", "\n")
-    code = code.replace("Python\n", "\n")
+    if code[:6] == "python":
+      code = code.replace("python", "", 1)
+    elif code[:6] == "Python":
+      code = code.replace("Python", "", 1)
     return code
 
 
