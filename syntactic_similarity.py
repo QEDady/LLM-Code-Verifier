@@ -10,7 +10,9 @@ from sklearn.metrics import f1_score
 
 from scipy.spatial.distance import hamming
 
-def syntactic_similarity(func1: str, func2: str, n_grams=2) -> float:
+import matplotlib.pyplot as plt
+
+def compute_syntactic_score(func1: str, func2: str, n_grams=2) -> float:
     # Calculate sequence similarity
     seq_matcher = SequenceMatcher(None, func1, func2, autojunk=False)
     sequence_similarity = seq_matcher.ratio()
@@ -80,6 +82,15 @@ def syntactic_similarity(func1: str, func2: str, n_grams=2) -> float:
 
     return sum(scores.values()) / len(scores), scores
 
+def syntactic_similarity(func1: str, funcList: list, n_grams=2) -> dict:
+    scores = {}
+    for i, func2 in enumerate(funcList):
+        score, score_details = compute_syntactic_score(func1, func2, n_grams)
+        scores[f"res_code_{i + 1}"] = {
+            "score": score,
+            "score_details": score_details
+        }
+    return scores
 
 test_cases = {
     "code_1": '''
@@ -111,24 +122,28 @@ test_cases = {
 
 
 if __name__ == "__main__":
-    code1 = test_cases["code_1"]
-    code2 = test_cases["code_2"]
-    code3 = test_cases["code_3"]
+    ref_code = test_cases["code_1"]
+    candidate_codes = [test_cases["code_2"], test_cases["code_3"]]
 
-    # Calculate similarity between all codes - N-grams = 2
-    similarity_score, scores = syntactic_similarity(code1, code2, n_grams=2)
-    print(f"Similarity between code1 and code2: {similarity_score}")
-    print(scores)
+    similarity_scores = syntactic_similarity(ref_code, candidate_codes)
 
-    similarity_score, scores = syntactic_similarity(code1, code3, n_grams=2)
-    print(f"Similarity between code1 and code3: {similarity_score}")
-    print(scores)
+# Prepare data for visualization
+    labels = list(similarity_scores.keys())
+    scores = [similarity_scores[label]['score'] for label in labels]
+    score_details = [similarity_scores[label]['score_details'] for label in labels]
 
-    # Calculate similarity between all codes - N-grams = 3
-    similarity_score, scores = syntactic_similarity(code1, code2, n_grams=3)
-    print(f"Similarity between code1 and code2: {similarity_score}")
-    print(scores)
+    # Create a bar chart
+    plt.bar(labels, scores)
+    plt.xlabel('Code')
+    plt.ylabel('Similarity Score')
+    plt.title('Syntactic Similarity Scores')
+    plt.show()
 
-    similarity_score, scores = syntactic_similarity(code1, code3, n_grams=3)
-    print(f"Similarity between code1 and code3: {similarity_score}")
-    print(scores)
+    # For each metric, create a separate bar chart
+    for metric in score_details[0].keys():
+        metric_scores = [details[metric] for details in score_details]
+        plt.bar(labels, metric_scores)
+        plt.xlabel('Code')
+        plt.ylabel('Score')
+        plt.title(f'{metric} Scores')
+        plt.show()
