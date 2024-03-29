@@ -9,8 +9,8 @@ HUMAN_EVAL = os.path.join(ROOT, "DATASETS", "human-eval.jsonl")
 HUMAN_EVAL_MODIFIED = os.path.join(ROOT, "DATASETS", "human-eval-modified.jsonl")
 HUMAN_EVAL_PROMPTS = os.path.join(ROOT, "PROMPTS", "human-eval-prompts.jsonl")
 
-def modify_test(test):
-    # Initialize the total number of tests and the number of passed tests after the function signature "check(candidate):"
+def modify_human_eval_tests(test):
+    # Initialize the total number of tests and the number of passed tests
     pattern = r"assert.*candidate"
     matches = re.findall(pattern, test)
     insertion = f"""
@@ -21,26 +21,26 @@ def modify_test(test):
     replacement = r"\1" + insertion
     test = re.sub(pattern, replacement, test)
 
-    # Replace all assert (True|False) statements with always-true statements
+    # Replace all assert True statements with always-true statements
     test = re.sub(r"assert\s+True.*\n", "True==True\n", test)
 
     assert_statement_pattern = r"assert.*candidate.*?(?=assert.*candidate|$)"
     assert_statments = re.findall(assert_statement_pattern, test, re.DOTALL)
     quoted_str_pattern = r",\s+\".*\".*"
     for assert_statement in assert_statments:
-        new_assert_statement = re.sub(r"assert", r"passed_tests_xyz+=", assert_statement)
-        new_assert_statement = re.sub(quoted_str_pattern, "", new_assert_statement)
-        test = re.sub(re.escape(assert_statement), new_assert_statement, test)  
+        test_statement = re.sub(r"assert", r"passed_tests_xyz+=", assert_statement)
+        test_statement = re.sub(quoted_str_pattern, "", test_statement)
+        test = re.sub(re.escape(assert_statement), test_statement, test)  
 
     test += "\n    return passed_tests_xyz / total_tests_xyz"
     return test
 
-def eval_Human_eval_modify():
+def modify_Human_eval():
     with open(HUMAN_EVAL, 'r') as f, open(HUMAN_EVAL_MODIFIED, 'w') as new_f:
         for line in f:
             if any(not x.isspace() for x in line):
                 problem = json.loads(line)
-                problem['test'] = modify_test(problem['test'])
+                problem['test'] = modify_human_eval_tests(problem['test'])
                 json_str = json.dumps(problem)
                 new_f.write(json_str + '\n')
 
