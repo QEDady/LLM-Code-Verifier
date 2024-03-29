@@ -28,8 +28,8 @@ def generate_codes(model="gpt-4-turbo-preview", n=5, t_refrence=0, t_samples=1, 
     if prompt is None:
         raise ValueError("prompt is not specifid")
     else:
-        prompt = "Write a Python function in markdown that " + prompt + \
-            ". Return the code of the function only without any other text."
+        prompt = "Write a Python function in markdown that does the following:\n" + prompt + \
+            ". \nReturn the markdown code of the function and all the needed imports only without any other text."
 
     headers = {
         "Content-Type": "application/json",
