@@ -20,6 +20,7 @@ def parse_response(choice):
       code = code.replace("python", "", 1)
     elif code[:6] == "Python":
       code = code.replace("Python", "", 1)
+    code = code.replace("markdown", "")
     return code
 
 
