@@ -17,6 +17,7 @@ def parse_response(choice):
     sentence = choice['message']['content'].split()
     code = choice['message']['content'].replace('`', "")
     code = code.replace("python", "")
+    code = code.replace("Python", "")
     return code
 
 
