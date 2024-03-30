@@ -4,7 +4,7 @@ import tqdm
 from chatgpt_api import generate_codes
 from data import stream_jsonl, modify_Human_eval, create_csv_file
 from data import HUMAN_EVAL, HUMAN_EVAL_MODIFIED, HUMAN_EVAL_PROMPTS, RESULTS
-from structural_similarity import structual_similarity_driver
+from structural_similarity import structural_similarity_driver
 from syntactic_similarity import syntactic_similarity_driver
 import re
 import csv
@@ -67,7 +67,11 @@ if __name__ == '__main__':
     # eval_Human_eval(model='gpt-3.5-turbo', n=3, t_refrence=0, t_samples=1, trial=1)
     # eval_Human_eval(model='gpt-3.5-turbo', n=10, t_refrence=0, t_samples=1, trial=1)
     # eval_Human_eval(model='gpt-3.5-turbo', n=5, t_refrence=1, t_samples=1, trial=1)
-    eval_Human_eval(model='gpt-3.5-turbo', n=5, t_refrence=0, t_samples=1.5, trial=1)
+    #eval_Human_eval(model='gpt-3.5-turbo', n=5, t_refrence=0, t_samples=1.5, trial=1)
+  #  eval_Human_eval(model='gpt-3.5-turbo', n=15, t_refrence=0, t_samples=1, trial=1)
+    eval_Human_eval(model='gpt-3.5-turbo', n=15, t_refrence=1, t_samples=1, trial=1)
+    eval_Human_eval(model='gpt-3.5-turbo', n=15, t_refrence=1, t_samples=1.5, trial=1)
+
 
     # eval_Human_eval(model='gpt-4-turbo-preview', n=5, t_refrence=0, t_samples=1, trial=1)
     # eval_Human_eval(model='gpt-4-turbo-preview', n=3, t_refrence=0, t_samples=1, trial=1)
