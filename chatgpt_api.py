@@ -13,6 +13,7 @@ import requests
 import json
 import pprint
 
+RETRIALS = 5
 
 def parse_response(choice):
     code = choice['message']['content'].replace('`', "")
@@ -55,19 +56,27 @@ def generate_codes(model="gpt-4-turbo-preview", n=5, t_refrence=0, t_samples=1, 
         "frequency_penalty": 0,
     }
 
-    refrence_response = requests.post(
-        URL, headers=headers, json=payload, stream=False).content.strip().decode("utf-8")
-    response_dict = json.loads(refrence_response)
     generated_codes = []
+    for trial in range(RETRIALS):
+        refrence_response = requests.post(
+            URL, headers=headers, json=payload, stream=False).content.strip().decode("utf-8")
+        response_dict = json.loads(refrence_response)
+        if 'choices' in response_dict:
+            break
+
     for choice in response_dict['choices']:
         generated_codes.append(parse_response(choice))
 
     # sampled responses
     payload["temperature"] = t_samples
     payload["n"] = n
-    samples_response = requests.post(
-        URL, headers=headers, json=payload, stream=False).content.strip().decode("utf-8")
-    response_dict = json.loads(samples_response)
+    for trial in range(RETRIALS):
+        samples_response = requests.post(
+            URL, headers=headers, json=payload, stream=False).content.strip().decode("utf-8")
+        response_dict = json.loads(samples_response)
+        if 'choices' in response_dict:
+            break
+        
     # print(response_dict)
     for choice in response_dict['choices']:
         generated_codes.append(parse_response(choice))

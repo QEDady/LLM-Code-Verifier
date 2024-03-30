@@ -15,6 +15,7 @@ def create_csv_file(dataset = "HumanEval", model="gpt-4-turbo-preview", n=5, t_r
     csv_file_name = f'dataset_{dataset}_model_{model}_n_{n}_tempr_{t_refrence}_temps_{t_samples}_trial_{trial}.csv'
     csv_file_name = os.path.join(RESULTS, csv_file_name)
     fieldnames = ["task_id", "prompt"]
+    last_task_id_num = -1
     for i in range(n+1):
         fieldnames.append(f"code_{i}")
     
@@ -24,10 +25,20 @@ def create_csv_file(dataset = "HumanEval", model="gpt-4-turbo-preview", n=5, t_r
     for i in range(n+1):
         fieldnames.append(f"err_{i}")
 
-    with open(csv_file_name, mode='w', newline='') as csv_f:
-        writer = csv.DictWriter(csv_f, fieldnames=fieldnames, quoting=csv.QUOTE_ALL)
-        writer.writeheader()
-    return csv_file_name, fieldnames
+    if os.path.exists(csv_file_name):
+        with open(csv_file_name, mode='r') as csv_f:
+            reader = csv.DictReader(csv_f)
+            last_row = None
+            for row in reader:
+                last_row = row
+            if last_row is not None:
+                last_task_id_num = int(last_row['task_id'].split('/')[-1])
+    else:
+        with open(csv_file_name, mode='w', newline='') as csv_f:
+            writer = csv.DictWriter(csv_f, fieldnames=fieldnames, quoting=csv.QUOTE_ALL)
+            writer.writeheader()
+
+    return csv_file_name, fieldnames, last_task_id_num
 
 def modify_human_eval_tests(test):
     # Initialize the total number of tests and the number of passed tests

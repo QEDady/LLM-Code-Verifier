@@ -14,13 +14,13 @@ def eval_Human_eval(model="gpt-3.5-turbo", n=5, t_refrence=0, t_samples=1, trial
     pass_rate = 0
     err = None
     row = {}
-    csv_file_name, fieldnames = create_csv_file(dataset="HumanEval", model=model, n=n, 
+    csv_file_name, fieldnames, last_task_id_num = create_csv_file(dataset="HumanEval", model=model, n=n, 
                                                  t_refrence=t_refrence, t_samples=t_samples, trial=trial)
 
     with open(csv_file_name, mode='a', newline='') as csv_f:
         writer = csv.DictWriter(csv_f, fieldnames=fieldnames, quoting=csv.QUOTE_ALL)
         for problem in stream_jsonl(HUMAN_EVAL_MODIFIED):
-            # if problem['task_id'] == 'HumanEval/39':
+            if int(problem['task_id'].split('/')[-1]) > last_task_id_num:
                 tqdm.tqdm.write(f"Processing {problem['task_id']}")
                 row['task_id'] = problem['task_id']
                 row['prompt'] = problem['prompt']
@@ -63,13 +63,13 @@ def parse_csv(csv_file_name):
             
 
 if __name__ == '__main__':
-    eval_Human_eval(model='gpt-3.5-turbo', n=5, t_refrence=0, t_samples=1, trial=1)
+    # eval_Human_eval(model='gpt-3.5-turbo', n=5, t_refrence=0, t_samples=1, trial=1)
     # eval_Human_eval(model='gpt-3.5-turbo', n=3, t_refrence=0, t_samples=1, trial=1)
     # eval_Human_eval(model='gpt-3.5-turbo', n=10, t_refrence=0, t_samples=1, trial=1)
     # eval_Human_eval(model='gpt-3.5-turbo', n=5, t_refrence=1, t_samples=1, trial=1)
-    # eval_Human_eval(model='gpt-3.5-turbo', n=5, t_refrence=0, t_samples=1.5, trial=1)
+    eval_Human_eval(model='gpt-3.5-turbo', n=5, t_refrence=0, t_samples=1.5, trial=1)
 
-    eval_Human_eval(model='gpt-4-turbo-preview', n=5, t_refrence=0, t_samples=1, trial=1)
+    # eval_Human_eval(model='gpt-4-turbo-preview', n=5, t_refrence=0, t_samples=1, trial=1)
     # eval_Human_eval(model='gpt-4-turbo-preview', n=3, t_refrence=0, t_samples=1, trial=1)
     # eval_Human_eval(model='gpt-4-turbo-preview', n=10, t_refrence=0, t_samples=1, trial=1)
     # eval_Human_eval(model='gpt-4-turbo-preview', n=5, t_refrence=1, t_samples=1, trial=1)
