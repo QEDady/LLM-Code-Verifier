@@ -70,7 +70,7 @@ if __name__ == '__main__':
     #eval_Human_eval(model='gpt-3.5-turbo', n=5, t_refrence=0, t_samples=1.5, trial=1)
   #  eval_Human_eval(model='gpt-3.5-turbo', n=15, t_refrence=0, t_samples=1, trial=1)
    # eval_Human_eval(model='gpt-3.5-turbo', n=15, t_refrence=1, t_samples=1, trial=1)
-    eval_Human_eval(model='gpt-3.5-turbo', n=15, t_refrence=1, t_samples=1.5, trial=1)
+    #eval_Human_eval(model='gpt-3.5-turbo', n=15, t_refrence=1, t_samples=1.5, trial=1)
 
 
     # eval_Human_eval(model='gpt-4-turbo-preview', n=5, t_refrence=0, t_samples=1, trial=1)
