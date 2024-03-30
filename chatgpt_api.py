@@ -16,7 +16,10 @@ import pprint
 
 def parse_response(choice):
     code = choice['message']['content'].replace('`', "")
-    code = code.replace("python", "")
+    if code[:6] == "python":
+      code = code.replace("python", "", 1)
+    elif code[:6] == "Python":
+      code = code.replace("Python", "", 1)
     code = code.replace("markdown", "")
     return code
 
