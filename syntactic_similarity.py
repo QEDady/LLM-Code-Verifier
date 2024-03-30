@@ -10,6 +10,7 @@ from sklearn.metrics import f1_score
 
 from scipy.spatial.distance import hamming
 
+
 def compute_syntactic_score(func1: str, func2: str, n_grams=2, hamming_mode='regular') -> float:
     # Calculate sequence similarity
     seq_matcher = SequenceMatcher(None, func1, func2, autojunk=False)
@@ -64,8 +65,10 @@ def compute_syntactic_score(func1: str, func2: str, n_grams=2, hamming_mode='reg
         hamming_distance_score = 1 - hamming_distance
 
     # Calculate Sørensen–Dice coefficient (F1 score) - Need to binarize the padded strings
-    binarized_func1 = [1 if char in padded_func2 else 0 for char in padded_func1]
-    binarized_func2 = [1 if char in padded_func1 else 0 for char in padded_func2]
+    binarized_func1 = [
+        1 if char in padded_func2 else 0 for char in padded_func1]
+    binarized_func2 = [
+        1 if char in padded_func1 else 0 for char in padded_func2]
     sorensen_dice_coefficient = f1_score(binarized_func1, binarized_func2)
 
     # Return an aggregate similarity score and the scores for each metric
@@ -86,12 +89,39 @@ def syntactic_similarity_driver(codes: list, n_grams=2, hamming_mode='regular') 
     func1 = codes[0]
     funcList = codes[1:]
     for i, func2 in enumerate(funcList):
-        score, metrics = compute_syntactic_score(func1, func2, n_grams, hamming_mode)
+        score, metrics = compute_syntactic_score(
+            func1, func2, n_grams, hamming_mode)
         scores[f"res_code_{i + 1}"] = {
             "aggregate_score": score,
             "metrics": metrics
         }
-    return scores
+
+    # dictionary to store the sum of each metric
+    metric_sums = {
+        'sequence_similarity': 0,
+        'edit_distance_score': 0,
+        'jaccard_similarity': 0,
+        'cosine_similarity_score': 0,
+        'sorensen_dice_coefficient': 0,
+        'hamming_distance_score': 0
+    }
+
+    num_entries = len(scores)
+
+    # getting the sum of each metric
+    for entry in scores.values():
+        for metric, value in entry['metrics'].items():
+            metric_sums[metric] += value
+
+    # compute the average for each metric
+    metric_averages = {metric: sum_value /
+                       num_entries for metric, sum_value in metric_sums.items()}
+
+    # getting the average of the metric averages
+    average_metric_average = sum(
+        metric_averages.values()) / len(metric_averages)
+
+    return scores, metric_averages, average_metric_average
 
 # generated_codes = [
 #     '\ndef find_divisors(num):\n    divisors = []\n    for i in range(1, n + 1):\n        if n % i == 0:\n            divisors.append(i)\n    return divisors\n',
@@ -106,4 +136,3 @@ def syntactic_similarity_driver(codes: list, n_grams=2, hamming_mode='regular') 
 #     similarity_scores = syntactic_similarity(ref_code, candidate_codes)
 
 #     print(similarity_scores)
-    
