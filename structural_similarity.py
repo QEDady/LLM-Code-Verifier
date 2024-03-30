@@ -2,9 +2,12 @@ import pycode_similar
 
 # The code is written with the help of https://github.com/CodeHero0/Nondeterminism-of-ChatGPT-in-Code-Generation?tab=readme-ov-file
 
+
 def compute_similarity(func_ast_diff_list):
-    total_plagiarism_count = sum(func_diff_info.plagiarism_count for func_diff_info in func_ast_diff_list)
-    total_count = sum(func_diff_info.total_count for func_diff_info in func_ast_diff_list)
+    total_plagiarism_count = sum(
+        func_diff_info.plagiarism_count for func_diff_info in func_ast_diff_list)
+    total_count = sum(
+        func_diff_info.total_count for func_diff_info in func_ast_diff_list)
     if total_count == 0:
         similarity_percent = 0
     else:
@@ -39,29 +42,31 @@ def structual_similarity(generated_codes, mode=pycode_similar.UnifiedDiff):
                                         keep_prints=True,
                                         module_level=False)
         except Exception as e:
-            #TODO(amer): maybe return negative numbers
-            raise Exception("f'Could not compute the {mode} structural similarity", e)
+            # TODO(amer): maybe return negative numbers
+            raise Exception(
+                "f'Could not compute the {mode} structural similarity", e)
     except Exception as e:
-            #TODO(amer): maybe return negative numbers
-            raise Exception("f'Could not compute the {mode} structural similarity", e)
-    
+        # TODO(amer): maybe return negative numbers
+        raise Exception(
+            "f'Could not compute the {mode} structural similarity", e)
+
     similarity_scores = {}
     for i, func_ast_diff_list in res:
         score = compute_similarity(func_ast_diff_list)
         similarity_scores[f'res_code_{i}'] = score
-    return similarity_scores  
+    return similarity_scores
 
 
 def structual_similarity_driver(codes):
     scores = {}
 
-    res_unified= structual_similarity(codes, pycode_similar.UnifiedDiff)
+    res_unified = structual_similarity(codes, pycode_similar.UnifiedDiff)
     res_tree = structual_similarity(codes, pycode_similar.TreeDiff)
-    
+
     for key in res_unified:
         metrics = {
-            "UnifiedDiff" : res_unified[key],
-            "TreeDiff":res_tree[key],
+            "UnifiedDiff": res_unified[key],
+            "TreeDiff": res_tree[key],
         }
 
         aggregate_score = sum(metrics.values()) / len(metrics)
@@ -69,10 +74,30 @@ def structual_similarity_driver(codes):
             "aggregate_score": aggregate_score,
             "metrics": metrics
         }
-    
-    return scores
 
-# if __name__=="__main__": 
+    metric_sums = {
+        'UnifiedDiff': 0,
+        'TreeDiff': 0
+    }
+
+    num_entries = len(scores)
+
+    # getting the sum of each metric
+    for entry in scores.values():
+        for metric, value in entry['metrics'].items():
+            metric_sums[metric] += value
+
+    # compute the average for each metric
+    metric_averages = {metric: sum_value /
+                       num_entries for metric, sum_value in metric_sums.items()}
+
+    # getting the average of the metric averages
+    average_metric_average = sum(
+        metric_averages.values()) / len(metric_averages)
+
+    return scores, metric_averages, average_metric_average
+
+# if __name__=="__main__":
 #     # generated_codes = ['\ndef all_unique(seq):\n    return len(seq) == len(set(seq))\n', '\ndef all_different(sequence):\n    return len(sequence) == len(set(sequence))\n', '\ndef all_different(seq):\n    return len(seq) == len(set(seq))+1\n', '\ndef are_all_numbers_unique(sequence):\n    return len(sequence) == len(set(sequence))\n', '\ndef are_all_numbers_different(sequence):\n    return len(sequence) == len(set(sequence))\n', '\ndef are_all_numbers_different(sequence):\n    return len(sequence) == len(set(sequence))\n']
 #     generated_codes = [
 #         '\ndef find_divisors(num):\n    divisors = []\n    for i in range(1, n + 1):\n        if n % i == 0:\n            divisors.append(i)\n    return divisors\n',
