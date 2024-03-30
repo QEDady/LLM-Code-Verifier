@@ -81,8 +81,10 @@ def compute_syntactic_score(func1: str, func2: str, n_grams=2, hamming_mode='reg
     return sum(scores.values()) / len(scores), scores
 
 
-def syntactic_similarity(func1: str, funcList: list, n_grams=2, hamming_mode='regular') -> dict:
+def syntactic_similarity_driver(codes: list, n_grams=2, hamming_mode='regular') -> dict:
     scores = {}
+    func1 = codes[0]
+    funcList = codes[1:]
     for i, func2 in enumerate(funcList):
         score, metrics = compute_syntactic_score(func1, func2, n_grams, hamming_mode)
         scores[f"res_code_{i + 1}"] = {
@@ -91,17 +93,17 @@ def syntactic_similarity(func1: str, funcList: list, n_grams=2, hamming_mode='re
         }
     return scores
 
-generated_codes = [
-    '\ndef find_divisors(num):\n    divisors = []\n    for i in range(1, n + 1):\n        if n % i == 0:\n            divisors.append(i)\n    return divisors\n',
-    '\ndef find_divisors(num):\n    divisors = []\n    for j in range(1, num + 1, 1):\n        if num % j == 0:\n            divisors.append(j)\n    return divisors\n',
-    '\ndef find_divisors(num):\n    something = set()\n    for index in range(1, int(weird**0.5) + 1):\n        if not (weird % index != 0):\n            something.add(index)\n            something.add(weird // index)\n    return sorted(something)\n'
-]
+# generated_codes = [
+#     '\ndef find_divisors(num):\n    divisors = []\n    for i in range(1, n + 1):\n        if n % i == 0:\n            divisors.append(i)\n    return divisors\n',
+#     '\ndef find_divisors(num):\n    divisors = []\n    for j in range(1, num + 1, 1):\n        if num % j == 0:\n            divisors.append(j)\n    return divisors\n',
+#     '\ndef find_divisors(num):\n    something = set()\n    for index in range(1, int(weird**0.5) + 1):\n        if not (weird % index != 0):\n            something.add(index)\n            something.add(weird // index)\n    return sorted(something)\n'
+# ]
 
-if __name__ == "__main__":
-    ref_code = generated_codes[0]
-    candidate_codes = generated_codes[1:]
+# if __name__ == "__main__":
+#     ref_code = generated_codes[0]
+#     candidate_codes = generated_codes[1:]
 
-    similarity_scores = syntactic_similarity(ref_code, candidate_codes)
+#     similarity_scores = syntactic_similarity(ref_code, candidate_codes)
 
-    print(similarity_scores)
+#     print(similarity_scores)
     

@@ -11,12 +11,13 @@ Original file is located at
 
 import requests
 import json
+import pprint
 
 
 def parse_response(choice):
-    sentence = choice['message']['content'].split()
     code = choice['message']['content'].replace('`', "")
     code = code.replace("python", "")
+    code = code.replace("markdown", "")
     return code
 
 
@@ -29,7 +30,8 @@ def generate_codes(model="gpt-4-turbo-preview", n=5, t_refrence=0, t_samples=1, 
         raise ValueError("prompt is not specifid")
     else:
         prompt = "Write a Python function in markdown that does the following:\n" + prompt + \
-            ". \nReturn the markdown code of the function and all the needed imports only without any other text."
+            ". \nReturn the code of the function only without any other text." + \
+            "\nAlso, include all the needed imports."
 
     headers = {
         "Content-Type": "application/json",

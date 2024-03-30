@@ -3,11 +3,31 @@ import gzip
 import json
 import os
 import re
+import csv
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 HUMAN_EVAL = os.path.join(ROOT, "DATASETS", "human-eval.jsonl")
 HUMAN_EVAL_MODIFIED = os.path.join(ROOT, "DATASETS", "human-eval-modified.jsonl")
 HUMAN_EVAL_PROMPTS = os.path.join(ROOT, "PROMPTS", "human-eval-prompts.jsonl")
+RESULTS = os.path.join(ROOT, "RESULTS")
+
+def create_csv_file(dataset = "HumanEval", model="gpt-4-turbo-preview", n=5, t_refrence=0, t_samples=1, trial=1):
+    csv_file_name = f'dataset_{dataset}_model_{model}_n_{n}_tempr_{t_refrence}_temps_{t_samples}_trial_{trial}.csv'
+    csv_file_name = os.path.join(RESULTS, csv_file_name)
+    fieldnames = ["task_id", "prompt"]
+    for i in range(n+1):
+        fieldnames.append(f"code_{i}")
+    
+    for i in range(n+1):
+        fieldnames.append(f"pass_rate_{i}")
+    
+    for i in range(n+1):
+        fieldnames.append(f"err_{i}")
+
+    with open(csv_file_name, mode='w', newline='') as csv_f:
+        writer = csv.DictWriter(csv_f, fieldnames=fieldnames, quoting=csv.QUOTE_ALL)
+        writer.writeheader()
+    return csv_file_name, fieldnames
 
 def modify_human_eval_tests(test):
     # Initialize the total number of tests and the number of passed tests

@@ -52,11 +52,11 @@ def structual_similarity(generated_codes, mode=pycode_similar.UnifiedDiff):
     return similarity_scores  
 
 
-def structual_similarity_driver(generated_codes):
+def structual_similarity_driver(codes):
     scores = {}
 
-    res_unified= structual_similarity(generated_codes, pycode_similar.UnifiedDiff)
-    res_tree = structual_similarity(generated_codes, pycode_similar.TreeDiff)
+    res_unified= structual_similarity(codes, pycode_similar.UnifiedDiff)
+    res_tree = structual_similarity(codes, pycode_similar.TreeDiff)
     
     for key in res_unified:
         metrics = {
@@ -72,12 +72,12 @@ def structual_similarity_driver(generated_codes):
     
     return scores
 
-if __name__=="__main__": 
-    # generated_codes = ['\ndef all_unique(seq):\n    return len(seq) == len(set(seq))\n', '\ndef all_different(sequence):\n    return len(sequence) == len(set(sequence))\n', '\ndef all_different(seq):\n    return len(seq) == len(set(seq))+1\n', '\ndef are_all_numbers_unique(sequence):\n    return len(sequence) == len(set(sequence))\n', '\ndef are_all_numbers_different(sequence):\n    return len(sequence) == len(set(sequence))\n', '\ndef are_all_numbers_different(sequence):\n    return len(sequence) == len(set(sequence))\n']
-    generated_codes = [
-        '\ndef find_divisors(num):\n    divisors = []\n    for i in range(1, n + 1):\n        if n % i == 0:\n            divisors.append(i)\n    return divisors\n',
-        '\ndef find_divisors(num):\n    divisors = []\n    for j in range(1, num + 1, 1):\n        if num % j == 0:\n            divisors.append(j)\n    return divisors\n',
-        '\ndef find_divisors(num):\n    something = set()\n    for index in range(1, int(weird**0.5) + 1):\n        if not (weird % index != 0):\n            something.add(index)\n            something.add(weird // index)\n    return sorted(something)\n'
-    ]
+# if __name__=="__main__": 
+#     # generated_codes = ['\ndef all_unique(seq):\n    return len(seq) == len(set(seq))\n', '\ndef all_different(sequence):\n    return len(sequence) == len(set(sequence))\n', '\ndef all_different(seq):\n    return len(seq) == len(set(seq))+1\n', '\ndef are_all_numbers_unique(sequence):\n    return len(sequence) == len(set(sequence))\n', '\ndef are_all_numbers_different(sequence):\n    return len(sequence) == len(set(sequence))\n', '\ndef are_all_numbers_different(sequence):\n    return len(sequence) == len(set(sequence))\n']
+#     generated_codes = [
+#         '\ndef find_divisors(num):\n    divisors = []\n    for i in range(1, n + 1):\n        if n % i == 0:\n            divisors.append(i)\n    return divisors\n',
+#         '\ndef find_divisors(num):\n    divisors = []\n    for j in range(1, num + 1, 1):\n        if num % j == 0:\n            divisors.append(j)\n    return divisors\n',
+#         '\ndef find_divisors(num):\n    something = set()\n    for index in range(1, int(weird**0.5) + 1):\n        if not (weird % index != 0):\n            something.add(index)\n            something.add(weird // index)\n    return sorted(something)\n'
+#     ]
 
-    print(structual_similarity_driver(generated_codes))
+#     print(structual_similarity_driver(generated_codes))
