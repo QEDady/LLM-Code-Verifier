@@ -79,6 +79,7 @@ def compute_syntactic_score(func1: str, func2: str, n_grams=2, hamming_mode='reg
         "cosine_similarity_score": cosine_similarity_score,
         "sorensen_dice_coefficient": sorensen_dice_coefficient,
         "hamming_distance_score": hamming_distance_score,
+        "longest_common_subsequence": lcs_similarity,
     }
 
     return sum(scores.values()) / len(scores), scores
@@ -103,7 +104,8 @@ def syntactic_similarity_driver(codes: list, n_grams=2, hamming_mode='regular') 
         'jaccard_similarity': 0,
         'cosine_similarity_score': 0,
         'sorensen_dice_coefficient': 0,
-        'hamming_distance_score': 0
+        'hamming_distance_score': 0,
+        'longest_common_subsequence': 0
     }
 
     num_entries = len(scores)
