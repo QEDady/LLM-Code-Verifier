@@ -1,0 +1,11 @@
+,0,1,2,3,4,5,6,7
+file,./RESULTS/final scores/dataset_HumanEval_model_gpt-3.5-turbo_n_10_tempr_0_temps_1_trial_1_sim_score.csv,./RESULTS/final scores/dataset_HumanEval_model_gpt-3.5-turbo_n_5_tempr_0_temps_1_trial_1_sim_score.csv,./RESULTS/final scores/dataset_HumanEval_model_gpt-3.5-turbo_n_3_tempr_0_temps_1_trial_1_sim_score.csv,./RESULTS/final scores/dataset_HumanEval_model_gpt-3.5-turbo_n_5_tempr_0_temps_1.5_trial_1_sim_score.csv,./RESULTS/final scores/dataset_HumanEval_model_gpt-3.5-turbo_n_15_tempr_0_temps_1_trial_1_sim_score.csv,./RESULTS/final scores/dataset_HumanEval_model_gpt-4-turbo-preview_n_5_tempr_0_temps_1_trial_1_sim_score.csv,./RESULTS/final scores/dataset_HumanEval_model_gpt-3.5-turbo_n_5_tempr_1_temps_1_trial_1_sim_score.csv,./RESULTS/final scores/dataset_HumanEval_model_gpt-3.5-turbo_n_15_tempr_1_temps_1_trial_1_sim_score.csv
+sequence_similarity,0.28,0.28,0.23,0.47,0.35,0.09,0.21,0.3
+edit_distance_score,0.27,0.27,0.19,0.43,0.34,0.08,0.19,0.28
+jaccard_similarity,0.23,0.27,0.17,0.4,0.29,0.13,0.16,0.3
+cosine_similarity_score,0.28,0.26,0.16,0.43,0.24,0.1,0.21,0.3
+sorensen_dice_coefficient,0.1,0.11,0.07,0.25,0.09,-0.03,0.05,0.19
+hamming_distance_score,0.17,0.19,0.07,0.3,0.22,0.08,0.08,0.18
+longest_common_subsequence,0.24,0.24,0.14,0.35,0.27,0.08,0.14,0.26
+UnifiedDiff,0.3,0.25,0.3,0.42,0.27,0.15,0.28,0.33
+TreeDiff,0.28,0.24,0.22,0.37,0.23,0.12,0.25,0.28
