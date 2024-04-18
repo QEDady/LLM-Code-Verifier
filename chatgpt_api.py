@@ -59,7 +59,7 @@ def generate_codes(model="gpt-4-turbo-preview", n=5, t_refrence=0, t_samples=1, 
     generated_codes = []
     for trial in range(RETRIALS):
         refrence_response = requests.post(
-            URL, headers=headers, json=payload, stream=False).content.strip().decode("utf-8")
+            URL, headers=headers, json=payload, stream=False, timeout=50).content.strip().decode("utf-8")
         response_dict = json.loads(refrence_response)
         if 'choices' in response_dict:
             break
@@ -72,7 +72,7 @@ def generate_codes(model="gpt-4-turbo-preview", n=5, t_refrence=0, t_samples=1, 
     payload["n"] = n
     for trial in range(RETRIALS):
         samples_response = requests.post(
-            URL, headers=headers, json=payload, stream=False).content.strip().decode("utf-8")
+            URL, headers=headers, json=payload, stream=False, timeout=50).content.strip().decode("utf-8")
         response_dict = json.loads(samples_response)
         if 'choices' in response_dict:
             break
