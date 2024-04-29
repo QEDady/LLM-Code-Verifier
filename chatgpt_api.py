@@ -11,9 +11,12 @@ Original file is located at
 
 import requests
 import json
+import ast
 import pprint
 
 RETRIALS = 5
+URL = "https://api.openai.com/v1/chat/completions"
+APIKEY = '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'
 
 def parse_response(choice):
     code = choice['message']['content'].replace('`', "")
@@ -24,14 +27,40 @@ def parse_response(choice):
     code = code.replace("markdown", "")
     return code
 
+def remove_code_comments(code):
+    class CommentRemover(ast.NodeTransformer):
+        def visit(self, node):
+            if isinstance(node, ast.FunctionDef):
+                # Remove comments within function definitions
+                node.body = [self.visit(stmt) for stmt in node.body if not self.is_comment(stmt)]
+            elif isinstance(node, ast.ClassDef):
+                # Remove comments within class definitions
+                node.body = [self.visit(stmt) for stmt in node.body if not self.is_comment(stmt)]
+            elif self.is_comment(node):
+                # Remove comments in expressions
+                return None
+            return ast.NodeTransformer.generic_visit(self, node)
+
+        def is_comment(self, node):
+            if isinstance(node, ast.Expr) and isinstance(node.value, ast.Constant) and isinstance(node.value.value, str):
+                return True
+            return False
+
+    try:
+        tree = ast.parse(code)
+        remover = CommentRemover()
+        cleaned_tree = remover.visit(tree)
+        return ast.unparse(cleaned_tree)
+    except SyntaxError:
+        # If there's a syntax error in the code, just return it as is
+        return code
+
 
 # n: number of samples to generate other than the refrence response
 # The function returns an array of n+1 codes where the first the refrence code and the others are the candidates.
 def generate_codes(model="gpt-4-turbo-preview", n=5, t_refrence=0, t_samples=1, prompt=None):
-    URL = "https://api.openai.com/v1/chat/completions"
-    api_key = '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'
     if prompt is None:
-        raise ValueError("prompt is not specifid")
+        raise ValueError("prompt is not specified")
     else:
         prompt = "Write a Python function in markdown that does the following:\n" + prompt + \
             ". \nReturn the code of the function only without any other text." + \
@@ -39,7 +68,7 @@ def generate_codes(model="gpt-4-turbo-preview", n=5, t_refrence=0, t_samples=1, 
 
     headers = {
         "Content-Type": "application/json",
-        "Authorization": f"Bearer {api_key}"
+        "Authorization": f"Bearer {APIKEY}"
     }
 
     # refrence request
@@ -84,6 +113,66 @@ def generate_codes(model="gpt-4-turbo-preview", n=5, t_refrence=0, t_samples=1, 
     return generated_codes
 
 
+# generate a comment that states the functionality of the given code
+def generate_comment(model="gpt-4-turbo-preview", code=None):
+    #TODO(amer): remove any comments from code
+    prompt = ""
+    if code is None:
+        raise ValueError("code is not specified")
+    else:
+        code = remove_code_comments(code)
+        prompt = "State the functionality of the following python code without going into implementation details:\n```\n" + code + "```"
+    
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {APIKEY}"
+    }
+
+       # refrence request
+    payload = {
+        "model": model,
+        "messages": [
+            {"role": "system", "content": "You are a programming assistant, skilled in explaining the code functionality."},
+            {"role": "user", "content": prompt}],
+        "stream": False,
+        "presence_penalty": 0,
+        "frequency_penalty": 0,
+    }
+
+    for trial in range(RETRIALS):
+        response = requests.post(
+            URL, headers=headers, json=payload, stream=False, timeout=50).content.strip().decode("utf-8")
+        response_dict = json.loads(response)
+        if 'choices' in response_dict:
+            break
+    response = "None"
+    for choice in response_dict['choices']:
+        response = choice['message']['content']
+        break
+
+    return response
+
 # if __name__=="__main__":
+#     code = '''
+# from typing import List
+
+# def has_close_elements(numbers: List[float], threshold: float) -> bool:
+#     """ Check if in given list of numbers, are any two numbers closer to each other than
+#     given threshold.
+#     >>> has_close_elements([1.0, 2.0, 3.0], 0.5)
+#     False
+#     >>> has_close_elements([1.0, 2.8, 3.0, 4.0, 5.0, 2.0], 0.3)
+#     True
+#     """
+#     for i in range(len(numbers)):
+#         for j in range(i+1, len(numbers)):
+#             if abs(numbers[i] - numbers[j]) < threshold:
+#                 return True
+#     return False
+# '''
+# print(remove_code_comments(code))
+# print("\n\n")
+# print(generate_comment(model='gpt-3.5-turbo', code = code))
 #   prompt = " Write a Python function in markdown that takes a sequence of numbers and determines whether all the numbers are different from each other. Return the code of the function only without any other text."
 #   print(generate_codes(prompt=prompt))
+
