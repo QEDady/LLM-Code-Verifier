@@ -1,4 +1,3 @@
-import json
 import subprocess
 import tqdm
 from chatgpt_api import generate_codes
@@ -6,9 +5,9 @@ from data import stream_jsonl, modify_Human_eval, create_csv_file
 from data import HUMAN_EVAL, HUMAN_EVAL_MODIFIED, HUMAN_EVAL_PROMPTS, RESULTS
 from structural_similarity import structual_similarity_driver
 from syntactic_similarity import syntactic_similarity_driver
-import re
 import csv
 import pprint
+import json
 
 def eval_Human_eval(model="gpt-3.5-turbo", n=5, t_refrence=0, t_samples=1, trial=1):
     pass_rate = 0
@@ -62,15 +61,26 @@ def parse_csv(csv_file_name):
     return codes
             
 
+def read_test():
+    with open(HUMAN_EVAL_MODIFIED, 'r') as f:
+        for line in f:
+            problem = json.loads(line)
+            if problem['task_id'] == "HumanEval/66":
+                print(f"{problem['test']}")
+                break
+
+
 if __name__ == '__main__':
     # eval_Human_eval(model='gpt-3.5-turbo', n=5, t_refrence=0, t_samples=1, trial=1)
     # eval_Human_eval(model='gpt-3.5-turbo', n=3, t_refrence=0, t_samples=1, trial=1)
     # eval_Human_eval(model='gpt-3.5-turbo', n=10, t_refrence=0, t_samples=1, trial=1)
     # eval_Human_eval(model='gpt-3.5-turbo', n=5, t_refrence=1, t_samples=1, trial=1)
-    eval_Human_eval(model='gpt-3.5-turbo', n=5, t_refrence=0, t_samples=1.5, trial=1)
+    # eval_Human_eval(model='gpt-3.5-turbo', n=5, t_refrence=0, t_samples=1.5, trial=1)
 
     # eval_Human_eval(model='gpt-4-turbo-preview', n=5, t_refrence=0, t_samples=1, trial=1)
     # eval_Human_eval(model='gpt-4-turbo-preview', n=3, t_refrence=0, t_samples=1, trial=1)
     # eval_Human_eval(model='gpt-4-turbo-preview', n=10, t_refrence=0, t_samples=1, trial=1)
     # eval_Human_eval(model='gpt-4-turbo-preview', n=5, t_refrence=1, t_samples=1, trial=1)
     # eval_Human_eval(model='gpt-4-turbo-preview', n=5, t_refrence=0, t_samples=1.5, trial=1)
+    read_test()
+    
