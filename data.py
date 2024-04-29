@@ -11,9 +11,12 @@ HUMAN_EVAL_MODIFIED = os.path.join(ROOT, "DATASETS", "human-eval-modified.jsonl"
 HUMAN_EVAL_PROMPTS = os.path.join(ROOT, "PROMPTS", "human-eval-prompts.jsonl")
 RESULTS = os.path.join(ROOT, "RESULTS")
 
+def generate_csv_file_name(dataset, model, n, t_refrence, t_samples, trial):
+    name = f'dataset_{dataset}_model_{model}_n_{n}_tempr_{t_refrence}_temps_{t_samples}_trial_{trial}.csv'
+    return os.path.join(RESULTS, name)
+
 def create_csv_file(dataset = "HumanEval", model="gpt-4-turbo-preview", n=5, t_refrence=0, t_samples=1, trial=1):
-    csv_file_name = f'dataset_{dataset}_model_{model}_n_{n}_tempr_{t_refrence}_temps_{t_samples}_trial_{trial}.csv'
-    csv_file_name = os.path.join(RESULTS, csv_file_name)
+    csv_file_name = generate_csv_file_name(dataset, model, n, t_refrence, t_samples, trial)
     fieldnames = ["task_id", "prompt"]
     last_task_id_num = -1
     for i in range(n+1):

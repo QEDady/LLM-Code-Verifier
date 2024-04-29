@@ -1,14 +1,15 @@
 import json
 import subprocess
 import tqdm
-from chatgpt_api import generate_codes
-from data import stream_jsonl, modify_Human_eval, create_csv_file
+from chatgpt_api import generate_codes, generate_comment
+from data import stream_jsonl, modify_Human_eval, create_csv_file, generate_csv_file_name
 from data import HUMAN_EVAL, HUMAN_EVAL_MODIFIED, HUMAN_EVAL_PROMPTS, RESULTS
 from structural_similarity import structural_similarity_driver
 from syntactic_similarity import syntactic_similarity_driver
 import re
 import csv
 import pprint
+import pandas as pd
 
 def eval_Human_eval(model="gpt-3.5-turbo", n=5, t_refrence=0, t_samples=1, trial=1):
     pass_rate = 0
@@ -51,7 +52,35 @@ def eval_Human_eval(model="gpt-3.5-turbo", n=5, t_refrence=0, t_samples=1, trial
                     row[f"err_{i}"] = err
                     row[f"pass_rate_{i}"] = pass_rate*100
                 writer.writerow(row)
-                
+
+
+# Generate a comment for each code in the given dataset and appends it to the end of the row in the csv file.
+# Pass either the csv_file_name directly or all the other parametrs to generate it according to the used convention. 
+def add_comments(comment_generation_model = "gpt-3.5-turbo", csv_file_name = None, dataset = None, code_generation_model = None, n = None, t_refrence = None, t_samples = None, trial = None):
+    if csv_file_name is None:
+        csv_file_name = generate_csv_file_name(dataset, code_generation_model, n, t_refrence, t_samples, trial)
+    
+    df = pd.read_csv(csv_file_name)
+    columns = list(df)
+    for code_col in columns[2:]:
+        if not str(code_col).startswith("code"):
+            break
+        new_column_name = comment_generation_model + "_" + str(code_col).replace("code", "comment")
+        if columns.count(new_column_name) !=0:
+            print("The comments are already generated for this table")
+            break
+        print("Starting with column", code_col)
+        generated_comments = []
+        task = 0
+        for code in df[code_col]:
+            generated_comments.append(generate_comment(comment_generation_model, code))
+            print("Task", task, "done")
+            task +=1
+        df[new_column_name] = generated_comments
+        print(new_column_name, "done")
+    
+    df.to_csv(csv_file_name, index=False)    
+
 def parse_csv(csv_file_name):
     codes = []
     with open(csv_file_name, mode='r') as csv_f:
@@ -62,7 +91,19 @@ def parse_csv(csv_file_name):
     return codes
             
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
+#     add_comments("gpt-3.5-turbo","RESULTS/dataset_HumanEval_model_gpt-3.5-turbo_n_10_tempr_0_temps_1_trial_1.csv")
+#     print("Done 10")
+#     print("--------------")
+#     add_comments("gpt-3.5-turbo","RESULTS/dataset_HumanEval_model_gpt-3.5-turbo_n_15_tempr_0_temps_1_trial_1.csv")
+#     print("Done 15")
+#     print("--------------")
+#     add_comments("gpt-3.5-turbo","RESULTS/dataset_HumanEval_model_gpt-3.5-turbo_n_5_tempr_0_temps_1.5_trial_1.csv")
+#     print("Done T 1.5")
+#     print("--------------")
+#     add_comments("gpt-3.5-turbo","RESULTS/dataset_HumanEval_model_gpt-4-turbo-preview_n_5_tempr_0_temps_1_trial_1.csv")
+#     print("Done Gpt4")
+#     print("--------------")
     # eval_Human_eval(model='gpt-3.5-turbo', n=5, t_refrence=0, t_samples=1, trial=1)
     # eval_Human_eval(model='gpt-3.5-turbo', n=3, t_refrence=0, t_samples=1, trial=1)
     # eval_Human_eval(model='gpt-3.5-turbo', n=10, t_refrence=0, t_samples=1, trial=1)

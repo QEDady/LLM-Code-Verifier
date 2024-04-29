@@ -154,21 +154,24 @@ def generate_comment(model="gpt-4-turbo-preview", code=None):
 
 # if __name__=="__main__":
 #     code = '''
-# from typing import List
+# import math
 
-# def has_close_elements(numbers: List[float], threshold: float) -> bool:
-#     """ Check if in given list of numbers, are any two numbers closer to each other than
-#     given threshold.
-#     >>> has_close_elements([1.0, 2.0, 3.0], 0.5)
-#     False
-#     >>> has_close_elements([1.0, 2.8, 3.0, 4.0, 5.0, 2.0], 0.3)
-#     True
+# def rounded_avg(n, m):
+#     """You are given two positive integers n and m, and your task is to compute the
+#     average of the integers from n through m (including n and m).
+#     Round the answer to the nearest integer and convert that to binary.
+#     If n is greater than m, return -1.
+#     Example:
+#     rounded_avg(1, 5) => "0b11"
+#     rounded_avg(7, 5) => -1
+#     rounded_avg(10, 20) => "0b1111"
+#     rounded_avg(20, 33) => "0b11010"
 #     """
-#     for i in range(len(numbers)):
-#         for j in range(i+1, len(numbers)):
-#             if abs(numbers[i] - numbers[j]) < threshold:
-#                 return True
-#     return False
+#     if n > m:
+#         return -1
+#     avg = math.ceil((n + m) / 2)
+#     return bin(avg)
+
 # '''
 # print(remove_code_comments(code))
 # print("\n\n")
@@ -176,3 +179,11 @@ def generate_comment(model="gpt-4-turbo-preview", code=None):
 #   prompt = " Write a Python function in markdown that takes a sequence of numbers and determines whether all the numbers are different from each other. Return the code of the function only without any other text."
 #   print(generate_codes(prompt=prompt))
 
+# if __name__=="__main__":
+#     code = '''
+# import re
+
+# def solve(txt):
+#     return bool(re.search(r'\b[a-zA-Z]$', txt))
+# '''
+#     print(generate_comment(model="gpt-4-turbo-preview", code=code))
