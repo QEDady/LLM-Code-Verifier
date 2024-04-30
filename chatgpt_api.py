@@ -141,7 +141,7 @@ def generate_comment(model="gpt-4-turbo-preview", code=None):
 
     for trial in range(RETRIALS):
         response = requests.post(
-            URL, headers=headers, json=payload, stream=False, timeout=50).content.strip().decode("utf-8")
+            URL, headers=headers, json=payload, stream=False, timeout=100).content.strip().decode("utf-8")
         response_dict = json.loads(response)
         if 'choices' in response_dict:
             break
