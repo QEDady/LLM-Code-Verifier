@@ -56,7 +56,7 @@ def eval_Human_eval(model="gpt-3.5-turbo", n=5, t_refrence=0, t_samples=1, trial
 
 # Generate a comment for each code in the given dataset and appends it to the end of the row in the csv file.
 # Pass either the csv_file_name directly or all the other parametrs to generate it according to the used convention. 
-def add_comments(comment_generation_model = "gpt-3.5-turbo", csv_file_name = None, dataset = None, code_generation_model = None, n = None, t_refrence = None, t_samples = None, trial = None):
+def add_comments(comment_generation_model = "gpt-3.5-turbo", rename_code_functions = False, csv_file_name = None, dataset = None, code_generation_model = None, n = None, t_refrence = None, t_samples = None, trial = None):
     if csv_file_name is None:
         csv_file_name = generate_csv_file_name(dataset, code_generation_model, n, t_refrence, t_samples, trial)
     
@@ -66,6 +66,8 @@ def add_comments(comment_generation_model = "gpt-3.5-turbo", csv_file_name = Non
         if not str(code_col).startswith("code"):
             break
         new_column_name = comment_generation_model + "_" + str(code_col).replace("code", "comment")
+        if rename_code_functions:
+            new_column_name = "functions-renamed_" + new_column_name
         if list(df).count(new_column_name) !=0:
             print(new_column_name, " comments are already generated for this table")
             continue
@@ -73,7 +75,7 @@ def add_comments(comment_generation_model = "gpt-3.5-turbo", csv_file_name = Non
         generated_comments = []
         task = 0
         for code in df[code_col]:
-            generated_comments.append(generate_comment(comment_generation_model, code))
+            generated_comments.append(generate_comment(model= comment_generation_model, code = code, rename_functions =rename_code_functions))
             print("Task", task, "done")
             task +=1
         df[new_column_name] = generated_comments
@@ -93,8 +95,8 @@ def parse_csv(csv_file_name):
             
 
 # if __name__ == '__main__':
-#     add_comments("gpt-3.5-turbo","RESULTS/dataset_HumanEval_model_gpt-3.5-turbo_n_15_tempr_0_temps_1_trial_1.csv")
-#     print("Done 15")
+#     add_comments(comment_generation_model="gpt-3.5-turbo", rename_code_functions=True, csv_file_name="RESULTS/dataset_HumanEval_model_gpt-3.5-turbo_n_5_tempr_0_temps_1_trial_1.csv")
+#     print("Done 5 with renaming functions")
     # print("--------------")
     # add_comments("gpt-3.5-turbo","RESULTS/dataset_HumanEval_model_gpt-3.5-turbo_n_5_tempr_0_temps_1.5_trial_1.csv")
     # print("Done T 1.5")

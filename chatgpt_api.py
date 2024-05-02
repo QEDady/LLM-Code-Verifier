@@ -55,7 +55,32 @@ def remove_code_comments(code):
         # If there's a syntax error in the code, just return it as is
         return code
 
+# Renmae all the Function inside a piece of code to 
+# func, func1, func2, func3, etc.
+def rename_code_functions(code):
+    class FunctionsRenamer(ast.NodeTransformer):
+        def visit(self, node):
+            if isinstance(node, ast.FunctionDef):
+                # Rename
+                new_identieier = 'func'
+                if self.function_id != 0:
+                    new_identieier = new_identieier + str(self.function_id)
+                node.name = new_identieier
+                self.function_id = self.function_id + 1
+            return ast.NodeTransformer.generic_visit(self, node)
+        
+        def __init__(self) -> None:
+            super().__init__()
+            self.function_id = 0
+        
 
+    try:
+        tree = ast.parse(code)
+        reanmer = FunctionsRenamer()
+        renamed_tree = reanmer.visit(tree)
+        return ast.unparse(renamed_tree)
+    except SyntaxError:
+        return code
 # n: number of samples to generate other than the refrence response
 # The function returns an array of n+1 codes where the first the refrence code and the others are the candidates.
 def generate_codes(model="gpt-4-turbo-preview", n=5, t_refrence=0, t_samples=1, prompt=None):
@@ -114,15 +139,20 @@ def generate_codes(model="gpt-4-turbo-preview", n=5, t_refrence=0, t_samples=1, 
 
 
 # generate a comment that states the functionality of the given code
-def generate_comment(model="gpt-4-turbo-preview", code=None):
+# The comments inside the given code are always removed in order not to bias gpt answer.
+#
+# if renmae_functions is set, the name of the functions get changed as well to func, func1, func2, etc.
+# as sometimes the name of the functions give wrong hints to gpt.
+def generate_comment(model="gpt-4-turbo-preview", code=None, rename_functions = False):
     #TODO(amer): remove any comments from code
     prompt = ""
     if code is None:
         raise ValueError("code is not specified")
     else:
         code = remove_code_comments(code)
-        prompt = "State the functionality of the following python code without going into implementation details:\n```\n" + code + "```"
-    
+    if rename_functions:
+        code = rename_code_functions(code)
+    prompt = "State the functionality of the following python code without going into implementation details:\n```\n" + code + "```"
     headers = {
         "Content-Type": "application/json",
         "Authorization": f"Bearer {APIKEY}"
@@ -154,26 +184,16 @@ def generate_comment(model="gpt-4-turbo-preview", code=None):
 
 # if __name__=="__main__":
 #     code = '''
-# import math
 
-# def rounded_avg(n, m):
-#     """You are given two positive integers n and m, and your task is to compute the
-#     average of the integers from n through m (including n and m).
-#     Round the answer to the nearest integer and convert that to binary.
-#     If n is greater than m, return -1.
-#     Example:
-#     rounded_avg(1, 5) => "0b11"
-#     rounded_avg(7, 5) => -1
-#     rounded_avg(10, 20) => "0b1111"
-#     rounded_avg(20, 33) => "0b11010"
-#     """
-#     if n > m:
-#         return -1
-#     avg = math.ceil((n + m) / 2)
-#     return bin(avg)
+# import re
+
+# def remove_vowels(text):
+#     # function should remove the vowels
+#     return re.sub(r'[aeiouAEIOU]', '', text)
+
 
 # '''
-# print(remove_code_comments(code))
+# print(generate_comment(model="gpt-4-turbo-preview", code=code, rename_functions = True))
 # print("\n\n")
 # print(generate_comment(model='gpt-3.5-turbo', code = code))
 #   prompt = " Write a Python function in markdown that takes a sequence of numbers and determines whether all the numbers are different from each other. Return the code of the function only without any other text."
