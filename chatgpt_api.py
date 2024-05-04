@@ -9,12 +9,14 @@ Original file is located at
 
 #!pip install --upgrade openai
 
+import time
 import requests
 import json
 import ast
 import pprint
+import aiohttp
 
-RETRIALS = 5
+RETRIALS = 20
 URL = "https://api.openai.com/v1/chat/completions"
 APIKEY = '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'
 
@@ -112,6 +114,7 @@ def generate_codes(model="gpt-4-turbo-preview", n=5, t_refrence=0, t_samples=1, 
 
     generated_codes = []
     for trial in range(RETRIALS):
+        # print(f"trial {trial}")
         refrence_response = requests.post(
             URL, headers=headers, json=payload, stream=False, timeout=50).content.strip().decode("utf-8")
         response_dict = json.loads(refrence_response)
@@ -125,6 +128,7 @@ def generate_codes(model="gpt-4-turbo-preview", n=5, t_refrence=0, t_samples=1, 
     payload["temperature"] = t_samples
     payload["n"] = n
     for trial in range(RETRIALS):
+        # print(f"trial {trial}")
         samples_response = requests.post(
             URL, headers=headers, json=payload, stream=False, timeout=50).content.strip().decode("utf-8")
         response_dict = json.loads(samples_response)
@@ -136,6 +140,70 @@ def generate_codes(model="gpt-4-turbo-preview", n=5, t_refrence=0, t_samples=1, 
 
     return generated_codes
 
+
+async def generate_codes_async(session, model="gpt-4-turbo-preview", n=5, t_refrence=0, t_samples=1, problem=None):
+    prompt = problem['prompt']
+    if prompt is None:
+        raise ValueError("prompt is not specified")
+    else:
+        prompt = "Write a Python function in markdown that does the following:\n" + prompt + \
+            ". \nReturn the code of the function only without any other text." + \
+            "\nAlso, include all the needed imports."
+
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {APIKEY}"
+    }
+
+    # refrence request
+    payload = {
+        "model": model,
+        "messages": [
+            {"role": "system", "content": "You are a programming assistant, skilled in writing complex programming concepts with creative syntax."},
+            {"role": "user", "content": prompt}],
+        "temperature": t_refrence,
+        "top_p": 1.0,
+        "n": 1,
+        # "stream": False,
+        "presence_penalty": 0,
+        "frequency_penalty": 0,
+    }
+
+    generated_codes = []
+    for trial in range(RETRIALS):
+        async with session.post(URL, headers=headers, json=payload, timeout=50) as response:
+            refrence_response = await response.content.read()
+            refrence_response = refrence_response.strip().decode("utf-8")
+            response_dict = json.loads(refrence_response)
+            if 'choices' in response_dict:
+                break
+            elif 'error' in response_dict:
+                print("Rate limit exceeded. Waiting for 1 second before retrying...")
+                time.sleep(1)
+        
+    pprint.pprint(response_dict)
+    for choice in response_dict['choices']:
+        generated_codes.append(parse_response(choice))
+
+    # sampled responses
+    payload["temperature"] = t_samples
+    payload["n"] = n
+    for trial in range(RETRIALS):
+        async with session.post(URL, headers=headers, json=payload, timeout=50) as response:
+            samples_response = await response.content.read()
+            samples_response = samples_response.strip().decode("utf-8")
+            response_dict = json.loads(samples_response)
+            if 'choices' in response_dict:
+                break
+            elif 'error' in response_dict:
+                print("Rate limit exceeded. Waiting for 1 second before retrying...")
+                time.sleep(1)
+
+    pprint.pprint(response_dict)
+    for choice in response_dict['choices']:
+        generated_codes.append(parse_response(choice))
+    print(f"finished generating codes for {problem['task_id']}")
+    return problem, generated_codes
 
 # generate a comment that states the functionality of the given code
 # The comments inside the given code are always removed in order not to bias gpt answer.
