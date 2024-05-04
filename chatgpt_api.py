@@ -77,7 +77,6 @@ def generate_codes(model="gpt-4-turbo-preview", n=5, t_refrence=0, t_samples=1, 
         if 'choices' in response_dict:
             break
         
-    # print(response_dict)
     for choice in response_dict['choices']:
         generated_codes.append(parse_response(choice))
 

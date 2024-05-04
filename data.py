@@ -20,10 +20,6 @@ APPS_TEST = os.path.join(ROOT, "DATASETS", "APPS", "data_split", "test.json")
 APPS_TRAIN = os.path.join(ROOT, "DATASETS", "APPS", "data_split", "train.json")
 
 def reindent_code(codestr):
-    """
-    Given code string, reindent it in the same way that the
-    Github dataset was indented
-    """
     codestr = io.StringIO(codestr)
     ret = io.StringIO()
 
@@ -87,24 +83,40 @@ def modify_human_eval_tests(test):
     test = re.sub(pattern, replacement, test)
 
     # Replace all assert True statements with always-true statements
-    test = re.sub(r"assert\s+True.*\n", "True==True\n", test)
+    test = re.sub(r"assert\s+True.*\n", "", test)
 
-    assert_statement_pattern = r"assert.*candidate.*?(?=assert.*candidate|$)"
+    assert_statement_pattern = r"assert.*?candidate.*?(?=assert.*candidate|for|$)"
     assert_statments = re.findall(assert_statement_pattern, test, re.DOTALL)
     quoted_str_pattern = r",\s+\".*\".*"
     for assert_statement in assert_statments:
-        test_statement = re.sub(r"assert", r"passed_tests_xyz+=", assert_statement)
-        test_statement = re.sub(quoted_str_pattern, "", test_statement)
+        test_statement = re.sub(quoted_str_pattern, "", assert_statement)
+        test_statement = re.sub(r"assert", r"\n    try:\n        passed_tests_xyz+=", test_statement)
+        test_statement += r"\n    except:\n        pass\n"
         test = re.sub(re.escape(assert_statement), test_statement, test)  
 
     test += "\n    return passed_tests_xyz / total_tests_xyz"
     return test
+    # return modify_human_eval_tests_manual(test)
+
+def modify_human_eval_tests_manual(test):
+    with open ("write.jsonl", "w") as f:
+        f.write(test)
+    
+    input('Press Enter to continue...')
+    with open ("write.jsonl", "r") as f:
+        test = f.readlines()
+        test = "".join(test)
+
+    return test
+        
 
 def modify_Human_eval():
     with open(HUMAN_EVAL, 'r') as f, open(HUMAN_EVAL_MODIFIED, 'w') as new_f:
         for line in f:
             if any(not x.isspace() for x in line):
                 problem = json.loads(line)
+                print(f"{problem['task_id']}:")
+                # if problem['task_id'] == "HumanEval/53":
                 problem['test'] = modify_human_eval_tests(problem['test'])
                 json_str = json.dumps(problem)
                 new_f.write(json_str + '\n')
@@ -170,23 +182,12 @@ def generate_prompt_APPS(args, test_case_path, prompt_path, solutions_path, star
         data = f.readlines()
         data = "".join(data)
     _input += data
-    # if starter_path != None:
-    #     with open(starter_path, "r") as f:
-    #         data = f.readlines()
-    #         data = "".join(data)
-    #         data = "\n" + data 
-    #     _input += data
-    # else:
-    #     pass
-
-    # with open(test_case_path, "r") as f:
-    #     data = json.load(f)
     # call-based format or user-input format
     _input += "\nUse Call-Based format and function signature solve()"
 
     return _input
 
-def get_problems(args):
+def get_problems_APPS(args):
     argsdict = vars(args)
 
     with open(APPS_TEST, "r") as f:
@@ -216,27 +217,28 @@ def get_problems(args):
     
     return problems
 
-def modify_sol(solution):
-    modified_sol = f"def solve():\n"
-    modified_sol += textwrap.indent(solution.strip(), '    ')
-    # modified_sol = re.sub(r"input\(\)", "str(x)", modified_sol)
-    modified_sol = re.sub(r'print\((.*)\)', r'return \1', modified_sol)
-    modified_sol = re.sub(r'\bmain\(\)\s*$', r'return main()', modified_sol, re.MULTILINE)
-    modified_sol += "\n"
-    return modified_sol
-
-def load_solutions(solutions_path):
+def load_solutions_APPS(solutions_path):
     with open (solutions_path, "r") as f:
         solutions = f.readlines()
         solutions = "".join(solutions)
         solutions = json.loads(solutions)
+    
+    solution = "def solve():\n"
+    solution += textwrap.indent(solutions[0], "    ")
+    solution += "\nsolve()"   
 
-    solution = modify_sol(solutions[0])
     return solution
+
+def get_tests_APPS(test_case_path):
+    with open(test_case_path, "r") as f:
+        tests = f.readlines()
+        tests = "".join(tests)
+        tests = json.loads(tests)
+    return tests
 
 def load_prompts_APPS(args):
 
-    problems = get_problems(args)
+    problems = get_problems_APPS(args)
     for index, problem in enumerate(problems):
         prob_path = os.path.join("DATASETS", problem)
         test_case_path = os.path.join(prob_path, "input_output.json")
@@ -249,7 +251,7 @@ def load_prompts_APPS(args):
             continue
 
         prompt_text = generate_prompt_APPS(args, test_case_path, prompt_path, solutions_path, starter_path)
-        solution = load_solutions(solutions_path)
+        solution = load_solutions_APPS(solutions_path)
         tests = get_tests_APPS(test_case_path)
 
         tests_passed = 0
@@ -258,95 +260,57 @@ def load_prompts_APPS(args):
             input_str = input_str.strip()
             output_str = output_str.strip()
 
-            # print(f"{i+1}/{num_tests}")
-            test_str = f"def check(candidate):\n    passed = 0\n\n"
-            if output_str.isdigit():
-                test_str += f"    passed += int(candidate()) == {output_str}\n"
-            elif '\n' in output_str or '\n' in output_str:
-                output_str = output_str.split()
-                output_str = f"[{', '.join(str(int(x)) if x.isdigit() else x for x in output_str)}]"
-                test_str += f"    passed += candidate() == {output_str}\n"
-            else:
-                test_str += f"    passed += candidate() == {output_str}\n"
-            test_str += "\n    return passed"
-            check_program = f"{solution}\n{test_str}\nprint(check(solve))"
-            # print(check_program)
+            print(f"{i+1}/{num_tests}")
+            # print(solution)
 
             try:
-                tests_passed += run_test(check_program, input_str)
+                res = run_test_APPS(solution, input_str)
             except Exception as e:
                 # print(e)
-                pass
+                res = None
+            if res is None:
+                continue
+            tests_passed += (res == output_str.strip())
             
             # break
-        print(f"problem {index+1}/{len(problems)}: {tests_passed/num_tests}")
+        print(f"problem {index}/{len(problems)}: {tests_passed/num_tests}")
 
-def run_test(solution, input_str):
-    passed = 0
+def run_test_APPS(solution, input_str):
+    res = None
     try:
         result = subprocess.run(['python3', '-c', solution], input=input_str.encode(), stdout=subprocess.PIPE,
                                 stderr=subprocess.PIPE, timeout=10)
+        if result.returncode != 0:
+            err = result.stderr.decode()
+            # print(err)
+        else:
+            try:
+                res = result.stdout.decode().strip()
+                # print(res)
+            except ValueError as e:
+                err = e
+                # print(e)
     except subprocess.TimeoutExpired:
         print("Timeout")
-        return
-    if result.returncode != 0:
-        err = result.stderr.decode()
-        # print(err)
-    else:
-        try:
-            err = None
-            passed = float(result.stdout.decode().split('\n')[-2])
-        except ValueError as e:
-            err = e
-            # print(e)
-    return passed
 
-def get_tests_APPS(test_case_path):
-    with open(test_case_path, "r") as f:
-        tests = f.readlines()
-        tests = "".join(tests)
-        tests = json.loads(tests)
-    return tests
-
-def modify_test_APPS(test_case_path):
-    test_str = ''
-    multi_line = False
-    multi_value = False
-    with open(test_case_path, "r") as f:
-        tests = f.readlines()
-        tests = "".join(tests)
-        tests = json.loads(tests)
-
-        try: 
-            if '\n' in tests['inputs'][0].strip() or '\n' in tests['outputs'][0].strip():
-                multi_line = True
-            elif ' ' in tests['inputs'][0].strip() or ' ' in tests['outputs'][0].strip():
-                multi_value = True
-            test_str += f"def check(candidate):\n    total_tests_xyz = {len(tests['inputs'])}\n    passed_tests_xyz = 0\n\n"
-            for i, test in enumerate(tests['inputs']):
-                test = test.split()
-                test = f"[{', '.join(str(int(x)) if x.isdigit() else x for x in test)}]"
-                test_str += f"    passed_tests_xyz += candidate({test.strip()}) == {tests['outputs'][i].strip()}\n"
-            test_str += "\n    return passed_tests_xyz / total_tests_xyz"
-        except:
-            pass
-    return test_str, multi_line, multi_value
+    return res
 
 if __name__ == "__main__":
-    import argparse
+    modify_Human_eval()
+#     import argparse
 
-    parser = argparse.ArgumentParser(description="Run a tranined model to generate Python code.")
-    parser.add_argument("-t","--test_loc", default="data_split/test.json", type=str)
-    parser.add_argument("-r","--root", default="../", type=str, help="where the data is stored.")
-    parser.add_argument("-l","--load", default="~/apps/models/checkpoints/final", type=str)
-    parser.add_argument("--peeking", default=0.0, type=float)
-    parser.add_argument("--num-beams", default=5, type=int)
-    parser.add_argument("-s","--start", default=0, type=int)
-    parser.add_argument("-e","--end", default=None, type=int)
-    parser.add_argument("-i", "--index", default=None, type=int)
-    parser.add_argument("-d", "--debug", action="store_true")
-    parser.add_argument("--save", type=str, default="./results")
+#     parser = argparse.ArgumentParser(description="Run a tranined model to generate Python code.")
+#     parser.add_argument("-t","--test_loc", default="data_split/test.json", type=str)
+#     parser.add_argument("-r","--root", default="../", type=str, help="where the data is stored.")
+#     parser.add_argument("-l","--load", default="~/apps/models/checkpoints/final", type=str)
+#     parser.add_argument("--peeking", default=0.0, type=float)
+#     parser.add_argument("--num-beams", default=5, type=int)
+#     parser.add_argument("-s","--start", default=0, type=int)
+#     parser.add_argument("-e","--end", default=None, type=int)
+#     parser.add_argument("-i", "--index", default=None, type=int)
+#     parser.add_argument("-d", "--debug", action="store_true")
+#     parser.add_argument("--save", type=str, default="./results")
  
-    args = parser.parse_args()
+#     args = parser.parse_args()
 
-    load_prompts(args, "APPS")
+#     load_prompts(args, "APPS")
