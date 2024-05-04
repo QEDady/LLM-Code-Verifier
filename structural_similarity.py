@@ -26,42 +26,78 @@ def add_function_name(code):
     return res
 
 
-def structual_similarity(generated_codes, mode=pycode_similar.UnifiedDiff):
-    try:
-        res = pycode_similar.detect(generated_codes,
-                                    diff_method=mode,
-                                    keep_prints=True,
-                                    module_level=False)
-    except pycode_similar.NoFuncException:
-        for i in range(len(generated_codes)):
-            if "__main__" not in generated_codes[i]:
-                generated_codes[i] = add_function_name(generated_codes[i])
-        try:
-            res = pycode_similar.detect(generated_codes,
-                                        diff_method=mode,
-                                        keep_prints=True,
-                                        module_level=False)
-        except Exception as e:
-            # TODO(amer): maybe return negative numbers
-            raise Exception(
-                "f'Could not compute the {mode} structural similarity", e)
-    except Exception as e:
-        # TODO(amer): maybe return negative numbers
-        raise Exception(
-            "f'Could not compute the {mode} structural similarity", e)
+# def structual_similarity(generated_codes, mode=pycode_similar.UnifiedDiff):
+    
+#     #initialize all the score to 0
+#     similarity_scores = {}
+#     for i, func_ast_diff_list in res:
+#         similarity_scores[f'res_code_{i}'] = 0
+    
+#     try:
+#         res = pycode_similar.detect(generated_codes,
+#                                     diff_method=mode,
+#                                     keep_prints=True,
+#                                     module_level=False)
+#     except pycode_similar.NoFuncException:
+#         for i in range(len(generated_codes)):
+#             if "__main__" not in generated_codes[i]:
+#                 generated_codes[i] = add_function_name(generated_codes[i])
+#         try:
+#             res = pycode_similar.detect(generated_codes,
+#                                         diff_method=mode,
+#                                         keep_prints=True,
+#                                         module_level=False)
+#         except Exception as e:
+#             # TODO(amer): maybe return negative numbers
+#             # raise Exception(
+#             #     "f'Could not compute the {mode} structural similarity", e)
+#             print("f'Could not compute the {mode} structural similarity", e)
+#     except Exception as e:
+#         # TODO(amer): maybe return negative numbers
 
+#         # raise Exception(
+#         #     "f'Could not compute the {mode} structural similarity", e)
+#         print("f'Could not compute the {mode} structural similarity", e)
+
+
+#     for i, func_ast_diff_list in res:
+#         score = compute_similarity(func_ast_diff_list)
+#         similarity_scores[f'res_code_{i}'] = score
+#     return similarity_scores
+
+def structural_similarity(generated_codes, mode=pycode_similar.UnifiedDiff):
     similarity_scores = {}
-    for i, func_ast_diff_list in res:
-        score = compute_similarity(func_ast_diff_list)
-        similarity_scores[f'res_code_{i}'] = score
+    #initialize all the score to 0
+
+    for i in range(len(generated_codes)):
+        similarity_scores[f'res_code_{i+1}'] = 0
+    
+    # Pre-validate code snippets for syntax errors
+    for i, code in enumerate(generated_codes):
+        try:
+            compile(code, f"<string_{i}>", "exec")
+        except SyntaxError as e:
+            pass
+
+    try:
+        res = pycode_similar.detect(generated_codes, diff_method=mode, keep_prints=True, module_level=False)
+        for i, (_, func_ast_diff_list) in enumerate(res):
+            try:
+                score = compute_similarity(func_ast_diff_list)
+                similarity_scores[f'res_code_{i}'] = score
+            except Exception:
+                pass
+    except Exception as e:
+        pass
+
     return similarity_scores
 
 
-def structual_similarity_driver(codes):
+def structural_similarity_driver(codes):
     scores = {}
 
-    res_unified = structual_similarity(codes, pycode_similar.UnifiedDiff)
-    res_tree = structual_similarity(codes, pycode_similar.TreeDiff)
+    res_unified = structural_similarity(codes, pycode_similar.UnifiedDiff)
+    res_tree = structural_similarity(codes, pycode_similar.TreeDiff)
 
     for key in res_unified:
         metrics = {
