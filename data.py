@@ -246,7 +246,7 @@ def get_tests_APPS(test_case_path):
         tests = "".join(tests)
         tests = json.loads(tests)
     tests_size = len(tests['inputs'])
-    end = min(15, tests_size)
+    end = min(35, tests_size)
     tests = {
         "inputs": tests['inputs'][:end],
         "outputs": tests['outputs'][:end]
