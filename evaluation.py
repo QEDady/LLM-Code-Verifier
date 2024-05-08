@@ -43,20 +43,15 @@ def run_test_APPS(solution, input_str):
     res = None
     try:
         result = subprocess.run(['python3', '-c', solution], input=input_str.encode(), stdout=subprocess.PIPE,
-                                stderr=subprocess.PIPE, timeout=10)
-        if result.returncode != 0:
-            err = result.stderr.decode()
-            # print(err)
-        else:
+                                stderr=subprocess.PIPE, timeout=5)
+        if result.returncode == 0:
             try:
                 res = result.stdout.decode().strip()
-                # print(res)
             except ValueError as e:
-                err = e
-                # print(e)
+                pass
     except subprocess.TimeoutExpired:
         print("Timeout")
-
+        res = 'Timeout'
     return res
 
 def eval_Human_eval(model="gpt-3.5-turbo", n=5, t_refrence=0, t_samples=1, trial=1):
@@ -145,9 +140,13 @@ def eval_APPS(args, model="gpt-3.5-turbo", n=5, t_refrence=0, t_samples=1, trial
                                 res = None
                             if res is None:
                                 continue
+                            elif res == 'Timeout':
+                                num_tests -= 1
+                                continue
                             tests_passed += (res == output_str.strip())
-                        row[f"err_{code_idx}"] = None
-                        row[f"pass_rate_{code_idx}"] = (tests_passed/num_tests)*100
+                        test_pass_rate = (tests_passed/num_tests)*100 if num_tests != 0 else 0
+                        row[f"err_{code_idx}"] = 'All tests timed out' if num_tests == 0 else None
+                        row[f"pass_rate_{code_idx}"] = test_pass_rate
                     writer.writerow(row)
 
 async def eval_Human_eval_async(model="gpt-3.5-turbo", n=5, t_refrence=0, t_samples=1, trial=1):
@@ -296,7 +295,21 @@ if __name__ == '__main__':
     # loop = asyncio.get_event_loop()
     # loop.run_until_complete(eval_Human_eval_async(model='gpt-3.5-turbo', n=5, t_refrence=0, t_samples=1, trial=1))
     trial = input("Press Enter trial number: ")
-    # eval_APPS(args, model='gpt-3.5-turbo', n=5, t_refrence=0, t_samples=1, trial=trial)
+    done = False
+    while not done:
+        try:
+            # eval_APPS(args, model='gpt-3.5-turbo', n=5, t_refrence=0, t_samples=1, trial=trial)
+            eval_APPS(args, model='gpt-3.5-turbo', n=3, t_refrence=0, t_samples=1, trial=trial)
+            eval_APPS(args, model='gpt-3.5-turbo', n=10, t_refrence=0, t_samples=1, trial=trial)
+            eval_APPS(args, model='gpt-3.5-turbo', n=5, t_refrence=1, t_samples=1, trial=trial)
+            eval_APPS(args, model='gpt-3.5-turbo', n=5, t_refrence=0, t_samples=1.5, trial=trial)
+            eval_APPS(args, model='gpt-3.5-turbo', n=15, t_refrence=0, t_samples=1, trial=trial)
+            done = True
+        except Exception as e:
+            continue
+        
+    # eval_APPS(args, model='gpt-3.5-turbo', n=15, t_refrence=1, t_samples=1, trial=trial)
+    # eval_APPS(args, model='gpt-3.5-turbo', n=15, t_refrence=1, t_samples=1.3, trial=trial)
 
     # eval_Human_eval_from_file(model='gpt-3.5-turbo', n=5, t_refrence=0, t_samples=1, trial=trial)
     # eval_Human_eval_from_file(model='gpt-3.5-turbo', n=3, t_refrence=0, t_samples=1, trial=trial)
