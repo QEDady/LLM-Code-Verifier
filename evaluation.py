@@ -279,12 +279,12 @@ def create_parser():
     parser.add_argument("-d", "--debug", action="store_true")
     return parser
 
-if __name__ == '__main__':
-    # parser = create_parser()
-    # args = parser.parse_args()
+# if __name__ == '__main__':
+#     # parser = create_parser()
+#     # args = parser.parse_args()
 
-    add_comments(comment_generation_model="gpt-4-turbo-preview", rename_code_functions=True, csv_file_name="RESULTS/dataset_HumanEval_model_gpt-3.5-turbo_n_5_tempr_0_temps_1_trial_1.csv")
-    print("Done 5 with renaming functions and got 4 comments")
+#     add_comments(comment_generation_model="gpt-4-turbo-preview", csv_file_name="RESULTS/dataset_HumanEval_model_gpt-3.5-turbo_n_5_tempr_0_temps_1_trial_1.csv")
+#     print("Done 5 without renaming functions and got 4 comments")
     # print("--------------")
     # add_comments("gpt-3.5-turbo","RESULTS/dataset_HumanEval_model_gpt-3.5-turbo_n_5_tempr_0_temps_1.5_trial_1.csv")
     # print("Done T 1.5")
