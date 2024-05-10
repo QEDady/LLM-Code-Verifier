@@ -210,22 +210,35 @@ async def generate_codes_async(session, model="gpt-4-turbo-preview", n=5, t_refr
 #
 # if renmae_functions is set, the name of the functions get changed as well to func, func1, func2, etc.
 # as sometimes the name of the functions give wrong hints to gpt.
-def generate_comment(model="gpt-4-turbo-preview", code=None, rename_functions = False):
-    #TODO(amer): remove any comments from code
+def generate_comment(model="gpt-4-turbo-preview", code=None, rename_functions = False, use_detailed_prompt = False):
+    if use_detailed_prompt and model != "gpt-4-turbo-preview":
+        raise ValueError("detailed prompt only works well with gpt-4-turbo-preview model")
     prompt = ""
+
     if code is None:
         raise ValueError("code is not specified")
-    else:
+    elif not use_detailed_prompt:
         code = remove_code_comments(code)
-    if rename_functions:
+    if rename_functions and not use_detailed_prompt:
         code = rename_code_functions(code)
-    prompt = "State the functionality of the following python code without going into implementation details:\n```\n" + code + "```"
+
+    prompt = "State the functionality of the following python code in no more than 3 sentences without going into implementation details:\n```\n" + code + "```"
+
+    detailed_prompt = \
+    "[System]: 1. You are a programming assistant, skilled in explaining python code functionality.\n" + \
+    "2. You are to write a SHORT description of the functionality of the given code.\n" + \
+    "3. The code may contain some semantic cues like the function name and code comments describing the intended functionality but these semantic cues do NOT necissirily represent the actual functionality of the code. So, deemphasize these comments and semantic cues while generating the descripion.\n" + \
+    "4. The description should be concise and to the point and consists of at most 3 sentences.\n" + \
+    "5. Do NOT include any code implementation details in the description. Instead, focus on the descriping the implemented function.\n" + \
+    "[USER]: The code is \n```\n" + code + "```\n [END OF PROMPT]"
     headers = {
         "Content-Type": "application/json",
         "Authorization": f"Bearer {APIKEY}"
     }
 
-       # refrence request
+    if use_detailed_prompt:
+        prompt = detailed_prompt
+    # refrence request
     payload = {
         "model": model,
         "messages": [
@@ -251,20 +264,29 @@ def generate_comment(model="gpt-4-turbo-preview", code=None, rename_functions = 
 
 # if __name__=="__main__":
 #     code = '''
+# from typing import List, Optional
+# def longest(strings: List[str]) -> Optional[str]:
+#     """ Out of list of strings, return the longest one. Return the first one in case of multiple
+# 	strings of the same length. Return None in case the input list is empty.
+# 	>>> longest([])
 
-# import re
-
-# def remove_vowels(text):
-#     # function should remove the vowels
-#     return re.sub(r'[aeiouAEIOU]', '', text)
-
+# 	>>> longest(['a', 'b', 'c'])
+# 	'a'
+# 	>>> longest(['a', 'bb', 'ccc'])
+# 	'ccc'
+# 	"""
+#     if not strings:
+#         return None
+#     longest_str = max(strings, key=len)
+#     return min(filter(lambda x: len(x) == len(longest_str), strings))
 
 # '''
-# print(generate_comment(model="gpt-4-turbo-preview", code=code, rename_functions = True))
-# print("\n\n")
-# print(generate_comment(model='gpt-3.5-turbo', code = code))
-#   prompt = " Write a Python function in markdown that takes a sequence of numbers and determines whether all the numbers are different from each other. Return the code of the function only without any other text."
-#   print(generate_codes(prompt=prompt))
+#     print(generate_comment(model="gpt-4-turbo-preview", code=code, rename_functions = True))
+    #print(generate_comment(model="gpt-4-turbo-preview", code=code, use_detailed_prompt = True))
+#     print("\n\n")
+#     print(generate_comment(model='gpt-3.5-turbo', code = code))
+#     prompt = " Write a Python function in markdown that takes a sequence of numbers and determines whether all the numbers are different from each other. Return the code of the function only without any other text."
+#     print(generate_codes(prompt=prompt))
 
 # if __name__=="__main__":
 #     code = '''

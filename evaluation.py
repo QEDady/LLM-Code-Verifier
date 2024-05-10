@@ -283,8 +283,8 @@ if __name__ == '__main__':
     parser = create_parser()
     args = parser.parse_args()
 
-    # add_comments(comment_generation_model="gpt-3.5-turbo", rename_code_functions=True, csv_file_name="RESULTS/dataset_HumanEval_model_gpt-4-turbo-preview_n_5_tempr_0_temps_1_trial_1.csv")
-    # print("Done 5 with renaming functions")
+    # add_comments(comment_generation_model="gpt-4-turbo-preview", rename_code_functions=True, csv_file_name="RESULTS/dataset_HumanEval_model_gpt-3.5-turbo_n_5_tempr_0_temps_1_trial_1.csv")
+    # print("Done 5 with renaming functions and got 4 comments")
     # print("--------------")
     # add_comments("gpt-3.5-turbo","RESULTS/dataset_HumanEval_model_gpt-3.5-turbo_n_5_tempr_0_temps_1.5_trial_1.csv")
     # print("Done T 1.5")
@@ -298,7 +298,7 @@ if __name__ == '__main__':
     done = False
     while not done:
         try:
-            # eval_APPS(args, model='gpt-3.5-turbo', n=5, t_refrence=0, t_samples=1, trial=trial)
+            eval_APPS(args, model='gpt-3.5-turbo', n=5, t_refrence=0, t_samples=1, trial=trial)
             eval_APPS(args, model='gpt-3.5-turbo', n=3, t_refrence=0, t_samples=1, trial=trial)
             eval_APPS(args, model='gpt-3.5-turbo', n=10, t_refrence=0, t_samples=1, trial=trial)
             eval_APPS(args, model='gpt-3.5-turbo', n=5, t_refrence=1, t_samples=1, trial=trial)
@@ -320,7 +320,7 @@ if __name__ == '__main__':
     # eval_Human_eval_from_file(model='gpt-3.5-turbo', n=15, t_refrence=1, t_samples=1, trial=trial)
     # eval_Human_eval_from_file(model='gpt-3.5-turbo', n=15, t_refrence=1, t_samples=1.3, trial=trial)
 
-    eval_Human_eval_from_file(model='gpt-4-turbo-preview', n=5, t_refrence=0, t_samples=1, trial=trial)
+   # eval_Human_eval_from_file(model='gpt-4-turbo-preview', n=5, t_refrence=0, t_samples=1, trial=trial)
     # eval_Human_eval(model='gpt-4-turbo-preview', n=3, t_refrence=0, t_samples=1, trial=1)
     # eval_Human_eval(model='gpt-4-turbo-preview', n=10, t_refrence=0, t_samples=1, trial=1)
     # eval_Human_eval(model='gpt-4-turbo-preview', n=5, t_refrence=1, t_samples=1, trial=1)
