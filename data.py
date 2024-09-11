@@ -1,47 +1,26 @@
-import io
-import pprint
-import random
-import subprocess
-from typing import Iterable, Dict
+import argparse
+import csv
 import gzip
+import io
 import json
 import os
+import pprint
+import random
 import re
-import csv
-from reindent import run as run_reindent
-import textwrap
-import argparse
+import subprocess
+from typing import Dict, Iterable, List
 
+# Define the root directory
 ROOT = os.path.dirname(os.path.abspath(__file__))
+
+# Define paths to datasets and results
+APPS = os.path.join(ROOT, "DATASETS", "apps.jsonl")
+APPS_TEST = os.path.join(ROOT, "DATASETS", "APPS", "data_split", "test.json")
+APPS_TRAIN = os.path.join(ROOT, "DATASETS", "APPS", "data_split", "train.json")
 HUMAN_EVAL = os.path.join(ROOT, "DATASETS", "human-eval.jsonl")
 HUMAN_EVAL_MODIFIED = os.path.join(ROOT, "DATASETS", "human-eval-modified.jsonl")
 HUMAN_EVAL_PROMPTS = os.path.join(ROOT, "PROMPTS", "human-eval-prompts.jsonl")
 RESULTS = os.path.join(ROOT, "RESULTS")
-APPS = os.path.join(ROOT, "DATASETS", "apps.jsonl")
-APPS_TEST = os.path.join(ROOT, "DATASETS", "APPS", "data_split", "test.json")
-APPS_TRAIN = os.path.join(ROOT, "DATASETS", "APPS", "data_split", "train.json")
-
-def reindent_code(codestr):
-    codestr = io.StringIO(codestr)
-    ret = io.StringIO()
-
-    run_reindent(
-        codestr, 
-        ret, 
-        config = {
-            "dry-run": False,
-            "help": False,
-            "to": 10,
-            "from": -1,
-            "tabs": True,
-            "encoding": "utf-8",
-            "is-tabs": False,
-            "tabsize": 10,
-            "all-tabs": False
-        }
-    )
-
-    return ret.getvalue()
 
 def generate_csv_file_name(dataset, model, n, t_refrence, t_samples, trial):
     name = f'dataset_{dataset}_model_{model}_n_{n}_tempr_{t_refrence}_temps_{t_samples}_trial_{trial}.csv'
@@ -49,31 +28,19 @@ def generate_csv_file_name(dataset, model, n, t_refrence, t_samples, trial):
 
 def create_csv_file(dataset = "HumanEval", model="gpt-4-turbo-preview", n=5, t_refrence=0, t_samples=1, trial=1):
     csv_file_name = generate_csv_file_name(dataset, model, n, t_refrence, t_samples, trial)
-    fieldnames = ["task_id", "prompt"]
-    last_task_id_num = -1
-    for i in range(n+1):
-        fieldnames.append(f"code_{i}")
-    
-    for i in range(n+1):
-        fieldnames.append(f"pass_rate_{i}")
-    
-    for i in range(n+1):
-        fieldnames.append(f"err_{i}")
+    fieldnames = ["task_id", "prompt"] + [f"code_{i}" for i in range(n+1)] + [f"pass_rate_{i}" for i in range(n+1)] + [f"err_{i}" for i in range(n+1)]
+    task_ids = []
 
     if os.path.exists(csv_file_name):
         with open(csv_file_name, mode='r') as csv_f:
             reader = csv.DictReader(csv_f)
-            last_row = None
-            for row in reader:
-                last_row = row
-            if last_row is not None:
-                last_task_id_num = int(last_row['task_id'].split('/')[-1])
+            task_ids = [row['task_id'] for row in reader]
     else:
         with open(csv_file_name, mode='w', newline='') as csv_f:
             writer = csv.DictWriter(csv_f, fieldnames=fieldnames, quoting=csv.QUOTE_ALL)
             writer.writeheader()
 
-    return csv_file_name, fieldnames, last_task_id_num
+    return csv_file_name, fieldnames, task_ids
 
 def modify_human_eval_tests(test):
     # Initialize the total number of tests and the number of passed tests
@@ -145,6 +112,16 @@ def load_prompts(args, dataset):
     # elif dataset == 'APPS':
     #     load_prompts_APPS(args)
 
+def get_random_tasks(filename: str, sample_size: int, exclude_ids: List[str] = None) -> List[Dict]:
+    if exclude_ids is None:
+        exclude_ids = []
+    data = [task for task in stream_jsonl(filename) if task['task_id'] not in exclude_ids]
+
+    if sample_size > len(data):
+        return data
+    
+    return random.sample(data, sample_size)
+
 def stream_jsonl(filename: str) -> Iterable[Dict]:
     """
     Parses each jsonl line and yields it as a dictionary
@@ -192,7 +169,7 @@ def generate_prompt_APPS(prompt_path):
 
     return _input
 
-def get_problems_range(args, dataset):
+def get_tasks_range(args, dataset):
     argsdict = vars(args)
     if dataset == "HumanEval":
         size = 164

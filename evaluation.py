@@ -1,22 +1,14 @@
 import argparse
+import csv
+import json
+import pprint
 import re
 import subprocess
-import time
-import aiohttp
-import tqdm
-from chatgpt_api import generate_codes, generate_comment, generate_codes_async
-from data import APPS, get_problems_range, stream_jsonl, modify_Human_eval, create_csv_file, generate_csv_file_name
-from data import HUMAN_EVAL, HUMAN_EVAL_MODIFIED, HUMAN_EVAL_PROMPTS, RESULTS
-from structural_similarity import structural_similarity_driver
-from syntactic_similarity import syntactic_similarity_driver
-import csv
-import pprint
+
 import pandas as pd
-import json
-import concurrent.futures
-import asyncio
 
-
+from chatgpt_api import generate_codes
+from data import APPS, HUMAN_EVAL_MODIFIED, create_csv_file, generate_csv_file_name, get_random_tasks, get_tasks_range, stream_jsonl
 
 def run_test_HUMAN_EVAL(check_program):
     try:
@@ -38,21 +30,6 @@ def run_test_HUMAN_EVAL(check_program):
         pass_rate = 0
 
     return err, pass_rate
-
-def run_test_APPS(solution, input_str):
-    res = None
-    try:
-        result = subprocess.run(['python3', '-c', solution], input=input_str.encode(), stdout=subprocess.PIPE,
-                                stderr=subprocess.PIPE, timeout=5)
-        if result.returncode == 0:
-            try:
-                res = result.stdout.decode().strip()
-            except ValueError as e:
-                pass
-    except subprocess.TimeoutExpired:
-        print("Timeout")
-        res = 'Timeout'
-    return res
 
 def eval_Human_eval(model="gpt-3.5-turbo", n=5, t_refrence=0, t_samples=1, trial=1):
     csv_file_name, fieldnames, last_task_id_num = create_csv_file(dataset="HumanEval", model=model, n=n, 
@@ -106,117 +83,85 @@ def eval_Human_eval_from_file(model="gpt-3.5-turbo", n=5, t_refrence=0, t_sample
                     row[f"pass_rate_{i}"] = pass_rate*100
                 writer.writerow(row)
 
+def run_test_APPS(solution, input_str):
+    try:
+        result = subprocess.run(['python3', '-c', solution], input=input_str.encode(), stdout=subprocess.PIPE,
+                                stderr=subprocess.PIPE, timeout=10)
+        if result.returncode == 0:
+                return result.stdout.decode().strip()
+    except subprocess.TimeoutExpired:
+        print("Timeout")
+        res = 'Timeout'
+    except Exception:
+        res = None
+
+def run_tests_on_code(code, test_cases):
+    tests_passed = 0
+    num_tests = len(test_cases['inputs'])
+    
+    for input_str, output_str in zip(test_cases['inputs'], test_cases['outputs']):
+        try:
+            input_str = input_str.strip()
+            output_str = output_str.strip()
+        except:
+            num_tests -= 1
+            continue
+
+        try:
+            res = run_test_APPS(code, input_str)
+        except Exception:
+            res = None
+
+        if res is None or res == 'Timeout':
+            num_tests -= 1
+            continue
+
+        tests_passed += (res == output_str)
+    
+    test_pass_rate = (tests_passed / num_tests) * 100 if num_tests != 0 else 0
+    error_message = 'All tests timed out' if num_tests == 0 else None
+    
+    return test_pass_rate, error_message
+
+def process_task(task, model, n, t_refrence, t_samples):
+    row = {
+        'task_id': task['task_id'],
+        'prompt': task['prompt']
+    }
+    codes= generate_codes(prompt=task['prompt'], model=model, t_refrence=t_refrence, t_samples=t_samples, n=n)
+
+    for code_idx, code in enumerate(codes):
+        if re.search(r"solve\(\)\s*$", code) is None:
+            code += "\nsolve()"
+
+        print(f"\tcode {code_idx + 1}/{len(codes)}")
+        test_pass_rate, error_message = run_tests_on_code(code, task['test'])
+
+        row[f"code_{code_idx}"] = code
+        row[f"err_{code_idx}"] = error_message
+        row[f"pass_rate_{code_idx}"] = test_pass_rate
+
+    return row
 
 def eval_APPS(args, model="gpt-3.5-turbo", n=5, t_refrence=0, t_samples=1, trial=1):
-    csv_file_name, fieldnames, last_task_id_num = create_csv_file(dataset="APPS", model=model, n=n, 
+    csv_file_name, fieldnames, task_ids = create_csv_file(dataset="APPS", model=model, n=n, 
                                                  t_refrence=t_refrence, t_samples=t_samples, trial=trial)
-    range = get_problems_range(args, 'APPS')
-    row = {}
-    print(range)
-    with open(csv_file_name, mode='a', newline='') as csv_f:
-        writer = csv.DictWriter(csv_f, fieldnames=fieldnames, quoting=csv.QUOTE_ALL) 
-        for problem in stream_jsonl(APPS):        
-            problem_id = int(problem['task_id'].split('/')[-1])
-            if problem_id >= range[0] and problem_id <= range[1]:
-                if problem_id > last_task_id_num:
-                    print(f"\nProcessing {problem['task_id']}")
-                    row['task_id'] = problem['task_id']
-                    row['prompt'] = problem['prompt']
-                    codes = generate_codes(prompt=problem['prompt'], model=model, t_refrence=t_refrence, 
-                                        t_samples=t_samples, n=n)
-                    for code_idx, code in enumerate(codes):
-                        if re.search(r"solve\(\)\s*$", code) is None:
-                            code += "\nsolve()"
-                        row[f"code_{code_idx}"] = code
-                        tests_passed = 0
-                        print(f"\tcode {code_idx+1}/6")
-                        num_tests = len(problem['test']['inputs'])
-                        for (input_str, output_str) in zip(problem['test']['inputs'], problem['test']['outputs']):
-                            input_str = input_str.strip()
-                            output_str = output_str.strip()
-                            try:
-                                res = run_test_APPS(code, input_str)
-                            except Exception as e:
-                                res = None
-                            if res is None:
-                                continue
-                            elif res == 'Timeout':
-                                num_tests -= 1
-                                continue
-                            tests_passed += (res == output_str.strip())
-                        test_pass_rate = (tests_passed/num_tests)*100 if num_tests != 0 else 0
-                        row[f"err_{code_idx}"] = 'All tests timed out' if num_tests == 0 else None
-                        row[f"pass_rate_{code_idx}"] = test_pass_rate
-                    writer.writerow(row)
-
-async def eval_Human_eval_async(model="gpt-3.5-turbo", n=5, t_refrence=0, t_samples=1, trial=1):
-    csv_file_name, fieldnames, last_task_id_num = create_csv_file(dataset="HumanEval-blabla", model=model, n=n, 
-                                                 t_refrence=t_refrence, t_samples=t_samples, trial=trial)
-    async with aiohttp.ClientSession() as session:
-        tasks = []
-        i = 0
-        for problem in stream_jsonl(HUMAN_EVAL_MODIFIED):     
-            i += 1   
-            if int(problem['task_id'].split('/')[-1]) > last_task_id_num:
-                print(f"Sending API Requests for {problem['task_id']}")
-                task = generate_codes_async(session, problem=problem, 
-                                            model=model, t_refrence=t_refrence, t_samples=t_samples, n=n)
-                tasks.append(task)
-            # if i == 10:
-                # time.sleep(0.2)
-                # i = 0
-        results = await asyncio.gather(*tasks)
+    
+    tasks_range = get_tasks_range(args, 'APPS')
+    tasks_size = max(args.number - len(task_ids), 0)
+    random_tasks = get_random_tasks(APPS, tasks_size, task_ids)
 
     with open(csv_file_name, mode='a', newline='') as csv_f:
         writer = csv.DictWriter(csv_f, fieldnames=fieldnames, quoting=csv.QUOTE_ALL) 
-        for problem, codes in results:
-            print(f"Processing {problem['task_id']}")
-            for i, code in enumerate(codes):
-                row = {}
-                row['task_id'] = problem['task_id']
-                row['prompt'] = problem['prompt']
-                row[f"code_{i}"] = code
-                check_program = f"{code}\n{problem['test']}\nprint(check({problem['entry_point']}))"
-                err, pass_rate = run_test_HUMAN_EVAL(check_program)
-                row[f"err_{i}"] = err
-                row[f"pass_rate_{i}"] = pass_rate*100
-                writer.writerow(row)
 
-def eval_Human_eval_multi_process(model="gpt-3.5-turbo", n=5, t_refrence=0, t_samples=1, trial=1):
-    csv_file_name, fieldnames, last_task_id_num = create_csv_file(dataset="HumanEval-blabla", model=model, n=n, 
-                                                 t_refrence=t_refrence, t_samples=t_samples, trial=trial)
+        for i, task in enumerate(random_tasks):     
+            task_id = int(task['task_id'].split('/')[-1])
+            if f"APPS/{task_id}" in task_ids or not (tasks_range[0] <= task_id <= tasks_range[1]):
+                continue
 
-    with open(csv_file_name, mode='a', newline='') as csv_f:
-        writer = csv.DictWriter(csv_f, fieldnames=fieldnames, quoting=csv.QUOTE_ALL)
-        with concurrent.futures.ProcessPoolExecutor() as executor:
-            futures = {executor.submit(process_problem, problem, model, n, t_refrence, t_samples, 
-                                       last_task_id_num): problem for problem in stream_jsonl(HUMAN_EVAL_MODIFIED)}
-            for future in concurrent.futures.as_completed(futures):
-                row = future.result()
-                if row is not None:
-                    writer.writerow(row)            
-
-
-def process_problem(problem, model, n, t_refrence, t_samples, last_task_id_num):
-    if int(problem['task_id'].split('/')[-1]) > last_task_id_num:
-        row = {}
-        print(f"Processing {problem['task_id']}")
-        row['task_id'] = problem['task_id']
-        row['prompt'] = problem['prompt']
-        # start = time.time()
-        codes = generate_codes(prompt=problem['prompt'], model=model, t_refrence=t_refrence, 
-                               t_samples=t_samples, n=n)
-        # end = time.time()
-        # print(f"Task done in {end-start} seconds")
-        for i, code in enumerate(codes):
-            row[f"code_{i}"] = code
-            check_program = f"{code}\n{problem['test']}\nprint(check({problem['entry_point']}))"
-            err, pass_rate = run_test_HUMAN_EVAL(check_program)
-            row[f"err_{i}"] = err
-            row[f"pass_rate_{i}"] = pass_rate*100
-        return row
-    else:
-        return None
+            print(f"\n[{len(task_ids) + i + 1}] Processing {task['task_id']}")
+            row = process_task(task, model, n, t_refrence, t_samples)
+            writer.writerow(row)
 
 # Generate a comment for each code in the given dataset and appends it to the end of the row in the csv file.
 # Pass either the csv_file_name directly or all the other parametrs to generate it according to the used convention. 
@@ -245,18 +190,7 @@ def add_comments(comment_generation_model = "gpt-3.5-turbo", rename_code_functio
         df[new_column_name] = generated_comments
         print(new_column_name, "done")
         df.to_csv(csv_file_name, index=False)  
-        df = pd.read_csv(csv_file_name)
-
-
-def parse_csv(csv_file_name):
-    codes = []
-    with open(csv_file_name, mode='r') as csv_f:
-        reader = csv.DictReader(csv_f)
-        for row in reader:
-            for i in range(6):
-                codes.append(row[f'code_{i}'])
-    return codes
-            
+        df = pd.read_csv(csv_file_name)            
 
 def read_test(dataset, idx):
     if dataset == "APPS":
@@ -273,15 +207,15 @@ def read_test(dataset, idx):
 
 def create_parser():
     parser = argparse.ArgumentParser(description="Evaluate the specified dataset ")
+    parser.add_argument("-n","--number", default=500, type=int)
     parser.add_argument("-s","--start", default=0, type=int)
     parser.add_argument("-e","--end", default=None, type=int)
     parser.add_argument("-i", "--index", default=None, type=int)
-    parser.add_argument("-d", "--debug", action="store_true")
     return parser
 
-# if __name__ == '__main__':
-#     # parser = create_parser()
-#     # args = parser.parse_args()
+if __name__ == '__main__':
+    parser = create_parser()
+    args = parser.parse_args()
 
 #     add_comments(comment_generation_model="gpt-4-turbo-preview", csv_file_name="RESULTS/dataset_HumanEval_model_gpt-3.5-turbo_n_5_tempr_0_temps_1_trial_1.csv")
 #     print("Done 5 without renaming functions and got 4 comments")
@@ -294,36 +228,5 @@ def create_parser():
     # print("--------------")
     # loop = asyncio.get_event_loop()
     # loop.run_until_complete(eval_Human_eval_async(model='gpt-3.5-turbo', n=5, t_refrence=0, t_samples=1, trial=1))
-    # trial = input("Press Enter trial number: ")
-    # done = False
-    # while not done:
-    #     try:
-    #         eval_APPS(args, model='gpt-3.5-turbo', n=5, t_refrence=0, t_samples=1, trial=trial)
-    #         eval_APPS(args, model='gpt-3.5-turbo', n=3, t_refrence=0, t_samples=1, trial=trial)
-    #         eval_APPS(args, model='gpt-3.5-turbo', n=10, t_refrence=0, t_samples=1, trial=trial)
-    #         eval_APPS(args, model='gpt-3.5-turbo', n=5, t_refrence=1, t_samples=1, trial=trial)
-    #         eval_APPS(args, model='gpt-3.5-turbo', n=5, t_refrence=0, t_samples=1.5, trial=trial)
-    #         eval_APPS(args, model='gpt-3.5-turbo', n=15, t_refrence=0, t_samples=1, trial=trial)
-    #         done = True
-    #     except Exception as e:
-    #         continue
         
-    # eval_APPS(args, model='gpt-3.5-turbo', n=15, t_refrence=1, t_samples=1, trial=trial)
-    # eval_APPS(args, model='gpt-3.5-turbo', n=15, t_refrence=1, t_samples=1.3, trial=trial)
-
-    # eval_Human_eval_from_file(model='gpt-3.5-turbo', n=5, t_refrence=0, t_samples=1, trial=trial)
-    # eval_Human_eval_from_file(model='gpt-3.5-turbo', n=3, t_refrence=0, t_samples=1, trial=trial)
-    # eval_Human_eval_from_file(model='gpt-3.5-turbo', n=10, t_refrence=0, t_samples=1, trial=trial)
-    # eval_Human_eval_from_file(model='gpt-3.5-turbo', n=5, t_refrence=1, t_samples=1, trial=trial)
-    # eval_Human_eval_from_file(model='gpt-3.5-turbo', n=5, t_refrence=0, t_samples=1.5, trial=trial)
-    # eval_Human_eval_from_file(model='gpt-3.5-turbo', n=15, t_refrence=0, t_samples=1, trial=trial)
-    # eval_Human_eval_from_file(model='gpt-3.5-turbo', n=15, t_refrence=1, t_samples=1, trial=trial)
-    # eval_Human_eval_from_file(model='gpt-3.5-turbo', n=15, t_refrence=1, t_samples=1.3, trial=trial)
-
-   # eval_Human_eval_from_file(model='gpt-4-turbo-preview', n=5, t_refrence=0, t_samples=1, trial=trial)
-    # eval_Human_eval(model='gpt-4-turbo-preview', n=3, t_refrence=0, t_samples=1, trial=1)
-    # eval_Human_eval(model='gpt-4-turbo-preview', n=10, t_refrence=0, t_samples=1, trial=1)
-    # eval_Human_eval(model='gpt-4-turbo-preview', n=5, t_refrence=1, t_samples=1, trial=1)
-    # eval_Human_eval(model='gpt-4-turbo-preview', n=5, t_refrence=0, t_samples=1.5, trial=1)
-    # read_test("APPS", 30)
-    
+    eval_APPS(args, model='gpt-3.5-turbo', n=5, t_refrence=1, t_samples=1, trial=10)

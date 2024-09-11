@@ -14,19 +14,21 @@ import requests
 import json
 import ast
 import pprint
-import aiohttp
+from openai import AzureOpenAI
+
 
 RETRIALS = 20
-URL = "https://api.openai.com/v1/chat/completions"
-APIKEY = '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'
+# URL = "https://api.openai.com/v1/chat/completions"
+# APIKEY = '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'
 
 def parse_response(choice):
-    code = choice['message']['content'].replace('`', "")
-    if code[:6] == "python":
-      code = code.replace("python", "", 1)
-    elif code[:6] == "Python":
-      code = code.replace("Python", "", 1)
-    code = code.replace("markdown", "")
+    code = choice['message']['content'].replace('`', "").strip()
+    code = code.replace("markdown\n", "")
+    if code.startswith("python\n"):
+      code = code.replace("python\n", "", 1)
+    elif code.startswith("Python\n"):
+      code = code.replace("Python\n", "", 1)
+
     return code
 
 def remove_code_comments(code):
@@ -86,6 +88,13 @@ def rename_code_functions(code):
 # n: number of samples to generate other than the refrence response
 # The function returns an array of n+1 codes where the first the refrence code and the others are the candidates.
 def generate_codes(model="gpt-4-turbo-preview", n=5, t_refrence=0, t_samples=1, prompt=None):
+
+    client = AzureOpenAI(
+        azure_endpoint="https://team5-chatgpt-4-api.openai.azure.com/",
+        api_version = "2023-05-15",  # Use the latest available version
+        api_key = "9423fcf02a494b5cbe440c6971903ba7",
+    )
+    
     if prompt is None:
         raise ValueError("prompt is not specified")
     else:
@@ -93,46 +102,31 @@ def generate_codes(model="gpt-4-turbo-preview", n=5, t_refrence=0, t_samples=1, 
             ". \nReturn the code of the function only without any other text." + \
             "\nAlso, include all the needed imports."
 
-    headers = {
-        "Content-Type": "application/json",
-        "Authorization": f"Bearer {APIKEY}"
-    }
-
-    # refrence request
-    payload = {
-        "model": model,
-        "messages": [
-            {"role": "system", "content": "You are a programming assistant, skilled in writing complex programming concepts with creative syntax."},
-            {"role": "user", "content": prompt}],
-        "temperature": t_refrence,
-        "top_p": 1.0,
-        "n": 1,
-        "stream": False,
-        "presence_penalty": 0,
-        "frequency_penalty": 0,
-    }
-
     generated_codes = []
     for trial in range(RETRIALS):
-        # print(f"trial {trial}")
-        refrence_response = requests.post(
-            URL, headers=headers, json=payload, stream=False, timeout=50).content.strip().decode("utf-8")
-        response_dict = json.loads(refrence_response)
-        if 'choices' in response_dict:
+        reference_response = client.chat.completions.create(
+            model="gpt4-api",  # The name you used when deploying the model
+            n=1,
+            messages=[
+                {"role": "system", "content": "You are a programming assistant, skilled in writing complex programming concepts with creative syntax."},
+                {"role": "user", "content": prompt},
+                ])
+        response_dict = json.loads(reference_response.to_json())
+        if response_dict:
             break
 
     for choice in response_dict['choices']:
         generated_codes.append(parse_response(choice))
 
-    # sampled responses
-    payload["temperature"] = t_samples
-    payload["n"] = n
     for trial in range(RETRIALS):
-        # print(f"trial {trial}")
-        samples_response = requests.post(
-            URL, headers=headers, json=payload, stream=False, timeout=50).content.strip().decode("utf-8")
-        response_dict = json.loads(samples_response)
-        if 'choices' in response_dict:
+        samples_response = client.chat.completions.create(
+            model="gpt4-api",  # The name you used when deploying the model
+            n=5,
+            messages=[
+                {"role": "system", "content": "You are a programming assistant, skilled in writing complex programming concepts with creative syntax."},
+                {"role": "user", "content": prompt}])
+        response_dict = json.loads(samples_response.to_json())
+        if response_dict:
             break
         
     for choice in response_dict['choices']:
@@ -140,127 +134,62 @@ def generate_codes(model="gpt-4-turbo-preview", n=5, t_refrence=0, t_samples=1, 
 
     return generated_codes
 
-
-async def generate_codes_async(session, model="gpt-4-turbo-preview", n=5, t_refrence=0, t_samples=1, problem=None):
-    prompt = problem['prompt']
-    if prompt is None:
-        raise ValueError("prompt is not specified")
-    else:
-        prompt = "Write a Python function in markdown that does the following:\n" + prompt + \
-            ". \nReturn the code of the function only without any other text." + \
-            "\nAlso, include all the needed imports."
-
-    headers = {
-        "Content-Type": "application/json",
-        "Authorization": f"Bearer {APIKEY}"
-    }
-
-    # refrence request
-    payload = {
-        "model": model,
-        "messages": [
-            {"role": "system", "content": "You are a programming assistant, skilled in writing complex programming concepts with creative syntax."},
-            {"role": "user", "content": prompt}],
-        "temperature": t_refrence,
-        "top_p": 1.0,
-        "n": 1,
-        # "stream": False,
-        "presence_penalty": 0,
-        "frequency_penalty": 0,
-    }
-
-    generated_codes = []
-    for trial in range(RETRIALS):
-        async with session.post(URL, headers=headers, json=payload, timeout=50) as response:
-            refrence_response = await response.content.read()
-            refrence_response = refrence_response.strip().decode("utf-8")
-            response_dict = json.loads(refrence_response)
-            if 'choices' in response_dict:
-                break
-            elif 'error' in response_dict:
-                print("Rate limit exceeded. Waiting for 1 second before retrying...")
-                time.sleep(1)
-        
-    pprint.pprint(response_dict)
-    for choice in response_dict['choices']:
-        generated_codes.append(parse_response(choice))
-
-    # sampled responses
-    payload["temperature"] = t_samples
-    payload["n"] = n
-    for trial in range(RETRIALS):
-        async with session.post(URL, headers=headers, json=payload, timeout=50) as response:
-            samples_response = await response.content.read()
-            samples_response = samples_response.strip().decode("utf-8")
-            response_dict = json.loads(samples_response)
-            if 'choices' in response_dict:
-                break
-            elif 'error' in response_dict:
-                print("Rate limit exceeded. Waiting for 1 second before retrying...")
-                time.sleep(1)
-
-    pprint.pprint(response_dict)
-    for choice in response_dict['choices']:
-        generated_codes.append(parse_response(choice))
-    print(f"finished generating codes for {problem['task_id']}")
-    return problem, generated_codes
-
 # generate a comment that states the functionality of the given code
 # The comments inside the given code are always removed in order not to bias gpt answer.
 #
 # if renmae_functions is set, the name of the functions get changed as well to func, func1, func2, etc.
 # as sometimes the name of the functions give wrong hints to gpt.
-def generate_comment(model="gpt-4-turbo-preview", code=None, rename_functions = False, use_detailed_prompt = False):
-    if use_detailed_prompt and model != "gpt-4-turbo-preview":
-        raise ValueError("detailed prompt only works well with gpt-4-turbo-preview model")
-    prompt = ""
+# def generate_comment(model="gpt-4-turbo-preview", code=None, rename_functions = False, use_detailed_prompt = False):
+#     if use_detailed_prompt and model != "gpt-4-turbo-preview":
+#         raise ValueError("detailed prompt only works well with gpt-4-turbo-preview model")
+#     prompt = ""
 
-    if code is None:
-        raise ValueError("code is not specified")
-    elif not use_detailed_prompt:
-        code = remove_code_comments(code)
-    if rename_functions and not use_detailed_prompt:
-        code = rename_code_functions(code)
+#     if code is None:
+#         raise ValueError("code is not specified")
+#     elif not use_detailed_prompt:
+#         code = remove_code_comments(code)
+#     if rename_functions and not use_detailed_prompt:
+#         code = rename_code_functions(code)
 
-    prompt = "State the functionality of the following python code in no more than 3 sentences without going into implementation details:\n```\n" + code + "```"
+#     prompt = "State the functionality of the following python code in no more than 3 sentences without going into implementation details:\n```\n" + code + "```"
 
-    detailed_prompt = \
-    "[System]: 1. You are a programming assistant, skilled in explaining python code functionality.\n" + \
-    "2. You are to write a SHORT description of the functionality of the given code.\n" + \
-    "3. The code may contain some semantic cues like the function name and code comments describing the intended functionality but these semantic cues do NOT necissirily represent the actual functionality of the code. So, deemphasize these comments and semantic cues while generating the descripion.\n" + \
-    "4. The description should be concise and to the point and consists of at most 3 sentences.\n" + \
-    "5. Do NOT include any code implementation details in the description. Instead, focus on the descriping the implemented function.\n" + \
-    "[USER]: The code is \n```\n" + code + "```\n [END OF PROMPT]"
-    headers = {
-        "Content-Type": "application/json",
-        "Authorization": f"Bearer {APIKEY}"
-    }
+#     detailed_prompt = \
+#     "[System]: 1. You are a programming assistant, skilled in explaining python code functionality.\n" + \
+#     "2. You are to write a SHORT description of the functionality of the given code.\n" + \
+#     "3. The code may contain some semantic cues like the function name and code comments describing the intended functionality but these semantic cues do NOT necissirily represent the actual functionality of the code. So, deemphasize these comments and semantic cues while generating the descripion.\n" + \
+#     "4. The description should be concise and to the point and consists of at most 3 sentences.\n" + \
+#     "5. Do NOT include any code implementation details in the description. Instead, focus on the descriping the implemented function.\n" + \
+#     "[USER]: The code is \n```\n" + code + "```\n [END OF PROMPT]"
+#     headers = {
+#         "Content-Type": "application/json",
+#         "Authorization": f"Bearer {APIKEY}"
+#     }
 
-    if use_detailed_prompt:
-        prompt = detailed_prompt
-    # refrence request
-    payload = {
-        "model": model,
-        "messages": [
-            {"role": "system", "content": "You are a programming assistant, skilled in explaining the code functionality."},
-            {"role": "user", "content": prompt}],
-        "stream": False,
-        "presence_penalty": 0,
-        "frequency_penalty": 0,
-    }
+#     if use_detailed_prompt:
+#         prompt = detailed_prompt
+#     # refrence request
+#     payload = {
+#         "model": model,
+#         "messages": [
+#             {"role": "system", "content": "You are a programming assistant, skilled in explaining the code functionality."},
+#             {"role": "user", "content": prompt}],
+#         "stream": False,
+#         "presence_penalty": 0,
+#         "frequency_penalty": 0,
+#     }
 
-    for trial in range(RETRIALS):
-        response = requests.post(
-            URL, headers=headers, json=payload, stream=False, timeout=100).content.strip().decode("utf-8")
-        response_dict = json.loads(response)
-        if 'choices' in response_dict:
-            break
-    response = "None"
-    for choice in response_dict['choices']:
-        response = choice['message']['content']
-        break
+#     for trial in range(RETRIALS):
+#         response = requests.post(
+#             URL, headers=headers, json=payload, stream=False, timeout=100).content.strip().decode("utf-8")
+#         response_dict = json.loads(response)
+#         if 'choices' in response_dict:
+#             break
+#     response = "None"
+#     for choice in response_dict['choices']:
+#         response = choice['message']['content']
+#         break
 
-    return response
+#     return response
 
 # if __name__=="__main__":
 #     code = '''
