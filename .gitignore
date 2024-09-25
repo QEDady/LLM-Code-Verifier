@@ -163,3 +163,4 @@ APPS/
 *.tar.gz
 test.py
 apps.jsonl
+.env

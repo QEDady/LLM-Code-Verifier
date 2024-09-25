@@ -31,6 +31,9 @@ def parse_response(choice):
 
     return code
 
+def parse_java_code(code):
+    return code.replace("java\n", "", 1).replace("Java\n", "", 1).replace("Java\n", "", 1)
+
 def remove_code_comments(code):
     class CommentRemover(ast.NodeTransformer):
         def visit(self, node):
@@ -131,6 +134,57 @@ def generate_codes(model="gpt-4-turbo-preview", n=5, t_refrence=0, t_samples=1, 
         
     for choice in response_dict['choices']:
         generated_codes.append(parse_response(choice))
+
+    return generated_codes
+
+def generate_java_codes(model="gpt-4-turbo-preview", n=5, t_refrence=0, t_samples=1, prompt=None):
+
+    client = AzureOpenAI(
+        azure_endpoint="https://team5-chatgpt-4-api.openai.azure.com/",
+        api_version = "2023-05-15",  # Use the latest available version
+        api_key = "9423fcf02a494b5cbe440c6971903ba7",
+    )
+    
+    if prompt is None:
+        raise ValueError("prompt is not specified")
+    else:
+        prompt = prompt.replace(" and function signature solve()", ".")
+        prompt = "Write a java function in markdown that does the following:\n" + prompt + \
+            ". \nReturn the code of the function only without any other text." + \
+            "\nInclude all necessary imports." + \
+            "\nName the public class 'code' and provide only the Java code in a single 'main' function without any explanations."
+
+    generated_codes = []
+    for trial in range(RETRIALS):
+        reference_response = client.chat.completions.create(
+            model="gpt4-api",  # The name you used when deploying the model
+            n=1,
+            temperature=0.7,
+            messages=[
+                {"role": "system", "content": "You are a programming assistant, skilled in writing complex programming concepts with creative syntax."},
+                {"role": "user", "content": prompt},
+                ])
+        response_dict = json.loads(reference_response.to_json())
+        if response_dict:
+            break
+
+    for choice in response_dict['choices']:
+        generated_codes.append(parse_java_code(choice['message']['content']).replace('`', "").strip())
+
+    for trial in range(RETRIALS):
+        samples_response = client.chat.completions.create(
+            model="gpt4-api",  # The name you used when deploying the model
+            n=5,
+            temperature=0.7,
+            messages=[
+                {"role": "system", "content": "You are a programming assistant, skilled in writing complex programming concepts with creative syntax."},
+                {"role": "user", "content": prompt}])
+        response_dict = json.loads(samples_response.to_json())
+        if response_dict:
+            break
+        
+    for choice in response_dict['choices']:
+        generated_codes.append(parse_java_code(choice['message']['content']).replace('`', "").strip())
 
     return generated_codes
 

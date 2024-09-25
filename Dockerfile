@@ -1,11 +1,12 @@
 FROM rockylinux:9.3 
 
-RUN dnf install -y sudo git python3 python3-pip python3-devel
+RUN dnf install -y sudo git python3 python3-pip python3-devel java-11-openjdk-devel
 
 WORKDIR /LLM-Code-Verifier
+
+COPY requirements.txt .
 RUN pip install -r requirements.txt
 
-# Create a group and user
 ARG USER_NAME
 ARG USER_ID
 ARG GROUP_NAME

@@ -1,13 +1,16 @@
 services:
   dev-env:
     build:
-      context: .
+      context: ..
       dockerfile: Dockerfile
       args:
         - USER_NAME=${USER_NAME}
         - USER_ID=${USER_ID}
         - GROUP_NAME=${GROUP_NAME}
         - GROUP_ID=${GROUP_ID}
+    image: thesis-dev-env-img
+    container_name: thesis-dev-env-container
+    hostname: thesis-dev-env-container
     volumes:
-      - .:/LLM-Code-Verifier
+      - ..:/LLM-Code-Verifier
     command: tail -f /dev/null
