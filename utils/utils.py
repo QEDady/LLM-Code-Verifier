@@ -10,8 +10,8 @@ def generate_results_csv_filename(dataset, model, n, t_refrence, t_samples, tria
     filename = f'dataset_{dataset}_model_{model}_n_{n}_tempr_{t_refrence}_temps_{t_samples}_trial_{trial}.csv'
     return os.path.join(RESULTS, filename)
 
-def create_results_csv_file(dataset, model, n, t_refrence, t_samples, trial):
-    file_name = generate_results_csv_filename(dataset, model, n, t_refrence, t_samples, trial)
+def create_results_csv_file(dataset, model, n, t_reference, t_samples, trial):
+    file_name = generate_results_csv_filename(dataset, model, n, t_reference, t_samples, trial)
     fieldnames = ["task_id", "prompt"] + [f"code_{i}" for i in range(n+1)] + [f"pass_rate_{i}" for i in range(n+1)]
 
     if not os.path.exists(file_name):

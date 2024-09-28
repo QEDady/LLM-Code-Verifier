@@ -1,5 +1,6 @@
 import json
 import os
+from typing import List, Optional
 from openai import AzureOpenAI
 from dotenv import load_dotenv
 
@@ -17,7 +18,7 @@ def parse_code(prog_lang: str, code: str) -> str:
 
     return code
 
-def get_response(client: AzureOpenAI, model: str="gpt4-api", n: int=1, temperature: float=0.7, prompt: str=None) -> dict:
+def get_response(client: AzureOpenAI, model: str="gpt4-api", n: int=1, temperature: float=0.7, prompt: Optional[str]=None) -> Optional[dict]:
     for _ in range(RETRIALS):
         response = client.chat.completions.create(
             model=model,
@@ -31,9 +32,9 @@ def get_response(client: AzureOpenAI, model: str="gpt4-api", n: int=1, temperatu
         response_dict = json.loads(response.to_json())
         if response_dict:
             return response_dict
-        return None
+    return None
 
-def generate_codes(prog_lang: str="python", model: str="gpt4-api", n: int=5, t_reference: float=0.7, t_samples: float=0.7, prompt: str=None) -> list:
+def generate_codes(prog_lang: str="python", model: str="gpt4-api", n: int=5, t_reference: float=0.7, t_samples: float=0.7, prompt: Optional[str]=None) -> list:
     if prompt is None:
         raise ValueError("prompt is not specified")
 
@@ -55,7 +56,7 @@ def generate_codes(prog_lang: str="python", model: str="gpt4-api", n: int=5, t_r
             "\nInclude all necessary imports." + \
             "\nName the public class 'code' and provide only the Java code in a single 'main' function without any explanations."
     
-    generated_codes = []
+    generated_codes: List[str] = []
     reference_response = get_response(client, model, 1, t_reference, prompt)
     if reference_response:
         generated_codes.extend(parse_code(prog_lang, choice['message']['content']).replace('`', "").strip() for choice in reference_response['choices'])

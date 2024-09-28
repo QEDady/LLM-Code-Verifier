@@ -1,12 +1,22 @@
+# Configuration for the dataset
 dataset: 
   name: human_eval
   language: java
-  random:
-    value: False
-    sample_size: 100
+  random: false
+  sample_size: 100
+
+# Limits for processing specific data points or ranges
+limits:
+  task_ids: null
+  start_id: null
+  end_id: null
+
+# Configuration for the model
 model:
   name: gpt4-api
   base_temperature: 0.7
   samples_temperature: 0.7
   samples_n: 5
+  
+# Trial number
 trial: 10

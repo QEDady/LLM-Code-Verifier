@@ -1,7 +1,7 @@
 import json
 import gzip
 import random
-from typing import List, Dict, Iterable, Union
+from typing import List, Dict, Iterable, Union, Optional
 import os
 import csv
 
@@ -13,12 +13,12 @@ def stream_jsonl(file_path: str) -> Iterable[Dict]:
         with open(file_path, "rb") as gzfp:
             with gzip.open(gzfp, 'rt') as fp:
                 for line in fp:
-                    if any(not x.isspace() for x in line):
+                    if isinstance(line, str) and any(not x.isspace() for x in line):
                         yield json.loads(line)
     else:
         with open(file_path, "r") as fp:
             for line in fp:
-                if any(not x.isspace() for x in line):
+                if isinstance(line, str) and any(not x.isspace() for x in line):
                     yield json.loads(line)
 
 def write_jsonl(file_path: str, data: Iterable[Dict], append: bool = False):
@@ -63,7 +63,7 @@ def extract_task_ids_from_file(file_path: str) -> List[str]:
         
     return []
 
-def load_dataset(dataset_path: str, random: bool = False, sample_size: int = None) -> Union[Iterable[Dict], List[Dict]]:
+def load_dataset(dataset_path: str, random: bool = False, sample_size: int=100) -> Optional[Union[Iterable[Dict], List[Dict]]]:
     if not os.path.exists(dataset_path):
         return []
     
