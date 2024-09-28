@@ -1,0 +1,12 @@
+dataset: 
+  name: human_eval
+  language: java
+  random:
+    value: False
+    sample_size: 100
+model:
+  name: gpt4-api
+  base_temperature: 0.7
+  samples_temperature: 0.7
+  samples_n: 5
+trial: 10
