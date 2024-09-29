@@ -1,0 +1,21 @@
+********************************************************************************
+Fold 0:
+Overall accuracy: 0.89383
+Time cost: 246393.01
+Clone pairs: 2713, non-clone pairs: 11623
+Recall: 0.7726, precision: 0.6984, f1 score: 0.7336
+Predicted_positive_count: 3001, recall truly positive: 2096, false positive: 905, missed true positive: 617
+********************************************************************************
+Fold 1:
+Overall accuracy: 0.92941
+Time cost: 246471.34
+Clone pairs: 2700, non-clone pairs: 11636
+Recall: 0.8337, precision: 0.7999, f1 score: 0.8165
+Predicted_positive_count: 2814, recall truly positive: 2251, false positive: 563, missed true positive: 449
+********************************************************************************
+Fold 2:
+Overall accuracy: 0.92913
+Time cost: 246062.14
+Clone pairs: 2738, non-clone pairs: 11598
+Recall: 0.8240, precision: 0.8086, f1 score: 0.8162
+Predicted_positive_count: 2790, recall truly positive: 2256, false positive: 534, missed true positive: 482
