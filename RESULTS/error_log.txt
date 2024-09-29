@@ -1,50 +1,45 @@
 Task ID: HumanEval/39
 Code number: 2
 Test Number: 10
-Error:Command '['python', '-c', '\nimport math\n\ndef is_prime(num):\n    if num < 2:\n        return False\n    for i in range(2, int(math.sqrt(num)) + 1):\n        if num % i == 0:\n            return False\n    return True\n\ndef prime_fib(n: int):\n    def fib(n):\n        if n <= 0:\n            return 0\n        elif n == 1:\n            return 1\n        else:\n            return fib(n - 1) + fib(n - 2)\n\n    count = 0\n    i = 0\n    while True:\n        if is_prime(fib(i)):\n            count += 1\n            if count == n:\n                return fib(i)\n        i += 1\n  \nprint(prime_fib(10))']' timed out after 40 seconds
+Error:Command '['python', '-c', '\r\nimport math\r\n\r\ndef is_prime(num):\r\n    if num < 2:\r\n        return False\r\n    for i in range(2, int(math.sqrt(num)) + 1):\r\n        if num % i == 0:\r\n            return False\r\n    return True\r\n\r\ndef prime_fib(n: int):\r\n    def fib(n):\r\n        if n <= 0:\r\n            return 0\r\n        elif n == 1:\r\n            return 1\r\n        else:\r\n            return fib(n - 1) + fib(n - 2)\r\n\r\n    count = 0\r\n    i = 0\r\n    while True:\r\n        if is_prime(fib(i)):\r\n            count += 1\r\n            if count == n:\r\n                return fib(i)\r\n        i += 1\r\n  \nprint(prime_fib(10))']' timed out after 40 seconds
 --------------------------------------------------
 Task ID: HumanEval/39
 Code number: 3
 Test Number: 10
-Error:Command '['python', '-c', '\nimport math\n\ndef is_prime(num):\n    if num <= 1:\n        return False\n    if num == 2:\n        return True\n    if num % 2 == 0:\n        return False\n    max_divisor = math.isqrt(num)\n    for i in range(3, max_divisor + 1, 2):\n        if num % i == 0:\n            return False\n    return True\n\ndef prime_fib(n: int):\n    def is_fibonacci(num):\n        return math.isqrt(5 * num**2 + 4) ** 2 == 5 * num**2 + 4 or math.isqrt(5 * num**2 - 4) ** 2 == 5 * num**2 - 4\n    \n    if n <= 0:\n        return "Invalid input"\n    \n    count = 0\n    num = 1\n    while count < n:\n        num += 1\n        if is_fibonacci(num) and is_prime(num):\n            count += 1\n            \n    return num\n  \nprint(prime_fib(10))']' timed out after 40 seconds
---------------------------------------------------
-Task ID: HumanEval/39
-Code number: 4
-Test Number: 10
-Error:Command '['python', '-c', '\nfrom math import isqrt\n\ndef is_prime(num):\n    if num <= 1:\n        return False\n    if num == 2 or num == 3:\n        return True\n    if num % 2 == 0:\n        return False\n    for i in range(3, isqrt(num) + 1, 2):\n        if num % i == 0:\n            return False\n    return True\n\ndef prime_fib(n: int):\n    def is_fib(num):\n        a, b = 1, 1\n        while b < num:\n            a, b = b, a + b\n        return b == num\n\n    count = 0\n    num = 2\n    while count < n:\n        if is_fib(num) and is_prime(num):\n            count += 1\n        num += 1\n    return num - 1\n\nprint(prime_fib(10))']' timed out after 40 seconds
+Error:Command '['python', '-c', '\r\nimport math\r\n\r\ndef is_prime(num):\r\n    if num <= 1:\r\n        return False\r\n    if num == 2:\r\n        return True\r\n    if num % 2 == 0:\r\n        return False\r\n    max_divisor = math.isqrt(num)\r\n    for i in range(3, max_divisor + 1, 2):\r\n        if num % i == 0:\r\n            return False\r\n    return True\r\n\r\ndef prime_fib(n: int):\r\n    def is_fibonacci(num):\r\n        return math.isqrt(5 * num**2 + 4) ** 2 == 5 * num**2 + 4 or math.isqrt(5 * num**2 - 4) ** 2 == 5 * num**2 - 4\r\n    \r\n    if n <= 0:\r\n        return "Invalid input"\r\n    \r\n    count = 0\r\n    num = 1\r\n    while count < n:\r\n        num += 1\r\n        if is_fibonacci(num) and is_prime(num):\r\n            count += 1\r\n            \r\n    return num\r\n  \nprint(prime_fib(10))']' timed out after 40 seconds
 --------------------------------------------------
 Task ID: HumanEval/41
 Code number: 4
 Test Number: 9
-Error:Command '['python', '-c', "\nfrom collections import Counter\n\ndef car_race_collision(n: int) -> int:\n    left_cars = ['L'] * n\n    right_cars = ['R'] * n\n    collisions = 0\n    \n    for _ in range(n):\n        left_cars.append('L')\n        right_cars.insert(0, 'R')\n        \n        combined = [left + right for left, right in zip(left_cars, right_cars)]\n        collisions += Counter(combined)['LR']\n    \n    return collisions\n\nprint(car_race_collision(100000))"]' timed out after 40 seconds
+Error:Command '['python', '-c', "\r\nfrom collections import Counter\r\n\r\ndef car_race_collision(n: int) -> int:\r\n    left_cars = ['L'] * n\r\n    right_cars = ['R'] * n\r\n    collisions = 0\r\n    \r\n    for _ in range(n):\r\n        left_cars.append('L')\r\n        right_cars.insert(0, 'R')\r\n        \r\n        combined = [left + right for left, right in zip(left_cars, right_cars)]\r\n        collisions += Counter(combined)['LR']\r\n    \r\n    return collisions\r\n\nprint(car_race_collision(100000))"]' timed out after 40 seconds
 --------------------------------------------------
 Task ID: HumanEval/41
 Code number: 4
 Test Number: 10
-Error:Command '['python', '-c', "\nfrom collections import Counter\n\ndef car_race_collision(n: int) -> int:\n    left_cars = ['L'] * n\n    right_cars = ['R'] * n\n    collisions = 0\n    \n    for _ in range(n):\n        left_cars.append('L')\n        right_cars.insert(0, 'R')\n        \n        combined = [left + right for left, right in zip(left_cars, right_cars)]\n        collisions += Counter(combined)['LR']\n    \n    return collisions\n\nprint(car_race_collision(1000000))"]' timed out after 40 seconds
+Error:Command '['python', '-c', "\r\nfrom collections import Counter\r\n\r\ndef car_race_collision(n: int) -> int:\r\n    left_cars = ['L'] * n\r\n    right_cars = ['R'] * n\r\n    collisions = 0\r\n    \r\n    for _ in range(n):\r\n        left_cars.append('L')\r\n        right_cars.insert(0, 'R')\r\n        \r\n        combined = [left + right for left, right in zip(left_cars, right_cars)]\r\n        collisions += Counter(combined)['LR']\r\n    \r\n    return collisions\r\n\nprint(car_race_collision(1000000))"]' timed out after 40 seconds
 --------------------------------------------------
 Task ID: HumanEval/83
 Code number: 1
 Test Number: 4
-Error:Command '['python', '-c', "\ndef starts_one_ends(n):\n    count = 0\n    for i in range(10**(n-1), 10**n):\n        if str(i)[0] == '1' or str(i)[-1] == '1':\n            count += 1\n    return count\n\nprint(starts_one_ends(10))"]' timed out after 40 seconds
+Error:Command '['python', '-c', "\r\ndef starts_one_ends(n):\r\n    count = 0\r\n    for i in range(10**(n-1), 10**n):\r\n        if str(i)[0] == '1' or str(i)[-1] == '1':\r\n            count += 1\r\n    return count\r\n\nprint(starts_one_ends(10))"]' timed out after 40 seconds
 --------------------------------------------------
 Task ID: HumanEval/83
 Code number: 1
 Test Number: 5
-Error:Command '['python', '-c', "\ndef starts_one_ends(n):\n    count = 0\n    for i in range(10**(n-1), 10**n):\n        if str(i)[0] == '1' or str(i)[-1] == '1':\n            count += 1\n    return count\n\nprint(starts_one_ends(13))"]' timed out after 40 seconds
+Error:Command '['python', '-c', "\r\ndef starts_one_ends(n):\r\n    count = 0\r\n    for i in range(10**(n-1), 10**n):\r\n        if str(i)[0] == '1' or str(i)[-1] == '1':\r\n            count += 1\r\n    return count\r\n\nprint(starts_one_ends(13))"]' timed out after 40 seconds
 --------------------------------------------------
 Task ID: HumanEval/83
 Code number: 1
 Test Number: 6
-Error:Command '['python', '-c', "\ndef starts_one_ends(n):\n    count = 0\n    for i in range(10**(n-1), 10**n):\n        if str(i)[0] == '1' or str(i)[-1] == '1':\n            count += 1\n    return count\n\nprint(starts_one_ends(20))"]' timed out after 40 seconds
+Error:Command '['python', '-c', "\r\ndef starts_one_ends(n):\r\n    count = 0\r\n    for i in range(10**(n-1), 10**n):\r\n        if str(i)[0] == '1' or str(i)[-1] == '1':\r\n            count += 1\r\n    return count\r\n\nprint(starts_one_ends(20))"]' timed out after 40 seconds
 --------------------------------------------------
 Task ID: HumanEval/83
 Code number: 1
 Test Number: 9
-Error:Command '['python', '-c', "\ndef starts_one_ends(n):\n    count = 0\n    for i in range(10**(n-1), 10**n):\n        if str(i)[0] == '1' or str(i)[-1] == '1':\n            count += 1\n    return count\n\nprint(starts_one_ends(15))"]' timed out after 40 seconds
+Error:Command '['python', '-c', "\r\ndef starts_one_ends(n):\r\n    count = 0\r\n    for i in range(10**(n-1), 10**n):\r\n        if str(i)[0] == '1' or str(i)[-1] == '1':\r\n            count += 1\r\n    return count\r\n\nprint(starts_one_ends(15))"]' timed out after 40 seconds
 --------------------------------------------------
 Task ID: HumanEval/83
 Code number: 1
 Test Number: 10
-Error:Command '['python', '-c', "\ndef starts_one_ends(n):\n    count = 0\n    for i in range(10**(n-1), 10**n):\n        if str(i)[0] == '1' or str(i)[-1] == '1':\n            count += 1\n    return count\n\nprint(starts_one_ends(25))"]' timed out after 40 seconds
+Error:Command '['python', '-c', "\r\ndef starts_one_ends(n):\r\n    count = 0\r\n    for i in range(10**(n-1), 10**n):\r\n        if str(i)[0] == '1' or str(i)[-1] == '1':\r\n            count += 1\r\n    return count\r\n\nprint(starts_one_ends(25))"]' timed out after 40 seconds
 --------------------------------------------------
