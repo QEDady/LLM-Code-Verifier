@@ -20,4 +20,4 @@ RUN echo "${USER_NAME} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 USER ${USER_NAME}
 
 RUN echo "alias cls=clear" >> ~/.bashrc && \
-    echo "PS1='\[\e[32m\]\u@\h \[\e[34m\]\w\[\e[0m\]\$ '" >> ~/.bashrc
+    echo "PS1='\[\e[36m\][\h] \[\e[32m\]\u\[\e[37m\]:\[\e[34m\]\w \[\e[35m\]$(git rev-parse --abbrev-ref HEAD 2>/dev/null | sed "s/^/(/" | sed "s/$/)/")\[\e[0m\]$ '" >> ~/.bashrc
