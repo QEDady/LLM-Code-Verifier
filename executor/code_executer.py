@@ -1,7 +1,27 @@
-
 import subprocess
+import textwrap
+from typing import Union
+from data.dataset_handler import stream_jsonl
+from data.const import HUMAN_EVAL_MODIFIED_PATH, APPS_PATH
 
-def run_python_code(code, input_str=None): 
+
+def validate_executer(dataset_path: str):
+    if dataset_path == HUMAN_EVAL_MODIFIED_PATH:
+        for task in stream_jsonl(dataset_path):
+            check_program = f"{task['prompt']}\n{task['canonical_solution']}\n{task['test']}\nprint(check({task['entry_point']}))"
+            test_pass_rate = evaluate_code(prog_lang="python", code=check_program, test_cases=None)
+            print(f"{task['task_id']}: {test_pass_rate}")
+
+    elif dataset_path == APPS_PATH:
+        for i, task in enumerate(stream_jsonl(dataset_path)):
+                code = task['canonical_solution']
+                code = textwrap.indent(code, '    ')
+                check_program = f"def solve():\n{code}\nsolve()"
+                test_pass_rate = evaluate_code(prog_lang="python", code=check_program, test_cases=task['test'])
+                print(f"{task['task_id']}: {test_pass_rate}")
+
+
+def run_python_code(code, input_str=None) ->Union[Exception, str]: 
     try:
         result = subprocess.run(
             ['python3', '-c', code],
@@ -9,26 +29,16 @@ def run_python_code(code, input_str=None):
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             timeout=10,
-            text=True
+            text=True,
+            check=True
         )
-        
-        if result.returncode != 0:
-            return result.stderr.strip(), None
-        
-        try:
-            output = result.stdout.strip()
-            return None, output
-        except ValueError as e:
-            return str(e), None
-        
-    except subprocess.TimeoutExpired:
-        return "Timeout", None
+        return result.stdout.strip()
     except Exception as e:
-        return str(e), None
+        return e
 
-def run_java_code(code, input_str=None):
+def run_java_code(code, input_str=None) -> Union[Exception, str]:
     try:
-        with open('code.java', 'w') as file:
+        with open('code.java', 'w', encoding='utf-8') as file:
             file.write(code)
 
         compile_result = subprocess.run(
@@ -36,11 +46,9 @@ def run_java_code(code, input_str=None):
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
                 timeout=10,
-                text=True
+                text=True,
+                check=True
             )
-
-        if compile_result.returncode != 0:
-            return compile_result.stderr.strip(), None
         
         run_result = subprocess.run(
                 ['java', 'code'],
@@ -48,18 +56,13 @@ def run_java_code(code, input_str=None):
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
                 timeout=10,
-                text=True
+                text=True,
+                check=True
             )
         
-        if run_result.returncode != 0:
-            return run_result.stderr.strip(), None
-        
-        return None, run_result.stdout.strip()
-
-    except subprocess.TimeoutExpired:
-        return "Timeout", None
+        return run_result.stdout.strip()
     except Exception as e:
-        return str(e), None
+        return e
     
 def evaluate_code(prog_lang, code, test_cases=None):
     language_runners = {
@@ -84,17 +87,24 @@ def evaluate_code(prog_lang, code, test_cases=None):
                 num_tests -= 1
                 continue
 
-            err, res = run_code(code, input_str)
-
-            if res is None or err == 'Timeout':
+            output = run_code(code, input_str)
+            if isinstance(output, str):
+                tests_passed += (output == output_str)
+            elif isinstance(output, subprocess.TimeoutExpired):
                 num_tests -= 1
-                continue
-            
-            tests_passed += (res == output_str)
+            elif isinstance(output, Exception):
+                # print(f"Error: {output}")
+                num_tests = 0
+                break
 
         test_pass_rate = (tests_passed / num_tests) * 100 if num_tests != 0 else 0
-        return test_pass_rate if test_pass_rate else 0
+        return test_pass_rate 
     
     else: 
-        err, test_pass_rate = run_code(code, None)
-        return test_pass_rate if test_pass_rate else 0
+        output = run_code(code, None)
+        if isinstance(output, str):
+            return 100 * float(output)
+        elif isinstance(output, Exception):
+            return 0
+        return  0
+    

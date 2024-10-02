@@ -1,15 +1,14 @@
 # Configuration for the dataset
 dataset: 
-  name: human_eval
-  language: java
-  random: false
-  sample_size: 100
-
-# Limits for processing specific data points or ranges
-limits:
-  task_ids: null
-  start_id: null
-  end_id: null
+  name: apps
+  prog_lang: python
+  random:
+    enabled: true
+    sample_size: 5
+  range:
+    task_ids: null
+    start_id: null
+    end_id: null
 
 # Configuration for the model
 model:
@@ -19,4 +18,14 @@ model:
   samples_n: 5
   
 # Trial number
-trial: 10
+trial: 100
+
+
+# Those directives are to restrict dataset and model names to a specific set of values
+# Do not change if not necessary, those are for validation purposes
+dataset_options:
+  - human_eval
+  - apps
+
+model_options:
+  - gpt4-api

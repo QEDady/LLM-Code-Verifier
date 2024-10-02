@@ -8,7 +8,22 @@
 	],
 	"service": "dev-env",
 	"shutdownAction": "stopCompose",
-	"initializeCommand": ".devcontainer/pre-start.sh"
+	"initializeCommand": ".devcontainer/pre-start.sh",
+	"postCreateCommand": ".devcontainer/post-create.sh",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"usernamehw.errorlens",
+				"ms-toolsai.jupyter-keymap",
+				"formulahendry.code-runner",
+				"adpyke.codesnap",
+				"eamodio.gitlens",
+				"ms-python.python",
+				"Gruntfuggly.todo-tree",
+				"GrapeCity.gc-excelviewer"
+			]
+		}
+	}
 
 	// "extensions": [
 	// 	"ms-azuretools.vscode-docker",

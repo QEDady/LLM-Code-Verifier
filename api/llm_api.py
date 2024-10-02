@@ -1,6 +1,6 @@
 import json
 import os
-from typing import List, Optional
+from typing import Dict, List, Optional
 from openai import AzureOpenAI
 from dotenv import load_dotenv
 
@@ -34,7 +34,13 @@ def get_response(client: AzureOpenAI, model: str="gpt4-api", n: int=1, temperatu
             return response_dict
     return None
 
-def generate_codes(prog_lang: str="python", model: str="gpt4-api", n: int=5, t_reference: float=0.7, t_samples: float=0.7, prompt: Optional[str]=None) -> list:
+def generate_codes(prog_lang: str, model_config: Dict, prompt: str) -> list:
+
+    model = model_config['name']
+    n = model_config['samples_n']
+    t_reference = model_config['base_temperature']
+    t_samples = model_config['samples_temperature']
+
     if prompt is None:
         raise ValueError("prompt is not specified")
 

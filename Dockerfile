@@ -11,9 +11,13 @@ ARG USER_NAME
 ARG USER_ID
 ARG GROUP_NAME
 ARG GROUP_ID
+
 RUN groupadd -g ${GROUP_ID} ${GROUP_NAME} && useradd ${USER_NAME} -G ${GROUP_NAME}
 RUN usermod -u ${USER_ID} ${USER_NAME}
 
 RUN echo "${USER_NAME} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 USER ${USER_NAME}
+
+RUN echo "alias cls=clear" >> ~/.bashrc && \
+    echo "PS1='\[\e[32m\]\u@\h \[\e[34m\]\w\[\e[0m\]\$ '" >> ~/.bashrc
