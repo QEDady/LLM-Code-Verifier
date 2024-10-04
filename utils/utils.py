@@ -41,11 +41,42 @@ def validate_config(config):
     dataset_options = config.get('dataset_options', [])
     dataset_name = dataset.get('name')
     prog_lang = dataset.get('prog_lang')
+    random = dataset.get('random')
+    range = dataset.get('range')
 
     if not dataset_name or dataset_name not in dataset_options:
         raise ValueError(f"Invalid or missing dataset name. Must be one of {dataset_options}.")
     if not prog_lang:
         raise ValueError("Missing required field: dataset.prog_lang")
+    
+    # Validate random sampling
+    if random["enabled"] and (not isinstance(random['sample_size'], int) or random['sample_size'] <= 0):
+        raise ValueError("Field 'random.sample_size' must be an integer more than zero.")
+
+    # Validate range sampling
+    if range["enabled"]:
+        if range["task_ids"] is not None:
+            if not isinstance(range["task_ids"], list) or not all(isinstance(task_id, int) and task_id >= 0 for task_id in range["task_ids"]):
+                raise ValueError("Field 'range.task_ids' must be a list of integers more than or equal to zero.")
+        else:
+            if range["start_id"] is None and range["end_id"] is None:
+                raise ValueError("Either 'range.task_ids' must be provided as a list of integers, or 'range.start_id' and/or 'range.end_id' must be specified.")
+            
+            if range["start_id"] is not None and not isinstance(range["start_id"], int):
+                raise ValueError("Field 'range.start_id' must be an integer.")
+            
+            if range["end_id"] is not None and not isinstance(range["end_id"], int):
+                raise ValueError("Field 'range.end_id' must be an integer.")
+            
+            if range["start_id"] is not None and range["start_id"] < 0:
+                raise ValueError("Field 'range.start_id' must be greater than or equal to zero.")
+            
+            if range["end_id"] is not None and range["end_id"] < 0:
+                raise ValueError("Field 'range.end_id' must be greater than or equal to zero.")
+            
+            if range["start_id"] is not None and range["end_id"] is not None:
+                if range["start_id"] > range["end_id"]:
+                    raise ValueError("Field 'range.start_id' must be less than or equal to 'range.end_id'.")
 
     # Validate model
     model = config.get('model', {})
@@ -64,12 +95,6 @@ def validate_config(config):
     if samples_n is None:
         raise ValueError("Missing required field: model.samples_n")
 
-    # Validate limits (all optional)
-    limits = config.get('limits', {})
-    task_ids = limits.get('task_ids')
-    start_id = limits.get('start_id')
-    end_id = limits.get('end_id')
-
     # Validate trial (optional, default to 100)
     trial = config.get('trial', 100)
     if not isinstance(trial, int):
@@ -78,7 +103,6 @@ def validate_config(config):
     # Return validated and possibly modified config
     return {
         'dataset': dataset,
-        'limits': limits,
         'model': model,
         'trial': trial
     }

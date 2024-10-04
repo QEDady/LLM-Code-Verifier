@@ -6,6 +6,7 @@ dataset:
     enabled: true
     sample_size: 5
   range:
+    enabled: false
     task_ids: null
     start_id: null
     end_id: null
