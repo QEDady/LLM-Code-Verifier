@@ -91,11 +91,11 @@ def evaluate_code(prog_lang, code, test_cases=None):
             if isinstance(output, str):
                 tests_passed += (output == output_str)
             elif isinstance(output, subprocess.TimeoutExpired):
-                num_tests -= 1
+                # num_tests -= 1
+                continue
             elif isinstance(output, Exception):
-                # print(f"Error: {output}")
-                num_tests = 0
-                break
+                # print(f"Error: {output}")                
+                continue
 
         test_pass_rate = (tests_passed / num_tests) * 100 if num_tests != 0 else 0
         return test_pass_rate 

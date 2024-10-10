@@ -1,9 +1,9 @@
 # Configuration for the dataset
 dataset: 
-  name: apps
+  name: human_eval
   prog_lang: python
   random:
-    enabled: true
+    enabled: false
     sample_size: 5
   range:
     enabled: false
