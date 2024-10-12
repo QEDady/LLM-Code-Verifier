@@ -4,10 +4,8 @@ import gzip
 import io
 import json
 import os
-import pprint
 import random
 import re
-import subprocess
 from typing import Dict, Iterable, List
 
 # Define the root directory
@@ -15,6 +13,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # Define paths to datasets and results
 APPS = os.path.join(ROOT, "DATASETS", "apps.jsonl")
+APPS_JAVA = os.path.join(ROOT, "DATASETS", "apps_java.jsonl")
 APPS_TEST = os.path.join(ROOT, "DATASETS", "APPS", "data_split", "test.json")
 APPS_TRAIN = os.path.join(ROOT, "DATASETS", "APPS", "data_split", "train.json")
 HUMAN_EVAL = os.path.join(ROOT, "DATASETS", "human-eval.jsonl")
@@ -81,7 +80,6 @@ def modify_human_eval_tests_manual(test):
 
     return test
         
-
 def modify_Human_eval():
     with open(HUMAN_EVAL, 'r') as f, open(HUMAN_EVAL_MODIFIED, 'w') as new_f:
         for line in f:

@@ -161,5 +161,4 @@ cython_debug/
 
 APPS/
 *.tar.gz
-test.py
-apps.jsonl
+.env

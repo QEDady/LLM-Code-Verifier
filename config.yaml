@@ -1,0 +1,32 @@
+# Configuration for the dataset
+dataset: 
+  name: human_eval
+  prog_lang: python
+  random:
+    enabled: true
+    sample_size: 2
+  range:
+    enabled: false
+    task_ids: null
+    start_id: null
+    end_id: null
+
+# Configuration for the model
+model:
+  name: gpt4-api
+  base_temperature: 0.7
+  samples_temperature: 0.7
+  samples_n: 5
+  
+# Trial number
+trial: 200
+
+
+# Those directives are to restrict dataset and model names to a specific set of values
+# Do not change if not necessary, those are for validation purposes
+dataset_options:
+  - human_eval
+  - apps
+
+model_options:
+  - gpt4-api

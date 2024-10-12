@@ -1,0 +1,19 @@
+services:
+  dev-env:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+      args:
+        - USER_NAME=${USER_NAME}
+        - USER_ID=${USER_ID}
+        - GROUP_NAME=${GROUP_NAME}
+        - GROUP_ID=${GROUP_ID}
+    image: thesis-dev-env-img
+    container_name: thesis-dev-env-container
+    hostname: thesis-dev-env-container
+    command: tail -f /dev/null
+    environment:
+      - GIT_USERNAME=${GIT_USERNAME}
+      - GIT_EMAIL=${GIT_EMAIL}
+    volumes:
+      - ..:/LLM-Code-Verifier
