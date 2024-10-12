@@ -3,8 +3,8 @@ dataset:
   name: human_eval
   prog_lang: python
   random:
-    enabled: false
-    sample_size: 5
+    enabled: true
+    sample_size: 2
   range:
     enabled: false
     task_ids: null
@@ -19,7 +19,7 @@ model:
   samples_n: 5
   
 # Trial number
-trial: 100
+trial: 200
 
 
 # Those directives are to restrict dataset and model names to a specific set of values

@@ -1,6 +1,7 @@
 import csv
 import re
-from typing import Dict, List, Iterable, Optional, Union
+from typing import Counter, Dict, List, Iterable, Optional, Union
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 from utils.utils import create_results_csv_file
 from data.dataset_handler import extract_task_ids_from_file, load_dataset
@@ -49,17 +50,31 @@ def evaluate(dataset_config: Dict, model_config: Dict, trial: int, tasks: Union[
 
             generated_codes = generate_codes(prog_lang=prog_lang, model_config=model_config, prompt=task['prompt'])
 
-            for code_idx, code in enumerate(generated_codes):
-                check_program = preprocess_code(code=code, dataset=dataset, prog_lang=prog_lang, task=task, test_key=test_key, entry_point_key=entry_point_key)
-                if check_program is None:
-                    return
-                
-                print(f"\tcode {code_idx + 1}/{len(generated_codes)}")
-                test_cases = task[test_key] if dataset.lower() == APPS else None
-                test_pass_rate = evaluate_code(prog_lang=prog_lang, code=check_program, test_cases=test_cases)
+            with ThreadPoolExecutor(4) as executor:
+                task_id = task['task_id']
+                futures  = []
+                submitted_codes = Counter()
 
-                row[f"code_{code_idx}"] = code
-                row[f"pass_rate_{code_idx}"] = test_pass_rate 
+                print(f"[{task['task_id']}] Submitting codes...")
+                for code_idx, code in enumerate(generated_codes):
+                    check_program = preprocess_code(code=code, dataset=dataset, prog_lang=prog_lang, task=task, test_key=test_key, entry_point_key=entry_point_key)
+                    if check_program is None:
+                        return
+                    
+                    row[f"code_{code_idx}"] = code                    
+                    test_cases = task[test_key] if dataset.lower() == APPS else None
+                    args = (code_idx, prog_lang, check_program, test_cases)
+                    future = executor.submit(evaluate_code, *args)
+                    futures.append(future)
+                    submitted_codes [task_id] += 1
+
+                assert submitted_codes[task_id] == 6, "Some codes are not attempted"
+                    
+                print(f"[{task['task_id']}] Evaluating codes...")
+                for idx, future in enumerate(as_completed(futures)):
+                    code_idx, test_pass_rate = future.result()
+                    print(f"\t[{idx + 1}/{len(generated_codes)}] code {code_idx} completed")
+                    row[f"pass_rate_{code_idx}"] = test_pass_rate 
             writer.writerow(row)
 
 def eval_Human_eval(dataset_config: Dict, model_config: Dict, trial: int) -> None:

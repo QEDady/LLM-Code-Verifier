@@ -1,6 +1,6 @@
 import subprocess
 import textwrap
-from typing import Union
+from typing import Tuple, Union
 from data.dataset_handler import stream_jsonl
 from data.const import HUMAN_EVAL_MODIFIED_PATH, APPS_PATH
 
@@ -64,7 +64,7 @@ def run_java_code(code, input_str=None) -> Union[Exception, str]:
     except Exception as e:
         return e
     
-def evaluate_code(prog_lang, code, test_cases=None):
+def evaluate_code(code_id, prog_lang, code, test_cases=None) -> Tuple[int, float]:
     language_runners = {
         'python': run_python_code,
         'java': run_java_code
@@ -73,7 +73,7 @@ def evaluate_code(prog_lang, code, test_cases=None):
     run_code = language_runners.get(prog_lang.lower())
     if run_code is None:
         print(f"Unsupported language: {prog_lang}")
-        return 0
+        return code_id, 0
     
     if test_cases:
         tests_passed = 0
@@ -98,13 +98,13 @@ def evaluate_code(prog_lang, code, test_cases=None):
                 continue
 
         test_pass_rate = (tests_passed / num_tests) * 100 if num_tests != 0 else 0
-        return test_pass_rate 
+        return code_id, test_pass_rate 
     
     else: 
         output = run_code(code, None)
         if isinstance(output, str):
-            return 100 * float(output)
+            return code_id, 100 * float(output)
         elif isinstance(output, Exception):
-            return 0
-        return  0
+            return code_id, 0
+        return  code_id, 0
     
