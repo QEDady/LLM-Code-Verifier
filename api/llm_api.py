@@ -46,7 +46,7 @@ def generate_codes(prog_lang: str, model_config: Dict, prompt: str) -> list:
 
     client = AzureOpenAI(
         azure_endpoint="https://team5-chatgpt-4-api.openai.azure.com/",
-        api_version = "2023-05-15",  # Use the latest available version
+        api_version = "2024-10-01-preview",  # Use the latest available version
         api_key = os.getenv("OPENAI_API_KEY"),
     )
     
