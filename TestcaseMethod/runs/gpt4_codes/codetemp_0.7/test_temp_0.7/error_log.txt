@@ -1,0 +1,2069 @@
+Task ID: HumanEval/32
+Code number: 1
+Test Number: 1
+Error:Traceback (most recent call last):
+  File "<string>", line 26, in <module>
+  File "<string>", line 24, in find_zero
+ValueError: Polynomial must have an even number of coefficients and a nonzero leading coefficient
+--------------------------------------------------
+Task ID: HumanEval/32
+Code number: 2
+Test Number: 1
+Error:Traceback (most recent call last):
+  File "<string>", line 26, in <module>
+  File "<string>", line 24, in find_zero
+ValueError: Polynomial must have an even number of coefficients and a nonzero leading coefficient
+--------------------------------------------------
+Task ID: HumanEval/32
+Code number: 3
+Test Number: 1
+Error:Traceback (most recent call last):
+  File "<string>", line 26, in <module>
+  File "<string>", line 24, in find_zero
+ValueError: Polynomial must have an even number of coefficients and a nonzero leading coefficient
+--------------------------------------------------
+Task ID: HumanEval/32
+Code number: 4
+Test Number: 1
+Error:Traceback (most recent call last):
+  File "<string>", line 26, in <module>
+  File "<string>", line 24, in find_zero
+ValueError: Polynomial must have an even number of coefficients and a nonzero leading coefficient
+--------------------------------------------------
+Task ID: HumanEval/32
+Code number: 5
+Test Number: 1
+Error:Traceback (most recent call last):
+  File "<string>", line 26, in <module>
+  File "<string>", line 24, in find_zero
+ValueError: Polynomial must have an even number of coefficients and a nonzero leading coefficient
+--------------------------------------------------
+Task ID: HumanEval/32
+Code number: 1
+Test Number: 2
+Error:Traceback (most recent call last):
+  File "<string>", line 26, in <module>
+  File "<string>", line 24, in find_zero
+ValueError: Polynomial must have an even number of coefficients and a nonzero leading coefficient
+--------------------------------------------------
+Task ID: HumanEval/32
+Code number: 2
+Test Number: 2
+Error:Traceback (most recent call last):
+  File "<string>", line 26, in <module>
+  File "<string>", line 24, in find_zero
+ValueError: Polynomial must have an even number of coefficients and a nonzero leading coefficient
+--------------------------------------------------
+Task ID: HumanEval/32
+Code number: 3
+Test Number: 2
+Error:Traceback (most recent call last):
+  File "<string>", line 26, in <module>
+  File "<string>", line 24, in find_zero
+ValueError: Polynomial must have an even number of coefficients and a nonzero leading coefficient
+--------------------------------------------------
+Task ID: HumanEval/32
+Code number: 4
+Test Number: 2
+Error:Traceback (most recent call last):
+  File "<string>", line 26, in <module>
+  File "<string>", line 24, in find_zero
+ValueError: Polynomial must have an even number of coefficients and a nonzero leading coefficient
+--------------------------------------------------
+Task ID: HumanEval/32
+Code number: 5
+Test Number: 2
+Error:Traceback (most recent call last):
+  File "<string>", line 26, in <module>
+  File "<string>", line 24, in find_zero
+ValueError: Polynomial must have an even number of coefficients and a nonzero leading coefficient
+--------------------------------------------------
+Task ID: HumanEval/32
+Code number: 1
+Test Number: 3
+Error:Traceback (most recent call last):
+  File "<string>", line 26, in <module>
+  File "<string>", line 24, in find_zero
+ValueError: Polynomial must have an even number of coefficients and a nonzero leading coefficient
+--------------------------------------------------
+Task ID: HumanEval/32
+Code number: 2
+Test Number: 3
+Error:Traceback (most recent call last):
+  File "<string>", line 26, in <module>
+  File "<string>", line 24, in find_zero
+ValueError: Polynomial must have an even number of coefficients and a nonzero leading coefficient
+--------------------------------------------------
+Task ID: HumanEval/32
+Code number: 3
+Test Number: 3
+Error:Traceback (most recent call last):
+  File "<string>", line 26, in <module>
+  File "<string>", line 24, in find_zero
+ValueError: Polynomial must have an even number of coefficients and a nonzero leading coefficient
+--------------------------------------------------
+Task ID: HumanEval/32
+Code number: 4
+Test Number: 3
+Error:Traceback (most recent call last):
+  File "<string>", line 26, in <module>
+  File "<string>", line 24, in find_zero
+ValueError: Polynomial must have an even number of coefficients and a nonzero leading coefficient
+--------------------------------------------------
+Task ID: HumanEval/32
+Code number: 5
+Test Number: 3
+Error:Traceback (most recent call last):
+  File "<string>", line 26, in <module>
+  File "<string>", line 24, in find_zero
+ValueError: Polynomial must have an even number of coefficients and a nonzero leading coefficient
+--------------------------------------------------
+Task ID: HumanEval/32
+Code number: 1
+Test Number: 4
+Error:Traceback (most recent call last):
+  File "<string>", line 26, in <module>
+  File "<string>", line 24, in find_zero
+ValueError: Polynomial must have an even number of coefficients and a nonzero leading coefficient
+--------------------------------------------------
+Task ID: HumanEval/32
+Code number: 2
+Test Number: 4
+Error:Traceback (most recent call last):
+  File "<string>", line 26, in <module>
+  File "<string>", line 24, in find_zero
+ValueError: Polynomial must have an even number of coefficients and a nonzero leading coefficient
+--------------------------------------------------
+Task ID: HumanEval/32
+Code number: 3
+Test Number: 4
+Error:Traceback (most recent call last):
+  File "<string>", line 26, in <module>
+  File "<string>", line 24, in find_zero
+ValueError: Polynomial must have an even number of coefficients and a nonzero leading coefficient
+--------------------------------------------------
+Task ID: HumanEval/32
+Code number: 4
+Test Number: 4
+Error:Traceback (most recent call last):
+  File "<string>", line 26, in <module>
+  File "<string>", line 24, in find_zero
+ValueError: Polynomial must have an even number of coefficients and a nonzero leading coefficient
+--------------------------------------------------
+Task ID: HumanEval/32
+Code number: 5
+Test Number: 4
+Error:Traceback (most recent call last):
+  File "<string>", line 26, in <module>
+  File "<string>", line 24, in find_zero
+ValueError: Polynomial must have an even number of coefficients and a nonzero leading coefficient
+--------------------------------------------------
+Task ID: HumanEval/32
+Code number: 1
+Test Number: 5
+Error:Traceback (most recent call last):
+  File "<string>", line 26, in <module>
+  File "<string>", line 24, in find_zero
+ValueError: Polynomial must have an even number of coefficients and a nonzero leading coefficient
+--------------------------------------------------
+Task ID: HumanEval/32
+Code number: 2
+Test Number: 5
+Error:Traceback (most recent call last):
+  File "<string>", line 26, in <module>
+  File "<string>", line 24, in find_zero
+ValueError: Polynomial must have an even number of coefficients and a nonzero leading coefficient
+--------------------------------------------------
+Task ID: HumanEval/32
+Code number: 3
+Test Number: 5
+Error:Traceback (most recent call last):
+  File "<string>", line 26, in <module>
+  File "<string>", line 24, in find_zero
+ValueError: Polynomial must have an even number of coefficients and a nonzero leading coefficient
+--------------------------------------------------
+Task ID: HumanEval/32
+Code number: 4
+Test Number: 5
+Error:Traceback (most recent call last):
+  File "<string>", line 26, in <module>
+  File "<string>", line 24, in find_zero
+ValueError: Polynomial must have an even number of coefficients and a nonzero leading coefficient
+--------------------------------------------------
+Task ID: HumanEval/32
+Code number: 5
+Test Number: 5
+Error:Traceback (most recent call last):
+  File "<string>", line 26, in <module>
+  File "<string>", line 24, in find_zero
+ValueError: Polynomial must have an even number of coefficients and a nonzero leading coefficient
+--------------------------------------------------
+Task ID: HumanEval/32
+Code number: 1
+Test Number: 7
+Error:Traceback (most recent call last):
+  File "<string>", line 26, in <module>
+  File "<string>", line 24, in find_zero
+ValueError: Polynomial must have an even number of coefficients and a nonzero leading coefficient
+--------------------------------------------------
+Task ID: HumanEval/32
+Code number: 2
+Test Number: 7
+Error:Traceback (most recent call last):
+  File "<string>", line 26, in <module>
+  File "<string>", line 24, in find_zero
+ValueError: Polynomial must have an even number of coefficients and a nonzero leading coefficient
+--------------------------------------------------
+Task ID: HumanEval/32
+Code number: 3
+Test Number: 7
+Error:Traceback (most recent call last):
+  File "<string>", line 26, in <module>
+  File "<string>", line 24, in find_zero
+ValueError: Polynomial must have an even number of coefficients and a nonzero leading coefficient
+--------------------------------------------------
+Task ID: HumanEval/32
+Code number: 4
+Test Number: 7
+Error:Traceback (most recent call last):
+  File "<string>", line 26, in <module>
+  File "<string>", line 24, in find_zero
+ValueError: Polynomial must have an even number of coefficients and a nonzero leading coefficient
+--------------------------------------------------
+Task ID: HumanEval/32
+Code number: 5
+Test Number: 7
+Error:Traceback (most recent call last):
+  File "<string>", line 26, in <module>
+  File "<string>", line 24, in find_zero
+ValueError: Polynomial must have an even number of coefficients and a nonzero leading coefficient
+--------------------------------------------------
+Task ID: HumanEval/32
+Code number: 1
+Test Number: 9
+Error:Traceback (most recent call last):
+  File "<string>", line 26, in <module>
+  File "<string>", line 24, in find_zero
+ValueError: Polynomial must have an even number of coefficients and a nonzero leading coefficient
+--------------------------------------------------
+Task ID: HumanEval/32
+Code number: 2
+Test Number: 9
+Error:Traceback (most recent call last):
+  File "<string>", line 26, in <module>
+  File "<string>", line 24, in find_zero
+ValueError: Polynomial must have an even number of coefficients and a nonzero leading coefficient
+--------------------------------------------------
+Task ID: HumanEval/32
+Code number: 3
+Test Number: 9
+Error:Traceback (most recent call last):
+  File "<string>", line 26, in <module>
+  File "<string>", line 24, in find_zero
+ValueError: Polynomial must have an even number of coefficients and a nonzero leading coefficient
+--------------------------------------------------
+Task ID: HumanEval/32
+Code number: 4
+Test Number: 9
+Error:Traceback (most recent call last):
+  File "<string>", line 26, in <module>
+  File "<string>", line 24, in find_zero
+ValueError: Polynomial must have an even number of coefficients and a nonzero leading coefficient
+--------------------------------------------------
+Task ID: HumanEval/32
+Code number: 5
+Test Number: 9
+Error:Traceback (most recent call last):
+  File "<string>", line 26, in <module>
+  File "<string>", line 24, in find_zero
+ValueError: Polynomial must have an even number of coefficients and a nonzero leading coefficient
+--------------------------------------------------
+Task ID: HumanEval/38
+Code number: 1
+Test Number: 0
+Error:Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+NameError: name 'encode_cyclic' is not defined. Did you mean: 'decode_cyclic'?
+--------------------------------------------------
+Task ID: HumanEval/38
+Code number: 2
+Test Number: 0
+Error:Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+NameError: name 'encode_cyclic' is not defined. Did you mean: 'decode_cyclic'?
+--------------------------------------------------
+Task ID: HumanEval/38
+Code number: 3
+Test Number: 0
+Error:Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+NameError: name 'encode_cyclic' is not defined. Did you mean: 'decode_cyclic'?
+--------------------------------------------------
+Task ID: HumanEval/38
+Code number: 4
+Test Number: 0
+Error:Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+NameError: name 'encode_cyclic' is not defined. Did you mean: 'decode_cyclic'?
+--------------------------------------------------
+Task ID: HumanEval/38
+Code number: 5
+Test Number: 0
+Error:Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+NameError: name 'encode_cyclic' is not defined. Did you mean: 'decode_cyclic'?
+--------------------------------------------------
+Task ID: HumanEval/38
+Code number: 1
+Test Number: 1
+Error:Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+NameError: name 'encode_cyclic' is not defined. Did you mean: 'decode_cyclic'?
+--------------------------------------------------
+Task ID: HumanEval/38
+Code number: 2
+Test Number: 1
+Error:Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+NameError: name 'encode_cyclic' is not defined. Did you mean: 'decode_cyclic'?
+--------------------------------------------------
+Task ID: HumanEval/38
+Code number: 3
+Test Number: 1
+Error:Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+NameError: name 'encode_cyclic' is not defined. Did you mean: 'decode_cyclic'?
+--------------------------------------------------
+Task ID: HumanEval/38
+Code number: 4
+Test Number: 1
+Error:Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+NameError: name 'encode_cyclic' is not defined. Did you mean: 'decode_cyclic'?
+--------------------------------------------------
+Task ID: HumanEval/38
+Code number: 5
+Test Number: 1
+Error:Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+NameError: name 'encode_cyclic' is not defined. Did you mean: 'decode_cyclic'?
+--------------------------------------------------
+Task ID: HumanEval/38
+Code number: 1
+Test Number: 2
+Error:Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+NameError: name 'encode_cyclic' is not defined. Did you mean: 'decode_cyclic'?
+--------------------------------------------------
+Task ID: HumanEval/38
+Code number: 2
+Test Number: 2
+Error:Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+NameError: name 'encode_cyclic' is not defined. Did you mean: 'decode_cyclic'?
+--------------------------------------------------
+Task ID: HumanEval/38
+Code number: 3
+Test Number: 2
+Error:Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+NameError: name 'encode_cyclic' is not defined. Did you mean: 'decode_cyclic'?
+--------------------------------------------------
+Task ID: HumanEval/38
+Code number: 4
+Test Number: 2
+Error:Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+NameError: name 'encode_cyclic' is not defined. Did you mean: 'decode_cyclic'?
+--------------------------------------------------
+Task ID: HumanEval/38
+Code number: 5
+Test Number: 2
+Error:Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+NameError: name 'encode_cyclic' is not defined. Did you mean: 'decode_cyclic'?
+--------------------------------------------------
+Task ID: HumanEval/38
+Code number: 1
+Test Number: 3
+Error:Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+NameError: name 'encode_cyclic' is not defined. Did you mean: 'decode_cyclic'?
+--------------------------------------------------
+Task ID: HumanEval/38
+Code number: 2
+Test Number: 3
+Error:Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+NameError: name 'encode_cyclic' is not defined. Did you mean: 'decode_cyclic'?
+--------------------------------------------------
+Task ID: HumanEval/38
+Code number: 3
+Test Number: 3
+Error:Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+NameError: name 'encode_cyclic' is not defined. Did you mean: 'decode_cyclic'?
+--------------------------------------------------
+Task ID: HumanEval/38
+Code number: 4
+Test Number: 3
+Error:Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+NameError: name 'encode_cyclic' is not defined. Did you mean: 'decode_cyclic'?
+--------------------------------------------------
+Task ID: HumanEval/38
+Code number: 5
+Test Number: 3
+Error:Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+NameError: name 'encode_cyclic' is not defined. Did you mean: 'decode_cyclic'?
+--------------------------------------------------
+Task ID: HumanEval/38
+Code number: 1
+Test Number: 4
+Error:Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+NameError: name 'encode_cyclic' is not defined. Did you mean: 'decode_cyclic'?
+--------------------------------------------------
+Task ID: HumanEval/38
+Code number: 2
+Test Number: 4
+Error:Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+NameError: name 'encode_cyclic' is not defined. Did you mean: 'decode_cyclic'?
+--------------------------------------------------
+Task ID: HumanEval/38
+Code number: 3
+Test Number: 4
+Error:Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+NameError: name 'encode_cyclic' is not defined. Did you mean: 'decode_cyclic'?
+--------------------------------------------------
+Task ID: HumanEval/38
+Code number: 4
+Test Number: 4
+Error:Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+NameError: name 'encode_cyclic' is not defined. Did you mean: 'decode_cyclic'?
+--------------------------------------------------
+Task ID: HumanEval/38
+Code number: 5
+Test Number: 4
+Error:Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+NameError: name 'encode_cyclic' is not defined. Did you mean: 'decode_cyclic'?
+--------------------------------------------------
+Task ID: HumanEval/38
+Code number: 1
+Test Number: 5
+Error:Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+NameError: name 'encode_cyclic' is not defined. Did you mean: 'decode_cyclic'?
+--------------------------------------------------
+Task ID: HumanEval/38
+Code number: 2
+Test Number: 5
+Error:Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+NameError: name 'encode_cyclic' is not defined. Did you mean: 'decode_cyclic'?
+--------------------------------------------------
+Task ID: HumanEval/38
+Code number: 3
+Test Number: 5
+Error:Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+NameError: name 'encode_cyclic' is not defined. Did you mean: 'decode_cyclic'?
+--------------------------------------------------
+Task ID: HumanEval/38
+Code number: 4
+Test Number: 5
+Error:Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+NameError: name 'encode_cyclic' is not defined. Did you mean: 'decode_cyclic'?
+--------------------------------------------------
+Task ID: HumanEval/38
+Code number: 5
+Test Number: 5
+Error:Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+NameError: name 'encode_cyclic' is not defined. Did you mean: 'decode_cyclic'?
+--------------------------------------------------
+Task ID: HumanEval/38
+Code number: 1
+Test Number: 6
+Error:Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+NameError: name 'encode_cyclic' is not defined. Did you mean: 'decode_cyclic'?
+--------------------------------------------------
+Task ID: HumanEval/38
+Code number: 2
+Test Number: 6
+Error:Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+NameError: name 'encode_cyclic' is not defined. Did you mean: 'decode_cyclic'?
+--------------------------------------------------
+Task ID: HumanEval/38
+Code number: 3
+Test Number: 6
+Error:Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+NameError: name 'encode_cyclic' is not defined. Did you mean: 'decode_cyclic'?
+--------------------------------------------------
+Task ID: HumanEval/38
+Code number: 4
+Test Number: 6
+Error:Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+NameError: name 'encode_cyclic' is not defined. Did you mean: 'decode_cyclic'?
+--------------------------------------------------
+Task ID: HumanEval/38
+Code number: 5
+Test Number: 6
+Error:Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+NameError: name 'encode_cyclic' is not defined. Did you mean: 'decode_cyclic'?
+--------------------------------------------------
+Task ID: HumanEval/38
+Code number: 1
+Test Number: 7
+Error:Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+NameError: name 'encode_cyclic' is not defined. Did you mean: 'decode_cyclic'?
+--------------------------------------------------
+Task ID: HumanEval/38
+Code number: 2
+Test Number: 7
+Error:Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+NameError: name 'encode_cyclic' is not defined. Did you mean: 'decode_cyclic'?
+--------------------------------------------------
+Task ID: HumanEval/38
+Code number: 3
+Test Number: 7
+Error:Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+NameError: name 'encode_cyclic' is not defined. Did you mean: 'decode_cyclic'?
+--------------------------------------------------
+Task ID: HumanEval/38
+Code number: 4
+Test Number: 7
+Error:Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+NameError: name 'encode_cyclic' is not defined. Did you mean: 'decode_cyclic'?
+--------------------------------------------------
+Task ID: HumanEval/38
+Code number: 5
+Test Number: 7
+Error:Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+NameError: name 'encode_cyclic' is not defined. Did you mean: 'decode_cyclic'?
+--------------------------------------------------
+Task ID: HumanEval/38
+Code number: 1
+Test Number: 8
+Error:Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+NameError: name 'encode_cyclic' is not defined. Did you mean: 'decode_cyclic'?
+--------------------------------------------------
+Task ID: HumanEval/38
+Code number: 2
+Test Number: 8
+Error:Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+NameError: name 'encode_cyclic' is not defined. Did you mean: 'decode_cyclic'?
+--------------------------------------------------
+Task ID: HumanEval/38
+Code number: 3
+Test Number: 8
+Error:Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+NameError: name 'encode_cyclic' is not defined. Did you mean: 'decode_cyclic'?
+--------------------------------------------------
+Task ID: HumanEval/38
+Code number: 4
+Test Number: 8
+Error:Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+NameError: name 'encode_cyclic' is not defined. Did you mean: 'decode_cyclic'?
+--------------------------------------------------
+Task ID: HumanEval/38
+Code number: 5
+Test Number: 8
+Error:Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+NameError: name 'encode_cyclic' is not defined. Did you mean: 'decode_cyclic'?
+--------------------------------------------------
+Task ID: HumanEval/38
+Code number: 1
+Test Number: 9
+Error:Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+NameError: name 'encode_cyclic' is not defined. Did you mean: 'decode_cyclic'?
+--------------------------------------------------
+Task ID: HumanEval/38
+Code number: 2
+Test Number: 9
+Error:Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+NameError: name 'encode_cyclic' is not defined. Did you mean: 'decode_cyclic'?
+--------------------------------------------------
+Task ID: HumanEval/38
+Code number: 3
+Test Number: 9
+Error:Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+NameError: name 'encode_cyclic' is not defined. Did you mean: 'decode_cyclic'?
+--------------------------------------------------
+Task ID: HumanEval/38
+Code number: 4
+Test Number: 9
+Error:Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+NameError: name 'encode_cyclic' is not defined. Did you mean: 'decode_cyclic'?
+--------------------------------------------------
+Task ID: HumanEval/38
+Code number: 5
+Test Number: 9
+Error:Traceback (most recent call last):
+  File "<string>", line 12, in <module>
+NameError: name 'encode_cyclic' is not defined. Did you mean: 'decode_cyclic'?
+--------------------------------------------------
+Task ID: HumanEval/42
+Code number: 1
+Test Number: 9
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'Integer' is not defined
+--------------------------------------------------
+Task ID: HumanEval/42
+Code number: 2
+Test Number: 9
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'Integer' is not defined
+--------------------------------------------------
+Task ID: HumanEval/42
+Code number: 3
+Test Number: 9
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'Integer' is not defined
+--------------------------------------------------
+Task ID: HumanEval/42
+Code number: 4
+Test Number: 9
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'Integer' is not defined
+--------------------------------------------------
+Task ID: HumanEval/42
+Code number: 5
+Test Number: 9
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'Integer' is not defined
+--------------------------------------------------
+Task ID: HumanEval/47
+Code number: 1
+Test Number: 3
+Error:Traceback (most recent call last):
+  File "<string>", line 13, in <module>
+  File "<string>", line 11, in median
+  File "c:\Python311\Lib\statistics.py", line 565, in median
+    raise StatisticsError("no median for empty data")
+statistics.StatisticsError: no median for empty data
+--------------------------------------------------
+Task ID: HumanEval/47
+Code number: 2
+Test Number: 3
+Error:Traceback (most recent call last):
+  File "<string>", line 13, in <module>
+  File "<string>", line 11, in median
+  File "c:\Python311\Lib\statistics.py", line 565, in median
+    raise StatisticsError("no median for empty data")
+statistics.StatisticsError: no median for empty data
+--------------------------------------------------
+Task ID: HumanEval/47
+Code number: 3
+Test Number: 3
+Error:Traceback (most recent call last):
+  File "<string>", line 13, in <module>
+  File "<string>", line 11, in median
+  File "c:\Python311\Lib\statistics.py", line 565, in median
+    raise StatisticsError("no median for empty data")
+statistics.StatisticsError: no median for empty data
+--------------------------------------------------
+Task ID: HumanEval/47
+Code number: 4
+Test Number: 3
+Error:Traceback (most recent call last):
+  File "<string>", line 13, in <module>
+  File "<string>", line 11, in median
+  File "c:\Python311\Lib\statistics.py", line 565, in median
+    raise StatisticsError("no median for empty data")
+statistics.StatisticsError: no median for empty data
+--------------------------------------------------
+Task ID: HumanEval/47
+Code number: 5
+Test Number: 3
+Error:Traceback (most recent call last):
+  File "<string>", line 13, in <module>
+  File "<string>", line 11, in median
+  File "c:\Python311\Lib\statistics.py", line 565, in median
+    raise StatisticsError("no median for empty data")
+statistics.StatisticsError: no median for empty data
+--------------------------------------------------
+Task ID: HumanEval/50
+Code number: 1
+Test Number: 0
+Error:Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+NameError: name 'encode_shift' is not defined. Did you mean: 'decode_shift'?
+--------------------------------------------------
+Task ID: HumanEval/50
+Code number: 2
+Test Number: 0
+Error:Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+NameError: name 'encode_shift' is not defined. Did you mean: 'decode_shift'?
+--------------------------------------------------
+Task ID: HumanEval/50
+Code number: 3
+Test Number: 0
+Error:Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+NameError: name 'encode_shift' is not defined. Did you mean: 'decode_shift'?
+--------------------------------------------------
+Task ID: HumanEval/50
+Code number: 4
+Test Number: 0
+Error:Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+NameError: name 'encode_shift' is not defined. Did you mean: 'decode_shift'?
+--------------------------------------------------
+Task ID: HumanEval/50
+Code number: 5
+Test Number: 0
+Error:Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+NameError: name 'encode_shift' is not defined. Did you mean: 'decode_shift'?
+--------------------------------------------------
+Task ID: HumanEval/50
+Code number: 1
+Test Number: 1
+Error:Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+NameError: name 'encode_shift' is not defined. Did you mean: 'decode_shift'?
+--------------------------------------------------
+Task ID: HumanEval/50
+Code number: 2
+Test Number: 1
+Error:Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+NameError: name 'encode_shift' is not defined. Did you mean: 'decode_shift'?
+--------------------------------------------------
+Task ID: HumanEval/50
+Code number: 3
+Test Number: 1
+Error:Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+NameError: name 'encode_shift' is not defined. Did you mean: 'decode_shift'?
+--------------------------------------------------
+Task ID: HumanEval/50
+Code number: 4
+Test Number: 1
+Error:Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+NameError: name 'encode_shift' is not defined. Did you mean: 'decode_shift'?
+--------------------------------------------------
+Task ID: HumanEval/50
+Code number: 5
+Test Number: 1
+Error:Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+NameError: name 'encode_shift' is not defined. Did you mean: 'decode_shift'?
+--------------------------------------------------
+Task ID: HumanEval/50
+Code number: 1
+Test Number: 2
+Error:Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+NameError: name 'encode_shift' is not defined. Did you mean: 'decode_shift'?
+--------------------------------------------------
+Task ID: HumanEval/50
+Code number: 2
+Test Number: 2
+Error:Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+NameError: name 'encode_shift' is not defined. Did you mean: 'decode_shift'?
+--------------------------------------------------
+Task ID: HumanEval/50
+Code number: 3
+Test Number: 2
+Error:Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+NameError: name 'encode_shift' is not defined. Did you mean: 'decode_shift'?
+--------------------------------------------------
+Task ID: HumanEval/50
+Code number: 4
+Test Number: 2
+Error:Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+NameError: name 'encode_shift' is not defined. Did you mean: 'decode_shift'?
+--------------------------------------------------
+Task ID: HumanEval/50
+Code number: 5
+Test Number: 2
+Error:Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+NameError: name 'encode_shift' is not defined. Did you mean: 'decode_shift'?
+--------------------------------------------------
+Task ID: HumanEval/50
+Code number: 1
+Test Number: 3
+Error:Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+NameError: name 'encode_shift' is not defined. Did you mean: 'decode_shift'?
+--------------------------------------------------
+Task ID: HumanEval/50
+Code number: 2
+Test Number: 3
+Error:Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+NameError: name 'encode_shift' is not defined. Did you mean: 'decode_shift'?
+--------------------------------------------------
+Task ID: HumanEval/50
+Code number: 3
+Test Number: 3
+Error:Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+NameError: name 'encode_shift' is not defined. Did you mean: 'decode_shift'?
+--------------------------------------------------
+Task ID: HumanEval/50
+Code number: 4
+Test Number: 3
+Error:Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+NameError: name 'encode_shift' is not defined. Did you mean: 'decode_shift'?
+--------------------------------------------------
+Task ID: HumanEval/50
+Code number: 5
+Test Number: 3
+Error:Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+NameError: name 'encode_shift' is not defined. Did you mean: 'decode_shift'?
+--------------------------------------------------
+Task ID: HumanEval/50
+Code number: 1
+Test Number: 4
+Error:Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+NameError: name 'encode_shift' is not defined. Did you mean: 'decode_shift'?
+--------------------------------------------------
+Task ID: HumanEval/50
+Code number: 2
+Test Number: 4
+Error:Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+NameError: name 'encode_shift' is not defined. Did you mean: 'decode_shift'?
+--------------------------------------------------
+Task ID: HumanEval/50
+Code number: 3
+Test Number: 4
+Error:Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+NameError: name 'encode_shift' is not defined. Did you mean: 'decode_shift'?
+--------------------------------------------------
+Task ID: HumanEval/50
+Code number: 4
+Test Number: 4
+Error:Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+NameError: name 'encode_shift' is not defined. Did you mean: 'decode_shift'?
+--------------------------------------------------
+Task ID: HumanEval/50
+Code number: 5
+Test Number: 4
+Error:Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+NameError: name 'encode_shift' is not defined. Did you mean: 'decode_shift'?
+--------------------------------------------------
+Task ID: HumanEval/50
+Code number: 1
+Test Number: 5
+Error:Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+NameError: name 'encode_shift' is not defined. Did you mean: 'decode_shift'?
+--------------------------------------------------
+Task ID: HumanEval/50
+Code number: 2
+Test Number: 5
+Error:Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+NameError: name 'encode_shift' is not defined. Did you mean: 'decode_shift'?
+--------------------------------------------------
+Task ID: HumanEval/50
+Code number: 3
+Test Number: 5
+Error:Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+NameError: name 'encode_shift' is not defined. Did you mean: 'decode_shift'?
+--------------------------------------------------
+Task ID: HumanEval/50
+Code number: 4
+Test Number: 5
+Error:Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+NameError: name 'encode_shift' is not defined. Did you mean: 'decode_shift'?
+--------------------------------------------------
+Task ID: HumanEval/50
+Code number: 5
+Test Number: 5
+Error:Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+NameError: name 'encode_shift' is not defined. Did you mean: 'decode_shift'?
+--------------------------------------------------
+Task ID: HumanEval/50
+Code number: 1
+Test Number: 6
+Error:Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+NameError: name 'encode_shift' is not defined. Did you mean: 'decode_shift'?
+--------------------------------------------------
+Task ID: HumanEval/50
+Code number: 2
+Test Number: 6
+Error:Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+NameError: name 'encode_shift' is not defined. Did you mean: 'decode_shift'?
+--------------------------------------------------
+Task ID: HumanEval/50
+Code number: 3
+Test Number: 6
+Error:Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+NameError: name 'encode_shift' is not defined. Did you mean: 'decode_shift'?
+--------------------------------------------------
+Task ID: HumanEval/50
+Code number: 4
+Test Number: 6
+Error:Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+NameError: name 'encode_shift' is not defined. Did you mean: 'decode_shift'?
+--------------------------------------------------
+Task ID: HumanEval/50
+Code number: 5
+Test Number: 6
+Error:Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+NameError: name 'encode_shift' is not defined. Did you mean: 'decode_shift'?
+--------------------------------------------------
+Task ID: HumanEval/50
+Code number: 1
+Test Number: 7
+Error:Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+NameError: name 'encode_shift' is not defined. Did you mean: 'decode_shift'?
+--------------------------------------------------
+Task ID: HumanEval/50
+Code number: 2
+Test Number: 7
+Error:Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+NameError: name 'encode_shift' is not defined. Did you mean: 'decode_shift'?
+--------------------------------------------------
+Task ID: HumanEval/50
+Code number: 3
+Test Number: 7
+Error:Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+NameError: name 'encode_shift' is not defined. Did you mean: 'decode_shift'?
+--------------------------------------------------
+Task ID: HumanEval/50
+Code number: 4
+Test Number: 7
+Error:Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+NameError: name 'encode_shift' is not defined. Did you mean: 'decode_shift'?
+--------------------------------------------------
+Task ID: HumanEval/50
+Code number: 5
+Test Number: 7
+Error:Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+NameError: name 'encode_shift' is not defined. Did you mean: 'decode_shift'?
+--------------------------------------------------
+Task ID: HumanEval/50
+Code number: 1
+Test Number: 8
+Error:Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+NameError: name 'encode_shift' is not defined. Did you mean: 'decode_shift'?
+--------------------------------------------------
+Task ID: HumanEval/50
+Code number: 2
+Test Number: 8
+Error:Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+NameError: name 'encode_shift' is not defined. Did you mean: 'decode_shift'?
+--------------------------------------------------
+Task ID: HumanEval/50
+Code number: 3
+Test Number: 8
+Error:Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+NameError: name 'encode_shift' is not defined. Did you mean: 'decode_shift'?
+--------------------------------------------------
+Task ID: HumanEval/50
+Code number: 4
+Test Number: 8
+Error:Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+NameError: name 'encode_shift' is not defined. Did you mean: 'decode_shift'?
+--------------------------------------------------
+Task ID: HumanEval/50
+Code number: 5
+Test Number: 8
+Error:Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+NameError: name 'encode_shift' is not defined. Did you mean: 'decode_shift'?
+--------------------------------------------------
+Task ID: HumanEval/50
+Code number: 1
+Test Number: 9
+Error:Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+NameError: name 'encode_shift' is not defined. Did you mean: 'decode_shift'?
+--------------------------------------------------
+Task ID: HumanEval/50
+Code number: 2
+Test Number: 9
+Error:Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+NameError: name 'encode_shift' is not defined. Did you mean: 'decode_shift'?
+--------------------------------------------------
+Task ID: HumanEval/50
+Code number: 3
+Test Number: 9
+Error:Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+NameError: name 'encode_shift' is not defined. Did you mean: 'decode_shift'?
+--------------------------------------------------
+Task ID: HumanEval/50
+Code number: 4
+Test Number: 9
+Error:Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+NameError: name 'encode_shift' is not defined. Did you mean: 'decode_shift'?
+--------------------------------------------------
+Task ID: HumanEval/50
+Code number: 5
+Test Number: 9
+Error:Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+NameError: name 'encode_shift' is not defined. Did you mean: 'decode_shift'?
+--------------------------------------------------
+Task ID: HumanEval/77
+Code number: 1
+Test Number: 3
+Error:Traceback (most recent call last):
+  File "<string>", line 20, in <module>
+  File "<string>", line 17, in iscube
+TypeError: type complex doesn't define __round__ method
+--------------------------------------------------
+Task ID: HumanEval/77
+Code number: 2
+Test Number: 3
+Error:Traceback (most recent call last):
+  File "<string>", line 20, in <module>
+  File "<string>", line 17, in iscube
+TypeError: type complex doesn't define __round__ method
+--------------------------------------------------
+Task ID: HumanEval/77
+Code number: 3
+Test Number: 3
+Error:Traceback (most recent call last):
+  File "<string>", line 20, in <module>
+  File "<string>", line 17, in iscube
+TypeError: type complex doesn't define __round__ method
+--------------------------------------------------
+Task ID: HumanEval/77
+Code number: 4
+Test Number: 3
+Error:Traceback (most recent call last):
+  File "<string>", line 20, in <module>
+  File "<string>", line 17, in iscube
+TypeError: type complex doesn't define __round__ method
+--------------------------------------------------
+Task ID: HumanEval/77
+Code number: 5
+Test Number: 3
+Error:Traceback (most recent call last):
+  File "<string>", line 20, in <module>
+  File "<string>", line 17, in iscube
+TypeError: type complex doesn't define __round__ method
+--------------------------------------------------
+Task ID: HumanEval/77
+Code number: 1
+Test Number: 8
+Error:Traceback (most recent call last):
+  File "<string>", line 20, in <module>
+  File "<string>", line 17, in iscube
+TypeError: type complex doesn't define __round__ method
+--------------------------------------------------
+Task ID: HumanEval/77
+Code number: 2
+Test Number: 8
+Error:Traceback (most recent call last):
+  File "<string>", line 20, in <module>
+  File "<string>", line 17, in iscube
+TypeError: type complex doesn't define __round__ method
+--------------------------------------------------
+Task ID: HumanEval/77
+Code number: 3
+Test Number: 8
+Error:Traceback (most recent call last):
+  File "<string>", line 20, in <module>
+  File "<string>", line 17, in iscube
+TypeError: type complex doesn't define __round__ method
+--------------------------------------------------
+Task ID: HumanEval/77
+Code number: 4
+Test Number: 8
+Error:Traceback (most recent call last):
+  File "<string>", line 20, in <module>
+  File "<string>", line 17, in iscube
+TypeError: type complex doesn't define __round__ method
+--------------------------------------------------
+Task ID: HumanEval/77
+Code number: 5
+Test Number: 8
+Error:Traceback (most recent call last):
+  File "<string>", line 20, in <module>
+  File "<string>", line 17, in iscube
+TypeError: type complex doesn't define __round__ method
+--------------------------------------------------
+Task ID: HumanEval/86
+Code number: 3
+Test Number: 7
+Error:Traceback (most recent call last):
+  File "<string>", line 130, in <module>
+  File "<string>", line 125, in anti_shuffle
+IndexError: list index out of range
+--------------------------------------------------
+Task ID: HumanEval/86
+Code number: 4
+Test Number: 7
+Error:Traceback (most recent call last):
+  File "<string>", line 130, in <module>
+  File "<string>", line 125, in anti_shuffle
+IndexError: list index out of range
+--------------------------------------------------
+Task ID: HumanEval/86
+Code number: 5
+Test Number: 7
+Error:Traceback (most recent call last):
+  File "<string>", line 130, in <module>
+  File "<string>", line 125, in anti_shuffle
+IndexError: list index out of range
+--------------------------------------------------
+Task ID: HumanEval/94
+Code number: 1
+Test Number: 7
+Error:Traceback (most recent call last):
+  File "<string>", line 70, in <module>
+  File "<string>", line 68, in skjkasdkd
+  File "<string>", line 50, in sum_of_digits
+  File "<string>", line 50, in <genexpr>
+ValueError: invalid literal for int() with base 10: '-'
+--------------------------------------------------
+Task ID: HumanEval/94
+Code number: 2
+Test Number: 7
+Error:Traceback (most recent call last):
+  File "<string>", line 70, in <module>
+  File "<string>", line 68, in skjkasdkd
+  File "<string>", line 50, in sum_of_digits
+  File "<string>", line 50, in <genexpr>
+ValueError: invalid literal for int() with base 10: '-'
+--------------------------------------------------
+Task ID: HumanEval/94
+Code number: 3
+Test Number: 7
+Error:Traceback (most recent call last):
+  File "<string>", line 70, in <module>
+  File "<string>", line 68, in skjkasdkd
+  File "<string>", line 50, in sum_of_digits
+  File "<string>", line 50, in <genexpr>
+ValueError: invalid literal for int() with base 10: '-'
+--------------------------------------------------
+Task ID: HumanEval/94
+Code number: 4
+Test Number: 7
+Error:Traceback (most recent call last):
+  File "<string>", line 70, in <module>
+  File "<string>", line 68, in skjkasdkd
+  File "<string>", line 50, in sum_of_digits
+  File "<string>", line 50, in <genexpr>
+ValueError: invalid literal for int() with base 10: '-'
+--------------------------------------------------
+Task ID: HumanEval/94
+Code number: 5
+Test Number: 7
+Error:Traceback (most recent call last):
+  File "<string>", line 70, in <module>
+  File "<string>", line 68, in skjkasdkd
+  File "<string>", line 50, in sum_of_digits
+  File "<string>", line 50, in <genexpr>
+ValueError: invalid literal for int() with base 10: '-'
+--------------------------------------------------
+Task ID: HumanEval/94
+Code number: 1
+Test Number: 8
+Error:Traceback (most recent call last):
+  File "<string>", line 70, in <module>
+  File "<string>", line 68, in skjkasdkd
+  File "<string>", line 50, in sum_of_digits
+  File "<string>", line 50, in <genexpr>
+ValueError: invalid literal for int() with base 10: '-'
+--------------------------------------------------
+Task ID: HumanEval/94
+Code number: 2
+Test Number: 8
+Error:Traceback (most recent call last):
+  File "<string>", line 70, in <module>
+  File "<string>", line 68, in skjkasdkd
+  File "<string>", line 50, in sum_of_digits
+  File "<string>", line 50, in <genexpr>
+ValueError: invalid literal for int() with base 10: '-'
+--------------------------------------------------
+Task ID: HumanEval/94
+Code number: 3
+Test Number: 8
+Error:Traceback (most recent call last):
+  File "<string>", line 70, in <module>
+  File "<string>", line 68, in skjkasdkd
+  File "<string>", line 50, in sum_of_digits
+  File "<string>", line 50, in <genexpr>
+ValueError: invalid literal for int() with base 10: '-'
+--------------------------------------------------
+Task ID: HumanEval/94
+Code number: 4
+Test Number: 8
+Error:Traceback (most recent call last):
+  File "<string>", line 70, in <module>
+  File "<string>", line 68, in skjkasdkd
+  File "<string>", line 50, in sum_of_digits
+  File "<string>", line 50, in <genexpr>
+ValueError: invalid literal for int() with base 10: '-'
+--------------------------------------------------
+Task ID: HumanEval/94
+Code number: 5
+Test Number: 8
+Error:Traceback (most recent call last):
+  File "<string>", line 70, in <module>
+  File "<string>", line 68, in skjkasdkd
+  File "<string>", line 50, in sum_of_digits
+  File "<string>", line 50, in <genexpr>
+ValueError: invalid literal for int() with base 10: '-'
+--------------------------------------------------
+Task ID: HumanEval/94
+Code number: 1
+Test Number: 9
+Error:Traceback (most recent call last):
+  File "<string>", line 70, in <module>
+  File "<string>", line 68, in skjkasdkd
+  File "<string>", line 50, in sum_of_digits
+  File "<string>", line 50, in <genexpr>
+ValueError: invalid literal for int() with base 10: '-'
+--------------------------------------------------
+Task ID: HumanEval/94
+Code number: 2
+Test Number: 9
+Error:Traceback (most recent call last):
+  File "<string>", line 70, in <module>
+  File "<string>", line 68, in skjkasdkd
+  File "<string>", line 50, in sum_of_digits
+  File "<string>", line 50, in <genexpr>
+ValueError: invalid literal for int() with base 10: '-'
+--------------------------------------------------
+Task ID: HumanEval/94
+Code number: 3
+Test Number: 9
+Error:Traceback (most recent call last):
+  File "<string>", line 70, in <module>
+  File "<string>", line 68, in skjkasdkd
+  File "<string>", line 50, in sum_of_digits
+  File "<string>", line 50, in <genexpr>
+ValueError: invalid literal for int() with base 10: '-'
+--------------------------------------------------
+Task ID: HumanEval/94
+Code number: 4
+Test Number: 9
+Error:Traceback (most recent call last):
+  File "<string>", line 70, in <module>
+  File "<string>", line 68, in skjkasdkd
+  File "<string>", line 50, in sum_of_digits
+  File "<string>", line 50, in <genexpr>
+ValueError: invalid literal for int() with base 10: '-'
+--------------------------------------------------
+Task ID: HumanEval/94
+Code number: 5
+Test Number: 9
+Error:Traceback (most recent call last):
+  File "<string>", line 70, in <module>
+  File "<string>", line 68, in skjkasdkd
+  File "<string>", line 50, in sum_of_digits
+  File "<string>", line 50, in <genexpr>
+ValueError: invalid literal for int() with base 10: '-'
+--------------------------------------------------
+Task ID: HumanEval/103
+Code number: 1
+Test Number: 0
+Error:Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+ImportError: cannot import name 'round' from 'math' (unknown location)
+--------------------------------------------------
+Task ID: HumanEval/103
+Code number: 2
+Test Number: 0
+Error:Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+ImportError: cannot import name 'round' from 'math' (unknown location)
+--------------------------------------------------
+Task ID: HumanEval/103
+Code number: 3
+Test Number: 0
+Error:Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+ImportError: cannot import name 'round' from 'math' (unknown location)
+--------------------------------------------------
+Task ID: HumanEval/103
+Code number: 4
+Test Number: 0
+Error:Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+ImportError: cannot import name 'round' from 'math' (unknown location)
+--------------------------------------------------
+Task ID: HumanEval/103
+Code number: 5
+Test Number: 0
+Error:Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+ImportError: cannot import name 'round' from 'math' (unknown location)
+--------------------------------------------------
+Task ID: HumanEval/103
+Code number: 1
+Test Number: 1
+Error:Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+ImportError: cannot import name 'round' from 'math' (unknown location)
+--------------------------------------------------
+Task ID: HumanEval/103
+Code number: 2
+Test Number: 1
+Error:Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+ImportError: cannot import name 'round' from 'math' (unknown location)
+--------------------------------------------------
+Task ID: HumanEval/103
+Code number: 3
+Test Number: 1
+Error:Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+ImportError: cannot import name 'round' from 'math' (unknown location)
+--------------------------------------------------
+Task ID: HumanEval/103
+Code number: 4
+Test Number: 1
+Error:Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+ImportError: cannot import name 'round' from 'math' (unknown location)
+--------------------------------------------------
+Task ID: HumanEval/103
+Code number: 5
+Test Number: 1
+Error:Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+ImportError: cannot import name 'round' from 'math' (unknown location)
+--------------------------------------------------
+Task ID: HumanEval/103
+Code number: 1
+Test Number: 2
+Error:Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+ImportError: cannot import name 'round' from 'math' (unknown location)
+--------------------------------------------------
+Task ID: HumanEval/103
+Code number: 2
+Test Number: 2
+Error:Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+ImportError: cannot import name 'round' from 'math' (unknown location)
+--------------------------------------------------
+Task ID: HumanEval/103
+Code number: 3
+Test Number: 2
+Error:Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+ImportError: cannot import name 'round' from 'math' (unknown location)
+--------------------------------------------------
+Task ID: HumanEval/103
+Code number: 4
+Test Number: 2
+Error:Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+ImportError: cannot import name 'round' from 'math' (unknown location)
+--------------------------------------------------
+Task ID: HumanEval/103
+Code number: 5
+Test Number: 2
+Error:Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+ImportError: cannot import name 'round' from 'math' (unknown location)
+--------------------------------------------------
+Task ID: HumanEval/103
+Code number: 1
+Test Number: 3
+Error:Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+ImportError: cannot import name 'round' from 'math' (unknown location)
+--------------------------------------------------
+Task ID: HumanEval/103
+Code number: 2
+Test Number: 3
+Error:Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+ImportError: cannot import name 'round' from 'math' (unknown location)
+--------------------------------------------------
+Task ID: HumanEval/103
+Code number: 3
+Test Number: 3
+Error:Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+ImportError: cannot import name 'round' from 'math' (unknown location)
+--------------------------------------------------
+Task ID: HumanEval/103
+Code number: 4
+Test Number: 3
+Error:Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+ImportError: cannot import name 'round' from 'math' (unknown location)
+--------------------------------------------------
+Task ID: HumanEval/103
+Code number: 5
+Test Number: 3
+Error:Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+ImportError: cannot import name 'round' from 'math' (unknown location)
+--------------------------------------------------
+Task ID: HumanEval/103
+Code number: 1
+Test Number: 4
+Error:Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+ImportError: cannot import name 'round' from 'math' (unknown location)
+--------------------------------------------------
+Task ID: HumanEval/103
+Code number: 2
+Test Number: 4
+Error:Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+ImportError: cannot import name 'round' from 'math' (unknown location)
+--------------------------------------------------
+Task ID: HumanEval/103
+Code number: 3
+Test Number: 4
+Error:Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+ImportError: cannot import name 'round' from 'math' (unknown location)
+--------------------------------------------------
+Task ID: HumanEval/103
+Code number: 4
+Test Number: 4
+Error:Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+ImportError: cannot import name 'round' from 'math' (unknown location)
+--------------------------------------------------
+Task ID: HumanEval/103
+Code number: 5
+Test Number: 4
+Error:Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+ImportError: cannot import name 'round' from 'math' (unknown location)
+--------------------------------------------------
+Task ID: HumanEval/103
+Code number: 1
+Test Number: 5
+Error:Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+ImportError: cannot import name 'round' from 'math' (unknown location)
+--------------------------------------------------
+Task ID: HumanEval/103
+Code number: 2
+Test Number: 5
+Error:Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+ImportError: cannot import name 'round' from 'math' (unknown location)
+--------------------------------------------------
+Task ID: HumanEval/103
+Code number: 3
+Test Number: 5
+Error:Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+ImportError: cannot import name 'round' from 'math' (unknown location)
+--------------------------------------------------
+Task ID: HumanEval/103
+Code number: 4
+Test Number: 5
+Error:Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+ImportError: cannot import name 'round' from 'math' (unknown location)
+--------------------------------------------------
+Task ID: HumanEval/103
+Code number: 5
+Test Number: 5
+Error:Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+ImportError: cannot import name 'round' from 'math' (unknown location)
+--------------------------------------------------
+Task ID: HumanEval/103
+Code number: 1
+Test Number: 6
+Error:Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+ImportError: cannot import name 'round' from 'math' (unknown location)
+--------------------------------------------------
+Task ID: HumanEval/103
+Code number: 2
+Test Number: 6
+Error:Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+ImportError: cannot import name 'round' from 'math' (unknown location)
+--------------------------------------------------
+Task ID: HumanEval/103
+Code number: 3
+Test Number: 6
+Error:Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+ImportError: cannot import name 'round' from 'math' (unknown location)
+--------------------------------------------------
+Task ID: HumanEval/103
+Code number: 4
+Test Number: 6
+Error:Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+ImportError: cannot import name 'round' from 'math' (unknown location)
+--------------------------------------------------
+Task ID: HumanEval/103
+Code number: 5
+Test Number: 6
+Error:Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+ImportError: cannot import name 'round' from 'math' (unknown location)
+--------------------------------------------------
+Task ID: HumanEval/103
+Code number: 1
+Test Number: 7
+Error:Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+ImportError: cannot import name 'round' from 'math' (unknown location)
+--------------------------------------------------
+Task ID: HumanEval/103
+Code number: 2
+Test Number: 7
+Error:Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+ImportError: cannot import name 'round' from 'math' (unknown location)
+--------------------------------------------------
+Task ID: HumanEval/103
+Code number: 3
+Test Number: 7
+Error:Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+ImportError: cannot import name 'round' from 'math' (unknown location)
+--------------------------------------------------
+Task ID: HumanEval/103
+Code number: 4
+Test Number: 7
+Error:Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+ImportError: cannot import name 'round' from 'math' (unknown location)
+--------------------------------------------------
+Task ID: HumanEval/103
+Code number: 5
+Test Number: 7
+Error:Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+ImportError: cannot import name 'round' from 'math' (unknown location)
+--------------------------------------------------
+Task ID: HumanEval/103
+Code number: 1
+Test Number: 8
+Error:Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+ImportError: cannot import name 'round' from 'math' (unknown location)
+--------------------------------------------------
+Task ID: HumanEval/103
+Code number: 2
+Test Number: 8
+Error:Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+ImportError: cannot import name 'round' from 'math' (unknown location)
+--------------------------------------------------
+Task ID: HumanEval/103
+Code number: 3
+Test Number: 8
+Error:Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+ImportError: cannot import name 'round' from 'math' (unknown location)
+--------------------------------------------------
+Task ID: HumanEval/103
+Code number: 4
+Test Number: 8
+Error:Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+ImportError: cannot import name 'round' from 'math' (unknown location)
+--------------------------------------------------
+Task ID: HumanEval/103
+Code number: 5
+Test Number: 8
+Error:Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+ImportError: cannot import name 'round' from 'math' (unknown location)
+--------------------------------------------------
+Task ID: HumanEval/103
+Code number: 1
+Test Number: 9
+Error:Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+ImportError: cannot import name 'round' from 'math' (unknown location)
+--------------------------------------------------
+Task ID: HumanEval/103
+Code number: 2
+Test Number: 9
+Error:Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+ImportError: cannot import name 'round' from 'math' (unknown location)
+--------------------------------------------------
+Task ID: HumanEval/103
+Code number: 3
+Test Number: 9
+Error:Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+ImportError: cannot import name 'round' from 'math' (unknown location)
+--------------------------------------------------
+Task ID: HumanEval/103
+Code number: 4
+Test Number: 9
+Error:Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+ImportError: cannot import name 'round' from 'math' (unknown location)
+--------------------------------------------------
+Task ID: HumanEval/103
+Code number: 5
+Test Number: 9
+Error:Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+ImportError: cannot import name 'round' from 'math' (unknown location)
+--------------------------------------------------
+Task ID: HumanEval/129
+Code number: 5
+Test Number: 9
+Error:Command '['python', '-c', "\nimport heapq\n\ndef minPath(grid, k):\n    N = len(grid)\n    directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]\n    \n    # Priority queue to keep track of paths, sorted by lexicographical order of cell values\n    pq = []\n    \n    # Initialize by pushing all possible starting positions into the priority queue\n    for i in range(N):\n        for j in range(N):\n            # (path sum, path length, current row, current column, path list)\n            heapq.heappush(pq, ([grid[i][j]], 1, i, j, [grid[i][j]]))\n    \n    while pq:\n        current_path, length, r, c, path_list = heapq.heappop(pq)\n        \n        # If the path length is k, return the current path list\n        if length == k:\n            return path_list\n        \n        # Explore all 4 possible directions\n        for dr, dc in directions:\n            nr, nc = r + dr, c + dc\n            # Check bounds\n            if 0 <= nr < N and 0 <= nc < N:\n                # Create a new path including the new cell\n                new_path = path_list + [grid[nr][nc]]\n                # Push the new path into the priority queue\n                heapq.heappush(pq, (new_path, length + 1, nr, nc, new_path))\n\nx = minPath([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]], 16)\nprint('x = ', x)\n\nimport heapq\n\ndef minPath(grid, k):\n    n = len(grid)\n    directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]\n    min_heap = []\n    visited = {}\n\n    # Initial step to add all cells with their values and positions to the heap\n    for i in range(n):\n        for j in range(n):\n            heapq.heappush(min_heap, (grid[i][j], [(i, j)], [grid[i][j]]))\n\n    while min_heap:\n        current_value, path, values = heapq.heappop(min_heap)\n        if len(values) == k:\n            return values\n\n        # Expand path from the last cell in the path\n        last_row, last_col = path[-1]\n        for d in directions:\n            new_row, new_col = last_row + d[0], last_col + d[1]\n            if 0 <= new_row < n and 0 <= new_col < n:\n                new_path = path + [(new_row, new_col)]\n                new_values = values + [grid[new_row][new_col]]\n                new_tuple = (new_values[-1], new_path, new_values)\n                path_key = tuple(new_path)  # To prevent cycles and redundant paths\n\n                if path_key not in visited or visited[path_key] > new_values:\n                    visited[path_key] = new_values\n                    heapq.heappush(min_heap, new_tuple)\n\ny = minPath([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]], 16)\nprint('y = ', y)\nprint('team5_LLM_CODE_verifier', x == y)\n\nimport heapq\n\ndef minPath(grid, k):\n    n = len(grid)\n    directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]\n    pq = []\n    for i in range(n):\n        for j in range(n):\n            pq.append((grid[i][j], [(i, j)], grid[i][j]))\n    heapq.heapify(pq)\n\n    while pq:\n        _, path, _ = heapq.heappop(pq)\n        if len(path) == k:\n            return [grid[x][y] for x, y in path]\n\n        last_x, last_y = path[-1]\n        for dx, dy in directions:\n            next_x, next_y = last_x + dx, last_y + dy\n            if 0 <= next_x < n and 0 <= next_y < n:\n                new_path = path + [(next_x, next_y)]\n                new_value = grid[next_x][next_y]\n                heapq.heappush(pq, (new_value, new_path, new_value))\n\ny = minPath([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]], 16)\nprint('y = ', y)\nprint('team5_LLM_CODE_verifier', x == y)\n\nimport heapq\n\ndef minPath(grid, k):\n    N = len(grid)\n    directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]\n    # Priority queue to store the paths based on their lexicographical order\n    pq = []\n    # Initialize the priority queue with all possible starting points\n    for i in range(N):\n        for j in range(N):\n            heapq.heappush(pq, ([grid[i][j]], i, j, 1))  # (current path, row, col, length of path)\n\n    while pq:\n        path, x, y, length = heapq.heappop(pq)\n        if length == k:\n            return path\n        # Explore all 4 possible directions\n        for dx, dy in directions:\n            nx, ny = x + dx, y + dy\n            if 0 <= nx < N and 0 <= ny < N:\n                # Continue the path with the next cell\n                heapq.heappush(pq, (path + [grid[nx][ny]], nx, ny, length + 1))\n\n    return []  # In case no path is found, which is guaranteed not to happen as per the problem statement\n\ny = minPath([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]], 16)\nprint('y = ', y)\nprint('team5_LLM_CODE_verifier', x == y)\n\nimport heapq\n\ndef minPath(grid, k):\n    N = len(grid)\n    directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]\n    \n    # Priority queue to store the paths with minimum lexicographic order of values\n    pq = []\n    \n    # Prepare the priority queue with all possible starting points\n    for r in range(N):\n        for c in range(N):\n            heapq.heappush(pq, ([grid[r][c]], r, c))\n            \n    # BFS-like approach to explore k-length paths\n    while pq:\n        path, r, c = heapq.heappop(pq)\n        if len(path) == k:\n            return path\n        # Explore neighbors\n        for dr, dc in directions:\n            nr, nc = r + dr, c + dc\n            if 0 <= nr < N and 0 <= nc < N:\n                new_path = path + [grid[nr][nc]]\n                heapq.heappush(pq, (new_path, nr, nc))\n\ny = minPath([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]], 16)\nprint('y = ', y)\nprint('team5_LLM_CODE_verifier', x == y)\n\nimport heapq\n\ndef minPath(grid, k):\n    N = len(grid)\n    directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]\n    ans = [float('inf')] * k\n    min_heap = []\n\n    # Create a map from values to their positions\n    value_to_position = {}\n    for r in range(N):\n        for c in range(N):\n            value_to_position[grid[r][c]] = (r, c)\n    \n    # Start from the smallest value cell\n    min_value = min(value_to_position.keys())\n    start_r, start_c = value_to_position[min_value]\n    heapq.heappush(min_heap, (min_value, [min_value], start_r, start_c, 1))  # value, path, row, col, length\n\n    while min_heap:\n        cur_val, cur_path, r, c, length = heapq.heappop(min_heap)\n\n        # If we reached the desired length, check if this path is lexicographically smaller\n        if length == k:\n            if cur_path < ans:\n                ans = cur_path\n            continue\n        \n        # Explore all four possible directions\n        for dr, dc in directions:\n            new_r, new_c = r + dr, c + dc\n            if 0 <= new_r < N and 0 <= new_c < N:\n                new_val = grid[new_r][new_c]\n                new_path = cur_path + [new_val]\n                heapq.heappush(min_heap, (new_val, new_path, new_r, new_c, length + 1))\n    \n    return ans\n\ny = minPath([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]], 16)\nprint('y = ', y)\nprint('team5_LLM_CODE_verifier', x == y)"]' timed out after 40 seconds
+--------------------------------------------------
+Task ID: HumanEval/129
+Code number: 5
+Test Number: 9
+Error:team5_LLM_CODE_verifier_TIMEOUT_ERROR
+--------------------------------------------------
+Task ID: HumanEval/149
+Code number: 1
+Test Number: 0
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'sorted_list_sum' is not defined
+--------------------------------------------------
+Task ID: HumanEval/149
+Code number: 2
+Test Number: 0
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'sorted_list_sum' is not defined
+--------------------------------------------------
+Task ID: HumanEval/149
+Code number: 3
+Test Number: 0
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'sorted_list_sum' is not defined
+--------------------------------------------------
+Task ID: HumanEval/149
+Code number: 4
+Test Number: 0
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'sorted_list_sum' is not defined
+--------------------------------------------------
+Task ID: HumanEval/149
+Code number: 5
+Test Number: 0
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'sorted_list_sum' is not defined
+--------------------------------------------------
+Task ID: HumanEval/149
+Code number: 1
+Test Number: 1
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'sorted_list_sum' is not defined
+--------------------------------------------------
+Task ID: HumanEval/149
+Code number: 2
+Test Number: 1
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'sorted_list_sum' is not defined
+--------------------------------------------------
+Task ID: HumanEval/149
+Code number: 3
+Test Number: 1
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'sorted_list_sum' is not defined
+--------------------------------------------------
+Task ID: HumanEval/149
+Code number: 4
+Test Number: 1
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'sorted_list_sum' is not defined
+--------------------------------------------------
+Task ID: HumanEval/149
+Code number: 5
+Test Number: 1
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'sorted_list_sum' is not defined
+--------------------------------------------------
+Task ID: HumanEval/149
+Code number: 1
+Test Number: 2
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'sorted_list_sum' is not defined
+--------------------------------------------------
+Task ID: HumanEval/149
+Code number: 2
+Test Number: 2
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'sorted_list_sum' is not defined
+--------------------------------------------------
+Task ID: HumanEval/149
+Code number: 3
+Test Number: 2
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'sorted_list_sum' is not defined
+--------------------------------------------------
+Task ID: HumanEval/149
+Code number: 4
+Test Number: 2
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'sorted_list_sum' is not defined
+--------------------------------------------------
+Task ID: HumanEval/149
+Code number: 5
+Test Number: 2
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'sorted_list_sum' is not defined
+--------------------------------------------------
+Task ID: HumanEval/149
+Code number: 1
+Test Number: 3
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'sorted_list_sum' is not defined
+--------------------------------------------------
+Task ID: HumanEval/149
+Code number: 2
+Test Number: 3
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'sorted_list_sum' is not defined
+--------------------------------------------------
+Task ID: HumanEval/149
+Code number: 3
+Test Number: 3
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'sorted_list_sum' is not defined
+--------------------------------------------------
+Task ID: HumanEval/149
+Code number: 4
+Test Number: 3
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'sorted_list_sum' is not defined
+--------------------------------------------------
+Task ID: HumanEval/149
+Code number: 5
+Test Number: 3
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'sorted_list_sum' is not defined
+--------------------------------------------------
+Task ID: HumanEval/149
+Code number: 1
+Test Number: 4
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'sorted_list_sum' is not defined
+--------------------------------------------------
+Task ID: HumanEval/149
+Code number: 2
+Test Number: 4
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'sorted_list_sum' is not defined
+--------------------------------------------------
+Task ID: HumanEval/149
+Code number: 3
+Test Number: 4
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'sorted_list_sum' is not defined
+--------------------------------------------------
+Task ID: HumanEval/149
+Code number: 4
+Test Number: 4
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'sorted_list_sum' is not defined
+--------------------------------------------------
+Task ID: HumanEval/149
+Code number: 5
+Test Number: 4
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'sorted_list_sum' is not defined
+--------------------------------------------------
+Task ID: HumanEval/149
+Code number: 1
+Test Number: 5
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'sorted_list_sum' is not defined
+--------------------------------------------------
+Task ID: HumanEval/149
+Code number: 2
+Test Number: 5
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'sorted_list_sum' is not defined
+--------------------------------------------------
+Task ID: HumanEval/149
+Code number: 3
+Test Number: 5
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'sorted_list_sum' is not defined
+--------------------------------------------------
+Task ID: HumanEval/149
+Code number: 4
+Test Number: 5
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'sorted_list_sum' is not defined
+--------------------------------------------------
+Task ID: HumanEval/149
+Code number: 5
+Test Number: 5
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'sorted_list_sum' is not defined
+--------------------------------------------------
+Task ID: HumanEval/149
+Code number: 1
+Test Number: 6
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'sorted_list_sum' is not defined
+--------------------------------------------------
+Task ID: HumanEval/149
+Code number: 2
+Test Number: 6
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'sorted_list_sum' is not defined
+--------------------------------------------------
+Task ID: HumanEval/149
+Code number: 3
+Test Number: 6
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'sorted_list_sum' is not defined
+--------------------------------------------------
+Task ID: HumanEval/149
+Code number: 4
+Test Number: 6
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'sorted_list_sum' is not defined
+--------------------------------------------------
+Task ID: HumanEval/149
+Code number: 5
+Test Number: 6
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'sorted_list_sum' is not defined
+--------------------------------------------------
+Task ID: HumanEval/149
+Code number: 1
+Test Number: 7
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'sorted_list_sum' is not defined
+--------------------------------------------------
+Task ID: HumanEval/149
+Code number: 2
+Test Number: 7
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'sorted_list_sum' is not defined
+--------------------------------------------------
+Task ID: HumanEval/149
+Code number: 3
+Test Number: 7
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'sorted_list_sum' is not defined
+--------------------------------------------------
+Task ID: HumanEval/149
+Code number: 4
+Test Number: 7
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'sorted_list_sum' is not defined
+--------------------------------------------------
+Task ID: HumanEval/149
+Code number: 5
+Test Number: 7
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'sorted_list_sum' is not defined
+--------------------------------------------------
+Task ID: HumanEval/149
+Code number: 1
+Test Number: 8
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'sorted_list_sum' is not defined
+--------------------------------------------------
+Task ID: HumanEval/149
+Code number: 2
+Test Number: 8
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'sorted_list_sum' is not defined
+--------------------------------------------------
+Task ID: HumanEval/149
+Code number: 3
+Test Number: 8
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'sorted_list_sum' is not defined
+--------------------------------------------------
+Task ID: HumanEval/149
+Code number: 4
+Test Number: 8
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'sorted_list_sum' is not defined
+--------------------------------------------------
+Task ID: HumanEval/149
+Code number: 5
+Test Number: 8
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'sorted_list_sum' is not defined
+--------------------------------------------------
+Task ID: HumanEval/149
+Code number: 1
+Test Number: 9
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'sorted_list_sum' is not defined
+--------------------------------------------------
+Task ID: HumanEval/149
+Code number: 2
+Test Number: 9
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'sorted_list_sum' is not defined
+--------------------------------------------------
+Task ID: HumanEval/149
+Code number: 3
+Test Number: 9
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'sorted_list_sum' is not defined
+--------------------------------------------------
+Task ID: HumanEval/149
+Code number: 4
+Test Number: 9
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'sorted_list_sum' is not defined
+--------------------------------------------------
+Task ID: HumanEval/149
+Code number: 5
+Test Number: 9
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+NameError: name 'sorted_list_sum' is not defined
+--------------------------------------------------
+Task ID: HumanEval/153
+Code number: 1
+Test Number: 7
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+  File "<string>", line 8, in Strongest_Extension
+ValueError: max() arg is an empty sequence
+--------------------------------------------------
+Task ID: HumanEval/153
+Code number: 2
+Test Number: 7
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+  File "<string>", line 8, in Strongest_Extension
+ValueError: max() arg is an empty sequence
+--------------------------------------------------
+Task ID: HumanEval/153
+Code number: 3
+Test Number: 7
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+  File "<string>", line 8, in Strongest_Extension
+ValueError: max() arg is an empty sequence
+--------------------------------------------------
+Task ID: HumanEval/153
+Code number: 4
+Test Number: 7
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+  File "<string>", line 8, in Strongest_Extension
+ValueError: max() arg is an empty sequence
+--------------------------------------------------
+Task ID: HumanEval/153
+Code number: 5
+Test Number: 7
+Error:Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+  File "<string>", line 8, in Strongest_Extension
+ValueError: max() arg is an empty sequence
+--------------------------------------------------
