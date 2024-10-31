@@ -1,126 +1,126 @@
 #!/usr/bin/env bash
-set -e
+# set -e
 
-######################### Preparing the host environment #########################
-# Git
-install_git_ubuntu() {
-    sudo apt-get update
-    sudo apt-get install -y git
-}
+# ######################### Preparing the host environment #########################
+# # Git
+# install_git_ubuntu() {
+#     sudo apt-get update
+#     sudo apt-get install -y git
+# }
 
-install_git_centos() {
-    sudo yum install -y git
-}
+# install_git_centos() {
+#     sudo yum install -y git
+# }
 
-# Docker
-install_docker_ubuntu() {
-  # FROM https://docs.docker.com/engine/install/ubuntu/
-  # Add Docker's official GPG key:
-  sudo apt-get update
-  sudo apt-get install ca-certificates curl
-  sudo install -m 0755 -d /etc/apt/keyrings
-  sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
-  sudo chmod a+r /etc/apt/keyrings/docker.asc
+# # Docker
+# install_docker_ubuntu() {
+#   # FROM https://docs.docker.com/engine/install/ubuntu/
+#   # Add Docker's official GPG key:
+#   sudo apt-get update
+#   sudo apt-get install ca-certificates curl
+#   sudo install -m 0755 -d /etc/apt/keyrings
+#   sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+#   sudo chmod a+r /etc/apt/keyrings/docker.asc
 
-  # Add the repository to Apt sources:
-  echo \
-    "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
-    $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
-    sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-  sudo apt-get update
+#   # Add the repository to Apt sources:
+#   echo \
+#     "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+#     $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+#     sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+#   sudo apt-get update
 
-  sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+#   sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 
-  # Check if Docker is running. If not, start it.
-  if ! sudo systemctl is-active --quiet docker; then
-    sudo systemctl start docker
-    sudo systemctl enable docker
-  fi
+#   # Check if Docker is running. If not, start it.
+#   if ! sudo systemctl is-active --quiet docker; then
+#     sudo systemctl start docker
+#     sudo systemctl enable docker
+#   fi
 
-  # Check if docker group exists, if not, create it.
-  if ! getent group docker &>/dev/null; then
-    sudo groupadd docker
-  fi
+#   # Check if docker group exists, if not, create it.
+#   if ! getent group docker &>/dev/null; then
+#     sudo groupadd docker
+#   fi
 
-  # Check if the current user is in the docker group. If not, add it.
-  if ! groups $USER | grep &>/dev/null '\bdocker\b'; then
-    sudo usermod -aG docker $USER
-    newgrp docker
-  fi
+#   # Check if the current user is in the docker group. If not, add it.
+#   if ! groups $USER | grep &>/dev/null '\bdocker\b'; then
+#     sudo usermod -aG docker $USER
+#     newgrp docker
+#   fi
   
-  # Print Docker version to verify installation
-  docker --version
+#   # Print Docker version to verify installation
+#   docker --version
 
-  echo "Docker installation completed successfully."
-}
+#   echo "Docker installation completed successfully."
+# }
 
-install_docker_centos() {
-    sudo yum install -y yum-utils
-    sudo yum-config-manager \
-        --add-repo \
-        https://download.docker.com/linux/centos/docker-ce.repo
+# install_docker_centos() {
+#     sudo yum install -y yum-utils
+#     sudo yum-config-manager \
+#         --add-repo \
+#         https://download.docker.com/linux/centos/docker-ce.repo
 
-    sudo yum install -y docker-ce docker-ce-cli containerd.io
-    sudo systemctl start docker
-    sudo systemctl enable docker
-}
+#     sudo yum install -y docker-ce docker-ce-cli containerd.io
+#     sudo systemctl start docker
+#     sudo systemctl enable docker
+# }
 
-if [ -f /etc/os-release ]; then
-    . /etc/os-release
-    case "$ID" in
-        ubuntu|debian)
-            if command -v docker &> /dev/null; then
-              echo "Docker is already installed."
-            else
-              install_docker_ubuntu
+# if [ -f /etc/os-release ]; then
+#     . /etc/os-release
+#     case "$ID" in
+#         ubuntu|debian)
+#             if command -v docker &> /dev/null; then
+#               echo "Docker is already installed."
+#             else
+#               install_docker_ubuntu
 
-              # Add the current user to the docker group
-              sudo usermod -aG docker $USER
+#               # Add the current user to the docker group
+#               sudo usermod -aG docker $USER
 
-              # Print Docker version to verify installation
-              docker --version
+#               # Print Docker version to verify installation
+#               docker --version
 
-              echo "Docker installation completed successfully."
-            fi
+#               echo "Docker installation completed successfully."
+#             fi
 
-            if command -v git &> /dev/null; then
-              echo "Git is already installed."
-            else
-              install_git_ubuntu
-              echo "Git installation completed successfully."
-            fi
-            ;;
-        centos|rhel|rocky)
-            if command -v docker &> /dev/null; then
-              echo "Docker is already installed."
-            else
-              install_docker_centos
+#             if command -v git &> /dev/null; then
+#               echo "Git is already installed."
+#             else
+#               install_git_ubuntu
+#               echo "Git installation completed successfully."
+#             fi
+#             ;;
+#         centos|rhel|rocky)
+#             if command -v docker &> /dev/null; then
+#               echo "Docker is already installed."
+#             else
+#               install_docker_centos
 
-              # Add the current user to the docker group
-              sudo usermod -aG docker $USER
+#               # Add the current user to the docker group
+#               sudo usermod -aG docker $USER
 
-              # Print Docker version to verify installation
-              docker --version
+#               # Print Docker version to verify installation
+#               docker --version
 
-              echo "Docker installation completed successfully."
-            fi
+#               echo "Docker installation completed successfully."
+#             fi
 
-            if command -v git &> /dev/null; then
-              echo "Git is already installed."
-            else
-              install_git_centos
-              echo "Git installation completed successfully."
-            fi
-            ;;
-        *)
-            echo "Unsupported Linux distribution: $ID"
-            exit 1
-            ;;
-    esac
-else
-    echo "Cannot detect the Linux distribution."
-    exit 1
-fi
+#             if command -v git &> /dev/null; then
+#               echo "Git is already installed."
+#             else
+#               install_git_centos
+#               echo "Git installation completed successfully."
+#             fi
+#             ;;
+#         *)
+#             echo "Unsupported Linux distribution: $ID"
+#             exit 1
+#             ;;
+#     esac
+# else
+#     echo "Cannot detect the Linux distribution."
+#     exit 1
+# fi
 
 # Docker Compose
 
@@ -128,10 +128,10 @@ fi
 set -x
 
 # Get the user and group names and IDs
-echo "USER_NAME=$USER" > .devcontainer/.env
+echo "USER_NAME=$(id -un)" > .devcontainer/.env
 echo "USER_ID=$(id -u)" >> .devcontainer/.env
 
-echo "GROUP_NAME=$GROUP" >> .devcontainer/.env
+echo "GROUP_NAME=$(id -gn)" >> .devcontainer/.env
 echo "GROUP_ID=$(id -g)" >> .devcontainer/.env
 
 # Get the git local user name and email
