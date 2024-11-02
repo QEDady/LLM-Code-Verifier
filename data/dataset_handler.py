@@ -1,39 +1,30 @@
 import json
 import gzip
 import random
+import textwrap
 from typing import List, Dict, Iterable, Union
 import os
 import csv
 
-def stream_jsonl(file_path: str) -> Iterable[Dict]:
+from utils.utils import stream_jsonl
+from executor.code_executer import evaluate_code
+from data.const import APPS_PATH, APPS_FILTERED_PATH
 
-    if file_path.endswith(".gz"):
-        with open(file_path, "rb") as gzfp:
-            with gzip.open(gzfp, 'rt') as fp:
-                for line in fp:
-                    if isinstance(line, str) and any(not x.isspace() for x in line):
-                        yield json.loads(line)
-    else:
-        with open(file_path, "r", encoding="utf-8") as fp:
-            for line in fp:
-                if isinstance(line, str) and any(not x.isspace() for x in line):
-                    yield json.loads(line)
+def filter_apps():
+    apps_path = APPS_PATH
+    ids = []
 
-def write_jsonl(file_path: str, data: Iterable[Dict], append: bool = False):
-    if append:
-        mode = 'ab'
-    else:
-        mode = 'wb'
-    file_path = os.path.expanduser(file_path)
-    if file_path.endswith(".gz"):
-        with open(file_path, mode) as fp:
-            with gzip.GzipFile(fileobj=fp, mode='wb') as gzfp:
-                for x in data:
-                    gzfp.write((json.dumps(x) + "\n").encode('utf-8'))
-    else:
-        with open(file_path, mode) as fp:
-            for x in data:
-                fp.write((json.dumps(x) + "\n").encode('utf-8'))     
+    with open("using_apps_compare", 'r') as file:
+        lines = [line.strip() for line in file.readlines()]
+        for i in range(1, len(lines)):
+            split = lines[i].split(":")
+            if float(split[1].strip()) == float(100):
+                ids.append(split[0])
+    
+    with open(APPS_FILTERED_PATH, 'w') as file:
+        for entry in stream_jsonl(apps_path):
+            if entry['task_id'] in ids:
+                file.write(json.dumps(entry) + '\n')
 
 def reservoir_sample(dataset_path: str, sample_size: int) -> List[Dict]:    
     sample = []

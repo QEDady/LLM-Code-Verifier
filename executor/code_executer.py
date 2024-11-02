@@ -1,15 +1,22 @@
+import os
 import subprocess
+import tempfile
 import textwrap
 from typing import Tuple, Union
 import ast
 import numpy as np
 from data.dataset_handler import stream_jsonl
-from data.const import HUMAN_EVAL_MODIFIED_PATH, APPS_FILTERED_PATH, APPS_PATH
+from data.const import HUMAN_EVAL_MODIFIED_PATH, HUMAN_EVAL_PLUS_PATH, APPS_FILTERED_PATH, APPS_PATH, SET_ENCODING_TEXT
 
 def validate_executer(dataset_path: str):
     if dataset_path == HUMAN_EVAL_MODIFIED_PATH:
         for task in stream_jsonl(dataset_path):
             check_program = f"{task['prompt']}\n{task['canonical_solution']}\n{task['test']}\nprint(check({task['entry_point']}))"
+            test_pass_rate = evaluate_code(code_id=0, prog_lang="python", code=check_program, test_cases=None)
+            print(f"{task['task_id']}: {test_pass_rate}")
+    elif dataset_path == HUMAN_EVAL_PLUS_PATH:
+        for task in stream_jsonl(dataset_path):
+            check_program = SET_ENCODING_TEXT + f"{task['prompt']}\n{task['canonical_solution']}\n{task['test']}\nprint(check({task['entry_point']}))"
             test_pass_rate = evaluate_code(code_id=0, prog_lang="python", code=check_program, test_cases=None)
             print(f"{task['task_id']}: {test_pass_rate}")
     elif dataset_path in [APPS_FILTERED_PATH, APPS_PATH]:
@@ -201,6 +208,26 @@ def run_python_code(code, input_str=None) ->Union[Exception, str]:
             check=True
         )
         return result.stdout.strip()
+    except OSError as e:
+        if e.errno == 7:
+            try:
+                with tempfile.NamedTemporaryFile(mode='w', suffix='.py', delete=False) as temp_file:
+                    temp_file.write(code)
+                    temp_file_path = temp_file.name
+                result = subprocess.run(
+                    ['python3', temp_file_path],
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.PIPE,
+                    timeout=10,
+                    text=True,
+                    check=True
+                )
+                os.unlink(temp_file_path)
+                return result.stdout.strip()
+            except Exception as e:
+                return e
+        else:
+            return e
     except Exception as e:
         return e
 

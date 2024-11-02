@@ -1,11 +1,43 @@
+import gzip
+import json
 import os
 import csv
 import glob
-from typing import Any, Dict
+from typing import Any, Dict, Iterable
 import yaml
 
 from data.const import RESULTS
 
+def stream_jsonl(file_path: str) -> Iterable[Dict]:
+
+    if file_path.endswith(".gz"):
+        with open(file_path, "rb") as gzfp:
+            with gzip.open(gzfp, 'rt') as fp:
+                for line in fp:
+                    if isinstance(line, str) and any(not x.isspace() for x in line):
+                        yield json.loads(line)
+    else:
+        with open(file_path, "r", encoding="utf-8") as fp:
+            for line in fp:
+                if isinstance(line, str) and any(not x.isspace() for x in line):
+                    yield json.loads(line)
+
+def write_jsonl(file_path: str, data: Iterable[Dict], append: bool = False):
+    if append:
+        mode = 'ab'
+    else:
+        mode = 'wb'
+    file_path = os.path.expanduser(file_path)
+    if file_path.endswith(".gz"):
+        with open(file_path, mode) as fp:
+            with gzip.GzipFile(fileobj=fp, mode='wb') as gzfp:
+                for x in data:
+                    gzfp.write((json.dumps(x) + "\n").encode('utf-8'))
+    else:
+        with open(file_path, mode) as fp:
+            for x in data:
+                fp.write((json.dumps(x) + "\n").encode('utf-8'))  
+                
 def generate_results_csv_filename(dataset, model, n, t_refrence, t_samples, trial):
     filename = f'dataset_{dataset}_model_{model}_n_{n}_tempr_{t_refrence}_temps_{t_samples}_trial_{trial}.csv'
     return os.path.join(RESULTS, filename)
@@ -43,6 +75,7 @@ def validate_config(config):
     prog_lang = dataset.get('prog_lang')
     random = dataset.get('random')
     range = dataset.get('range')
+    from_file = dataset.get('from_file')
 
     if not dataset_name or dataset_name not in dataset_options:
         raise ValueError(f"Invalid or missing dataset name. Must be one of {dataset_options}.")
@@ -77,6 +110,10 @@ def validate_config(config):
             if range["start_id"] is not None and range["end_id"] is not None:
                 if range["start_id"] > range["end_id"]:
                     raise ValueError("Field 'range.start_id' must be less than or equal to 'range.end_id'.")
+    
+    # Validate from_file sampling
+    if from_file["enabled"] and not os.path.exists(from_file["file_path"]):
+        raise ValueError(f"File '{from_file['file_path']}' does not exist.")
 
     # Validate model
     model = config.get('model', {})

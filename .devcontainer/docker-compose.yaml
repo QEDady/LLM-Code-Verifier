@@ -17,3 +17,4 @@ services:
       - GIT_EMAIL=${GIT_EMAIL}
     volumes:
       - ..:/LLM-Code-Verifier
+      # - ../../apps:/apps
