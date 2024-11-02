@@ -203,7 +203,7 @@ def run_python_code(code, input_str=None) ->Union[Exception, str]:
             input=input_str,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
-            timeout=10,
+            timeout=40,
             text=True,
             check=True
         )
@@ -218,7 +218,7 @@ def run_python_code(code, input_str=None) ->Union[Exception, str]:
                     ['python3', temp_file_path],
                     stdout=subprocess.PIPE,
                     stderr=subprocess.PIPE,
-                    timeout=10,
+                    timeout=40,
                     text=True,
                     check=True
                 )
@@ -240,7 +240,7 @@ def run_java_code(code, input_str=None) -> Union[Exception, str]:
                 ['javac', 'code.java'],
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
-                timeout=10,
+                timeout=40,
                 text=True,
                 check=True
             )
@@ -250,7 +250,7 @@ def run_java_code(code, input_str=None) -> Union[Exception, str]:
                 input=input_str,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
-                timeout=10,
+                timeout=40,
                 text=True,
                 check=True
             )
