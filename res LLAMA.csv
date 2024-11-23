@@ -1830,9 +1830,17 @@ def numerical_letter_grade(grades):
     Example:
     grade_equation([4.0, 3, 1.7, 2, 3.5]) ==> ['A+', 'B', 'C-', 'C', 'A-']
     """"""
-",numerical_letter_grade,"Here are the 10 test cases for the function 'numerical_letter_grade':
-
-[4.0, 3.7, 3.3, 3.0, 2.7, 2.3, 2.0, 1.7, 1.3, 1.0, 0.7, 0.0]"
+",numerical_letter_grade,"grade_equation([4.0, 3.7, 3.3, 3.0, 2.7, 2.3, 2.0, 1.7, 1.3, 1.0, 0.7, 0.0])
+grade_equation([4.0, 3.7, 3.3, 3.0, 2.7, 2.3, 2.0, 1.7, 1.3, 1.0, 0.7, 0.0])
+grade_equation([4.0, 3.7, 3.3, 3.0, 2.7, 2.3, 2.0, 1.7, 1.3, 1.0, 0.7, 0.0])
+grade_equation([4.0, 3.7, 3.3, 3.0, 2.7, 2.3, 2.0, 1.7, 1.3, 1.0, 0.7, 0.0])
+grade_equation([4.0, 3.7, 3.3, 3.0, 2.7, 2.3, 2.0, 1.7, 1.3, 1.0, 0.7, 0.0])
+grade_equation([4.0, 3.7, 3.3, 3.0, 2.7, 2.3, 2.0, 1.7, 1.3, 1.0, 0.7, 0.0])
+grade_equation([4.0, 3.7, 3.3, 3.0, 2.7, 2.3, 2.0, 1.7, 1.3, 1.0, 0.7, 0.0])
+grade_equation([4.0, 3.7, 3.3, 3.0, 2.7, 2.3, 2.0, 1.7, 1.3, 1.0, 0.7, 0.0])
+grade_equation([4.0, 3.7, 3.3, 3.0, 2.7, 2.3, 2.0, 1.7, 1.3, 1.0, 0.7, 0.0])
+grade_equation([4.0, 3.7, 3.3, 3.0, 2.7, 2.3, 2.0, 1.7, 1.3, 1.0, 0.7, 0.0])
+"
 83,HumanEval/82,"
 def prime_length(string):
     """"""Write a function that takes a string and returns True if the string
@@ -1850,9 +1858,9 @@ prime_length(""orange"")
 prime_length(""a"")
 prime_length("""")
 prime_length(""123456789"")
-prime_length(""a""*100)
+prime_length(""aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"")
 prime_length(""abcdefghijklmnopqrstuvwxyz"")
-prime_length(""abcdefghijklmnopqrstuvwxyz""*2)"
+prime_length(""abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz"")"
 84,HumanEval/83,"
 def starts_one_ends(n):
     """"""
@@ -1983,9 +1991,7 @@ def sort_array(array):
     * sort_array([2, 4, 3, 0, 1, 5]) => [0, 1, 2, 3, 4, 5]
     * sort_array([2, 4, 3, 0, 1, 5, 6]) => [6, 5, 4, 3, 2, 1, 0]
     """"""
-",sort_array,"Here are the test cases:
-
-sort_array([])
+",sort_array,"sort_array([])
 sort_array([5])
 sort_array([2, 4, 3, 0, 1, 5])
 sort_array([2, 4, 3, 0, 1, 5, 6])
@@ -2052,19 +2058,16 @@ def is_bored(S):
     >>> is_bored(""The sky is blue. The sun is shining. I love this weather"")
     1
     """"""
-",is_bored,"Here are 10 test cases for the function 'is_bored':
-
-is_bored(""Hello world"")
+",is_bored,"is_bored(""Hello world"")
 is_bored(""The sky is blue. The sun is shining. I love this weather"")
 is_bored(""I am bored. I am very bored."")
 is_bored(""I am not bored. I am happy."")
 is_bored(""I love this game. It's so much fun!"")
-is_bored("""")
 is_bored(""I am bored. I am very bored. I am happy."")
 is_bored(""I love this game. I love this game. I love this game."")
 is_bored(""I am bored. I am bored. I am bored. I am bored."")
 is_bored(""I am happy. I am happy. I am happy. I am happy."")
-is_bored(""I am not bored. I am not bored. I am not bored. I am not bored."")"
+Is_bored(""I am not bored. I am not bored. I am not bored. I am not bored."")"
 93,HumanEval/92,"
 def any_int(x, y, z):
     '''
@@ -2118,8 +2121,7 @@ encode(""AEIOU"")
 encode(""123456"")
 encode(""abcdefg"")
 encode(""ABCDEFGHIJKLMNOPQRSTUVWXYZ"")
-encode(""abcdefghijklmnopqrstuvwxyz"")
-encode(""AEIOUAEIOU"")"
+encode(""abcdefghijklmnopqrstuvwxyz"")"
 95,HumanEval/94,"
 
 def skjkasdkd(lst):
@@ -2134,14 +2136,16 @@ def skjkasdkd(lst):
     For lst = [0,81,12,3,1,21] the output should be 3
     For lst = [0,8,1,2,1,7] the output should be 7
     """"""
-",skjkasdkd,"Here are the test cases for the function'skjkasdkd':
-
-[0,3,2,1,3,5,7,4,5,5,5,2,181,32,4,32,3,2,32,324,4,3]
-[1,0,1,8,2,4597,2,1,3,40,1,2,1,2,4,2,5,1]
-[1,3,1,32,5107,34,83278,109,163,23,2323,32,30,1,9,3]
-[0,724,32,71,99,32,6,0,5,91,83,0,5,6]
-[0,81,12,3,1,21]
-[0,8,1,2,1,7]"
+",skjkasdkd,"skjkasdkd([0,3,2,1,3,5,7,4,5,5,5,2,181,32,4,32,3,2,32,324,4,3])
+skjkasdkd([1,0,1,8,2,4597,2,1,3,40,1,2,1,2,4,2,5,1])
+skjkasdkd([1,3,1,32,5107,34,83278,109,163,23,2323,32,30,1,9,3])
+skjkasdkd([0,724,32,71,99,32,6,0,5,91,83,0,5,6])
+skjkasdkd([0,81,12,3,1,21])
+Skjkasdkd([0,8,1,2,1,7])
+skjkasdkd([1,3,1,32,5107,34,83278,109,163,23,2323,32,30,1,9,3])
+skjkasdkd([0,724,32,71,99,32,6,0,5,91,83,0,5,6])
+skjkasdkd([0,81,12,3,1,21])
+Skjkasdkd([0,8,1,2,1,7])"
 96,HumanEval/95,"
 def check_dict_case(dict):
     """"""
@@ -2155,16 +2159,16 @@ def check_dict_case(dict):
     check_dict_case({""Name"":""John"", ""Age"":""36"", ""City"":""Houston""}) should return False.
     check_dict_case({""STATE"":""NC"", ""ZIP"":""12345"" }) should return True.
     """"""
-",check_dict_case,"dict1 = check_dict_case({""a"":""apple"", ""b"":""banana""})
-dict2 = check_dict_case({""A"":""apple"", ""B"":""banana""})
-dict3 = check_dict_case({""a"":""apple"", 8:""banana"", ""a"":""apple""})
-dict4 = check_dict_case({""Name"":""John"", ""Age"":""36"", ""City"":""Houston""})
-dict5 = check_dict_case({""STATE"":""NC"", ""ZIP"":""12345"" })
-dict6 = check_dict_case({})
-dict7 = check_dict_case({""A"":""apple"", ""B"":""banana"", ""C"":""cherry""})
-dict8 = check_dict_case({""STATE"":""NC"", ""ZIP"":""12345"", ""STATE"":""NC""})
-dict9 = check_dict_case({""STATE"":""NC"", ""STATE"":""NC"", ""STATE"":""NC""})
-dict10 = check_dict_case({""STATE"":""NC"", ""STATE"":""NC"", ""STATE"":""NC"", ""STATE"":""NC""})"
+",check_dict_case,"check_dict_case({""a"":""apple"", ""b"":""banana""})
+check_dict_case({""A"":""apple"", ""B"":""banana""})
+check_dict_case({""a"":""apple"", 8:""banana"", ""a"":""apple""})
+check_dict_case({""Name"":""John"", ""Age"":""36"", ""City"":""Houston""})
+check_dict_case({""STATE"":""NC"", ""ZIP"":""12345"" })
+check_dict_case({})
+check_dict_case({""A"":""apple"", ""B"":""banana"", ""C"":""cherry""})
+check_dict_case({""STATE"":""NC"", ""ZIP"":""12345"", ""STATE"":""NC""})
+check_dict_case({""STATE"":""NC"", ""STATE"":""NC"", ""STATE"":""NC""})
+check_dict_case({""STATE"":""NC"", ""STATE"":""NC"", ""STATE"":""NC"", ""STATE"":""NC""})"
 97,HumanEval/96,"
 def count_up_to(n):
     """"""Implement a function that takes an non-negative integer and returns an array of the first n
@@ -2247,9 +2251,7 @@ def closest_integer(value):
     farthest from zero. For example closest_integer(""14.5"") should
     return 15 and closest_integer(""-14.5"") should return -15.
     '''
-",closest_integer,"Here are the test cases for the 'closest_integer' function:
-
-closest_integer(""10"")
+",closest_integer,"closest_integer(""10"")
 closest_integer(""15.3"")
 closest_integer(""14.5"")
 closest_integer(""-14.5"")
@@ -2258,8 +2260,7 @@ closest_integer(""0"")
 closest_integer(""3.9"")
 closest_integer(""-3.9"")
 closest_integer(""2.5"")
-closest_integer(""-2.5"")
-closest_integer(""5.5"")"
+closest_integer(""-2.5"")"
 101,HumanEval/100,"
 def make_a_pile(n):
     """"""
@@ -2337,9 +2338,7 @@ def rounded_avg(n, m):
     rounded_avg(10, 20) => ""0b1111""
     rounded_avg(20, 33) => ""0b11010""
     """"""
-",rounded_avg,"Here are the 10 test cases:
-
-rounded_avg(1, 5)
+",rounded_avg,"rounded_avg(1, 5)
 rounded_avg(7, 5)
 rounded_avg(10, 20)
 rounded_avg(20, 33)
@@ -2370,7 +2369,8 @@ unique_digits([11, 22, 33, 44, 55])
 unique_digits([1, 2, 3, 4, 5, 6, 7, 8, 9])
 unique_digits([100, 200, 300, 400, 500])
 unique_digits([15, 33, 1422, 1423])
-unique_digits([10, 20, 30, 40, 50])"
+unique_digits([10, 20, 30, 40, 50])
+unique_digits([11, 22, 33, 44, 55])"
 106,HumanEval/105,"
 def by_length(arr):
     """"""
@@ -2394,16 +2394,16 @@ def by_length(arr):
             -> reverse arr -> [55, 1, -1]
       return = ['One']
     """"""
-",by_length,"Here are the test cases for the function 'by_length':
-
-by_length([2, 1, 1, 4, 5, 8, 2, 3])
+",by_length,"by_length([2, 1, 1, 4, 5, 8, 2, 3])
 by_length([])
 by_length([1, -1, 55])
 by_length([1, 2, 3, 4, 5, 6, 7, 8, 9])
 by_length([1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9])
 by_length([10, 10, 10])
 by_length([1, 1, 2, 3, 4, 5, 6, 7, 8, 9])
-by_length([1, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9])"
+by_length([1, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9])
+by_length([10, 10, 10])
+by_length([1, 1, 2, 3, 4, 5, 6, 7, 8, 9])"
 107,HumanEval/106,"
 def f(n):
     """""" Implement the function f that takes n as a parameter,
@@ -2448,16 +2448,16 @@ def even_odd_palindrome(n):
         1. 1 <= n <= 10^3
         2. returned tuple has the number of even and odd integer palindromes respectively.
     """"""
-",even_odd_palindrome,"1. even_odd_palindrome(1)
-2. even_odd_palindrome(2)
-3. even_odd_palindrome(3)
-4. even_odd_palindrome(4)
-5. even_odd_palindrome(5)
-6. even_odd_palindrome(6)
-7. even_odd_palindrome(7)
-8. even_odd_palindrome(8)
-9. even_odd_palindrome(9)
-10. even_odd_palindrome(10)"
+",even_odd_palindrome,"even_odd_palindrome(1)
+even_odd_palindrome(2)
+even_odd_palindrome(3)
+even_odd_palindrome(4)
+even_odd_palindrome(5)
+even_odd_palindrome(6)
+even_odd_palindrome(7)
+even_odd_palindrome(8)
+even_odd_palindrome(9)
+even_odd_palindrome(10)"
 109,HumanEval/108,"
 def count_nums(arr):
     """"""
@@ -2507,9 +2507,7 @@ def move_one_ball(arr):
                 array by performing any number of right shift operations.
                 
     """"""
-",move_one_ball,"Here are 10 test cases for the function'move_one_ball':
-
-move_one_ball([])
+",move_one_ball,"move_one_ball([])
 move_one_ball([1])
 move_one_ball([1, 2, 3])
 move_one_ball([3, 1, 2])
@@ -2602,18 +2600,16 @@ def odd_count(lst):
     [""the number of odd elements 1n the str1ng 1 of the 1nput."",
      ""the number of odd elements 8n the str8ng 8 of the 8nput.""]
     """"""
-",odd_count,"Here are the 10 test cases for the function 'odd_count':
-
-1. odd_count(['1234567'])
-2. odd_count(['3',""11111111""])
-3. odd_count(['345',""11111111""])
-4. odd_count(['1',""1""])
-5. odd_count(['2',""2""])
-6. odd_count(['345',""345""])
-7. odd_count(['123456',""123456""])
-8. odd_count(['123',""123""])
-9. odd_count(['123',""123456""])
-10. odd_count(['',""""])"
+",odd_count,"odd_count(['1234567'])
+odd_count(['3',""11111111""])
+odd_count(['345',""11111111""])
+odd_count(['1',""1""])
+odd_count(['2',""2""])
+odd_count(['345',""345""])
+odd_count(['123456',""123456""])
+odd_count(['123',""123""])
+odd_count(['123',""123456""])
+odd_count(['',""""])"
 115,HumanEval/114,"
 def minSubArraySum(nums):
     """"""
@@ -2669,18 +2665,16 @@ def max_fill(grid, capacity):
         * grid[i][j] -> 0 | 1
         * 1 <= capacity <= 10
     """"""
-",max_fill,"Here are 10 test cases for the function'max_fill':
-
-grid([[0,0,1,0], [0,1,0,0], [1,1,1,1]], 1)
-grid([[0,0,1,1], [0,0,0,0], [1,1,1,1], [0,1,1,1]], 2)
-grid([[0,0,0], [0,0,0]], 5)
-grid([[0,0,1], [0,0,1], [1,1,1]], 1)
-grid([[0,1,1,1], [0,0,1,1], [1,1,1,1]], 2)
-grid([[0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], [1,1,1,1,1,1,1,1,1,1]], 1)
-grid([[0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], [1,1,1,1,1,1,1,1,1,1], [0,1,1,1,1,1,1,1,1,1]], 2)
-grid([[0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], [1,1,1,1,1,1,1,1,1,1], [0,1,1,1,1,1,1,1,1,1], [1,1,1,1,1,1,1,1,1,1]], 2)
-grid([[0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], [1,1,1,1,1,1,1,1,1,1], [0,1,1,1,1,1,1,1,1,1], [1,1,1,1,1,1,1,1,1,1], [1,1,1,1,1,1,1,1,1,1]], 2)
-grid([[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1], [0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1], [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1], [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1], [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]], 1)"
+",max_fill,"max_fill([[0,0,1,0], [0,1,0,0], [1,1,1,1]], 1)
+max_fill([[0,0,1,1], [0,0,0,0], [1,1,1,1], [0,1,1,1]], 2)
+max_fill([[0,0,0], [0,0,0]], 5)
+max_fill([[0,0,1], [0,0,1], [1,1,1]], 1)
+max_fill([[0,1,1,1], [0,0,1,1], [1,1,1,1]], 2)
+max_fill([[0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], [1,1,1,1,1,1,1,1,1,1]], 1)
+max_fill([[0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], [1,1,1,1,1,1,1,1,1,1], [0,1,1,1,1,1,1,1,1,1]], 2)
+max_fill([[0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], [1,1,1,1,1,1,1,1,1,1], [0,1,1,1,1,1,1,1,1,1], [1,1,1,1,1,1,1,1,1,1]], 2)
+max_fill([[0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], [1,1,1,1,1,1,1,1,1,1], [0,1,1,1,1,1,1,1,1,1], [1,1,1,1,1,1,1,1,1,1], [1,1,1,1,1,1,1,1,1,1]], 2)
+max_fill([[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1], [0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1], [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1], [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1], [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]], 1)"
 117,HumanEval/116,"
 def sort_array(arr):
     """"""
@@ -2717,9 +2711,7 @@ def select_words(s, n):
     select_words(""Hello world"", 4) ==> [""world""]
     select_words(""Uncle sam"", 3) ==> [""Uncle""]
     """"""
-",select_words,"Here are the 10 test cases:
-
-select_words(""Mary had a little lamb"", 4)
+",select_words,"select_words(""Mary had a little lamb"", 4)
 select_words(""Mary had a little lamb"", 3)
 select_words(""simple white space"", 2)
 select_words(""Hello world"", 4)
@@ -2807,18 +2799,16 @@ def maximum(arr, k):
         2. The elements in the array will be in the range of [-1000, 1000].
         3. 0 <= k <= len(arr)
     """"""
-",maximum,"Here are the 10 test cases for the function'maximum':
-
-arr = [-3, -4, 5], k = 3
-arr = [4, -4, 4], k = 2
-arr = [-3, 2, 1, 2, -1, -2, 1], k = 1
-arr = [1, 2, 3, 4, 5], k = 3
-arr = [-10, -5, -1, 0, 1, 5, 10], k = 3
-arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], k = 5
-arr = [-100, -50, -10, -5, 0, 1, 2, 3, 4, 5], k = 5
-arr = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1], k = 1
-arr = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1], k = 5
-arr = [100, 50, 10, 5, 0, -1, -2, -3, -4, -5], k = 5"
+",maximum,"maximum([-3, -4, 5], 3)
+maximum([4, -4, 4],  2)
+maximum([-3, 2, 1, 2, -1, -2, 1], 1)
+maximum([1, 2, 3, 4, 5], 3)
+maximum([-10, -5, -1, 0, 1, 5, 10], 3)
+maximum([1, 2, 3, 4, 5, 6, 7, 8, 9, 10],  5)
+maximum([-100, -50, -10, -5, 0, 1, 2, 3, 4, 5], 5)
+maximum([-1, -1, -1, -1, -1, -1, -1, -1, -1, -1], 1)
+maximum([1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 5)
+Maximum([100, 50, 10, 5, 0, -1, -2, -3, -4, -5], 5)"
 122,HumanEval/121,"
 def solution(lst):
     """"""Given a non-empty list of integers, return the sum of all of the odd elements that are in even positions.
