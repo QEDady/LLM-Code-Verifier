@@ -911,7 +911,16 @@ def incr_list(l: list):
     >>> incr_list([5, 3, 5, 2, 3, 3, 9, 0, 123])
     [6, 4, 6, 3, 4, 4, 10, 1, 124]
     """"""
-",incr_list,"[incr_list([1]), incr_list([1, 2]), incr_list([5, 3, 5, 2, 3, 3, 9, 0, 123]), incr_list([]), incr_list([1, 0]), incr_list([10]), incr_list([-1]), incr_list([10, 0, -1, 10, 0, 123]), incr_list([10, -1, 10, 0, 123]), incr_list([-123, -1, -2, -3, -4])]"
+",incr_list,"incr_list([1])
+incr_list([1, 2])
+incr_list([5, 3, 5, 2, 3, 3, 9, 0, 123])
+incr_list([])
+incr_list([1, 0])
+incr_list([10])
+incr_list([-1])
+incr_list([10, 0, -1, 10, 0, 123])
+incr_list([10, -1, 10, 0, 123])
+incr_list([-123, -1, -2, -3, -4])"
 44,HumanEval/43,"
 
 def pairs_sum_to_zero(l):
@@ -997,9 +1006,7 @@ def fib4(n: int):
     >>> fib4(7)
     14
     """"""
-",fib4,"Here are 10 test cases for the function 'fib4':
-
-fib4(0)
+",fib4,"fib4(0)
 fib4(1)
 fib4(2)
 fib4(3)
@@ -1027,8 +1034,7 @@ median([1])
 median([])
 median([5, 3, 4, 2, 1])
 median([5, 3, 4])
-median([1, 2, 3, 4, 5, 6, 7, 8, 9])
-median([1, 2, 3, 4, 5, 6, 7, 8])"
+median([1, 2, 3, 4, 5, 6, 7, 8, 9])"
 49,HumanEval/48,"
 
 def is_palindrome(text: str):
@@ -1052,8 +1058,7 @@ is_palindrome(""radar"")
 is_palindrome(""hello"")
 is_palindrome(""12321"")
 is_palindrome(""a"")
-is_palindrome("""")
-is_palindrome(""abba"")"
+is_palindrome("""")"
 50,HumanEval/49,"
 
 def modp(n: int, p: int):
@@ -1101,7 +1106,6 @@ decode_shift(""z"")
 decode_shift(""abcde"")
 decode_shift(""xyzabc"")
 decode_shift(""abcdefg"")
-decode_shift(""abc"")
 decode_shift(""hello world"")"
 52,HumanEval/51,"
 
@@ -1121,9 +1125,7 @@ def remove_vowels(text):
     >>> remove_vowels('zbcd')
     'zbcd'
     """"""
-",remove_vowels,"Here are 10 test cases for the function'remove_vowels':
-
-remove_vowels("""")
+",remove_vowels,"remove_vowels("""")
 remove_vowels(""abcdef\nghijklm"")
 remove_vowels(""abcdef"")
 remove_vowels(""aaaaa"")
@@ -1142,7 +1144,16 @@ def below_threshold(l: list, t: int):
     >>> below_threshold([1, 20, 4, 10], 5)
     False
     """"""
-",below_threshold,"[below_threshold([1, 2, 4, 10], 100), below_threshold([], 100), below_threshold([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 10), below_threshold([1, 20, 4, 10], 5), below_threshold([1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 0), below_threshold([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 20), below_threshold([0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 0), below_threshold([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 11), below_threshold([1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 2)]"
+",below_threshold,"below_threshold([1, 2, 4, 10], 100)
+below_threshold([], 100)
+below_threshold([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 10)
+below_threshold([1, 20, 4, 10], 5)
+below_threshold([1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 0)
+below_threshold([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 20)
+below_threshold([0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 0)
+below_threshold([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 11)
+below_threshold([1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 2)
+below_threshold([1, 1, 1, 1, 1, 1, 1, 1, 1, 2], 2)"
 54,HumanEval/53,"
 
 def add(x: int, y: int):
@@ -1189,7 +1200,6 @@ same_chars('eabcdzzzz', 'dddzzzzzzzddddabc')
 same_chars('abcde', 'abcde')
 same_chars('abcde', 'deabc')
 same_chars('a', 'a')
-same_chars('abc', 'abc')
 same_chars('abc', 'bca')"
 56,HumanEval/55,"
 
@@ -1339,16 +1349,16 @@ def correct_bracketing(brackets: str):
     >>> correct_bracketing("")(()"")
     False
     """"""
-",correct_bracketing,"("")(""
-"")""
-""()""
-""(())""
-"")()""
-""((()))""
-"")(()""
-""()())""
-"")()()""
-""((()))(()))"""
+",correct_bracketing,"correct_bracketing("")("")
+correct_bracketing("")"")
+correct_bracketing(""()"")
+correct_bracketing(""(())"")
+correct_bracketing("")()"")
+correct_bracketing(""((()))"")
+correct_bracketing("")(()"")
+correct_bracketing(""()())"")
+correct_bracketing("")()()"")
+correct_bracketing(""((()))(()))"")"
 63,HumanEval/62,"
 
 def derivative(xs: list):
@@ -1369,8 +1379,7 @@ derivative([1])
 derivative([2, 1])
 derivative([1, 1])
 derivative([1, 2, 3, 4, 5, 6])
-derivative([5, 4, 3, 2, 1])
-derivative([1, 1, 1, 1])"
+derivative([5, 4, 3, 2, 1])"
 64,HumanEval/63,"
 
 def fibfib(n: int):
@@ -1546,7 +1555,16 @@ def search(lst):
         search([1, 2, 2, 3, 3, 3, 4, 4, 4]) == 3
         search([5, 5, 4, 4, 4]) == -1
     '''
-",search,"[search([4, 1, 2, 2, 3, 1]), search([1, 2, 2, 3, 3, 3, 4, 4, 4]), search([5, 5, 4, 4, 4]), search([1, 2, 3, 4, 5]), search([1, 2, 3, 4, 5, 5]), search([1, 2, 2, 3, 3, 3, 3]), search([4, 4, 4, 4, 5, 5, 5]), search([5, 5, 5, 5, 5, 5, 5]), search([1, 1, 1, 1, 1, 1, 1, 1, 1]), search([1, 1, 1, 2, 2, 2, 2, 2, 2])]"
+",search,"search([4, 1, 2, 2, 3, 1])
+search([1, 2, 2, 3, 3, 3, 4, 4, 4])
+search([5, 5, 4, 4, 4])
+search([1, 2, 3, 4, 5])
+search([1, 2, 3, 4, 5, 5])
+search([1, 2, 2, 3, 3, 3, 3])
+search([4, 4, 4, 4, 5, 5, 5])
+search([5, 5, 5, 5, 5, 5, 5])
+search([1, 1, 1, 1, 1, 1, 1, 1, 1])
+search([1, 1, 1, 2, 2, 2, 2, 2, 2])"
 71,HumanEval/70,"
 def strange_sort_list(lst):
     '''
@@ -1568,8 +1586,7 @@ strange_sort_list([1, 1, 1, 1, 1, 1, 1, 1, 1, 1])
 strange_sort_list([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 strange_sort_list([10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 10])
 strange_sort_list([5, 2, 8, 3, 1, 9, 4, 6, 7])
-strange_sort_list([3, 3, 2, 1, 4, 5, 6, 7, 8, 9, 10])
-strange_sort_list([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1])"
+strange_sort_list([3, 3, 2, 1, 4, 5, 6, 7, 8, 9, 10])"
 72,HumanEval/71,"
 def triangle_area(a, b, c):
     '''
@@ -1613,7 +1630,16 @@ def will_it_fly(q,w):
     '''
 ",will_it_fly,"Here are the test cases for the function 'will_it_fly':
 
-[will_it_fly([1, 2], 5), will_it_fly([3, 2, 3], 1), will_it_fly([3, 2, 3], 9), will_it_fly([3], 5), will_it_fly([1, 2, 1], 3), will_it_fly([2, 2, 2], 4), will_it_fly([5, 5, 5], 10), will_it_fly([1, 2, 3, 1], 5), will_it_fly([1, 2, 3, 4, 5], 10), will_it_fly([1, 2, 3, 4], 10)]"
+will_it_fly([1, 2], 5)
+will_it_fly([3, 2, 3], 1)
+will_it_fly([3, 2, 3], 9)
+will_it_fly([3], 5)
+will_it_fly([1, 2, 1], 3)
+will_it_fly([2, 2, 2], 4)
+will_it_fly([5, 5, 5], 10)
+will_it_fly([1, 2, 3, 1], 5)
+will_it_fly([1, 2, 3, 4, 5], 10)
+will_it_fly([1, 2, 3, 4], 10)]"
 74,HumanEval/73,"
 def smallest_change(arr):
     """"""
@@ -1660,8 +1686,7 @@ total_match(['hi', 'admin', 'python'], ['hi', 'admin'])
 total_match(['a', 'b', 'c'], ['a', 'b'])
 total_match(['hello'], ['hello'])
 total_match(['hello', 'world'], ['hello'])
-total_match([], ['hello'])
-total_match(['hello'], [])"
+total_match([], ['hello'])"
 76,HumanEval/75,"
 def is_multiply_prime(a):
     """"""Write a function that returns true if the given number is the multiplication of 3 prime numbers
@@ -1756,8 +1781,7 @@ hex_key("""")
 hex_key(""1"")
 hex_key(""2"")
 hex_key(""3"")
-hex_key(""4"")
-hex_key(""5"")"
+hex_key(""4"")"
 80,HumanEval/79,"
 def decimal_to_binary(decimal):
     """"""You will be given a number in decimal form and your task is to convert it to
